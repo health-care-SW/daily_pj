@@ -22,3 +22,4 @@ if __name__=="__main__":
     
 #가상환경 활성화 : .\flask_env\Scripts\Activate.ps1   (ps1은 powershell이라서)
 # python .app/py3
+

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/styles.css') }}">
+    <!--  중괄호*2 : 다른 기능을 갖는다. html에 없는 요소들이지만 사용 가능하게-->
+    <title>mysql</title>
+</head>
+<body>
+    <div class="main">
+        <!-- <form action="test">
+            <input type="text" name="first_test" placeholder="sql command" required="required">
+            <button>submit</button> -->
+        <form action="/command" method="POST">
+            <input type="text" name="first_test" placeholder="sql command" required="required">
+            <button>submit</button>
+        </form>
+    </div>
+</body>
+</html>

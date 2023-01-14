@@ -4,16 +4,43 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="'stylesheet" href="{{ url_for('static',filename='assets/css/styles.css') }}">
-    <title>mysql</title>
+    <link rel="'stylesheet" href="{{ url_for('static',filename='assets/css/style.css') }}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sofia+Sans:wght@500&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
+    <title>Preprocess</title>
 </head>
 <body>
-    <div class="main">
-        <form action="/command" method="POST">
-            <input type="text" name="first_test" placeholder="sql command" required>
-            <button>submit</button>
+    <div>
+        <form action="/get_image_pre_status" method="POST" enctype="multipart/form-data">
+            <h1>이미지 전처리 종류 선택</h1>
+            <input type="checkbox" name="pre_toggle_0">
+            <span>180도 회전 </span>
+            <br>
+            <input type="checkbox" name="pre_toggle_1">
+            <span>흑백 변경 </span>
+            <br>
+            <input type="checkbox" name="pre_toggle_2">
+            <span>이미지 사이즈 변경 </span>
+            <br>
+            <button type="submit">변경</button>
+        </form>
+        
+        <form action="/upload_image" method="POST" enctype="multipart/form-data">
+                <h1>이미지 업로드 하기</h1>
+                <input type="file" name="uploaded_image">
+                
+                <button>이미지 업로드</button>
+                {% if label %}
+                    <span>
+                        {{ label }}
+                    </span>
+                {% endif %}
         </form>
     </div>
-
+    
 </body>
 </html>

@@ -14,7 +14,7 @@ def get_db(db_name):
                     host='localhost',
                     port=3306,
                     user='root',
-                    passwd='327954',
+                    passwd='',
                     db=db_name,
                     charset='utf8')
 
@@ -67,7 +67,7 @@ def sql_test():
             # select 문 일 때 output을 표현
             if sql_command.split()[0].lower() == 'select':
                 return render_template("data.html", label="정상", output = None) + output
-            # 아니면 표현 x  -- 이 조건을 처리하지 않으면 에러 발생 bool + str exception
+            # select문이 아니면 표현 안함  -- 이 조건을 처리하지 않으면 에러 발생 bool + str exception
             else: 
                 return render_template("data.html", label="정상", output = None)
         elif output == None: # 오류 발생

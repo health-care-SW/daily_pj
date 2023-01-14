@@ -4,15 +4,56 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for ('static', filename='assets/css/style.css') }}">
-    <title>mysql</title>
+    <title>전처리 페이지 UI</title>
 </head>
 <body>
-    <div class="main">
-        <form action="command" method="POST">
-            <input type="text" name="first_test" placeholder="sql command" required="required">
-            <button>submit</button>
-        </form>
-    </div>
+    <!-- action 태그에는 url이 들어간다. 절대 주소 or 상대주소. 아래는 상대주소이다. 다음의 제출을 누르면 action 태그의 url로 이동한다. + 정보 전달과 함께 -->
+    <form action="/get_selected_table" method="POST" enctype="multipart/form/data">
+        <input type="text" name="table_name" placeholder="테이블 명" required="required" />
+        <button type="submit">선택</button>
+            {% if label %}
+                <span>
+                    {{label}}
+                </span>
+            {% endif %}
+    </form>
+    <form action="/get_column_name_change" method="POST" ectype="multipart/form-data">
+        <!-- ectype은 폼 데이터가 서버로 제출될 때 해당 데이터가 인코딩 되는 방법을 명시 -->
+        <!-- application/x-www-form-urlencoded : 모든 문자를 인코딩함 -->
+        <!-- multipart/form-data : 모든 문자를 인코딩하지 않음. 파일이나 이미지가 서버로 제출될 때 주로 사용 -->
+        <!-- text/plain : 공백 문자는 + 기호로 변환 / 나머지는 인코딩 안됨 -->
+        <h1>컬럼 이름 변경</h1>
+        <input type="text" name="before_column_name" placeholder="변경 전 컬럼명" required="required">
+        <input type="text" name="after_column_name" placeholder="변경 후 컬럼명" required="required">
+        <br>
+        <br>
+        <button type="submit">변경</button>
+    </form>
+
+    <form action="/get_image_pre_status" method="POST" enctype="multipart/form-data">
+        <h1>이미지 전처리 종류 선택</h1>
+        <input type="checkbox" name="pre_toggle_0">
+        <span>180도 회전</span>
+        <br>
+        <input type="checkbox" name="pre_toggle_1">
+        <span>흑백 변경</span>
+        <br>
+        <input type="checkbox" name="pre_toggle_2">
+        <span>이미지 사이즈 변경</span>
+        <br>
+        <button type="submit">변경</button>
+    </form>
+
+    <form action="/upload_image" method="POST" enctype="multipart/form-data">
+        <h1>이미지 업로드 하기</h1>
+        <input type="file" name="uploaded_image">
+        <button>이미지 업로드</button>
+        {% if label %}
+            <span>
+                {{ label }}
+            </span>
+        {% endif %}
+    </form>
+
 </body>
 </html>

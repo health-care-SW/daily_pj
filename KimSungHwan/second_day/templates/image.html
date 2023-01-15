@@ -1,0 +1,55 @@
+<html>
+
+<head>
+    <title>전처리 페이지 UI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename ='assets/css/style.css') }}">
+</head>
+
+<body>
+    <div class="main">
+        <div class="sub">
+        <form action="/image_preprocess" method="POST" enctype="multipart/form-data">
+            <h1>이미지 업로드 하기</h1>
+            <input type="file" name="uploaded_image">
+            <!-- <button>이미지 업로드</button> -->
+            <h1>이미지 전처리 종류 선택</h1>
+            <input type="checkbox" name="pre_toggle_0">
+            <span>180도 회전 </span>
+            <br>
+            <input type="checkbox" name="pre_toggle_1">
+            <span>흑백 변경 </span>
+            <br>
+            <input type="checkbox" name="pre_toggle_2" onclick="hide(this)">
+            <span>이미지 사이즈 변경 </span>
+            <br>
+            <div id="size" style="display:none">
+                <h1>이미지 사이즈 변경</h1>
+                <input type="text" name="changed_width" placeholder="넓이(width)를 입력해주세요"><br>
+                <input type="text" name="changed_height" placeholder="높이(heigh)를 입력해주세요">
+            </div>
+            <br>
+            <button type="submit">원본 및 처리된 이미지 확인</button>
+            {% if label  %}
+                <span>
+                    {{ label }}
+                </span>
+                <img src="{{url_for('static', filename='assets/images/original.jpg')}}" alt="원본" >
+                <img src= "{{url_for('static', filename='assets/images/fix.jpg')}}" alt="수정본">
+            {% endif %}
+        </form>
+        </div>
+    </div>
+    <script>
+        // 이미지 사이즈 체크박스 변경시 visibility 설정
+        function hide(e) {
+            var box = document.getElementById("size");
+            if(e.checked) {
+                box.style.display="block";
+            } else {
+                box.style.display="none";
+            }
+        }
+    </script>    
+</body>
+
+</html>

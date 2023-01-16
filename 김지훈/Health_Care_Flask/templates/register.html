@@ -4,9 +4,26 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="..\static\assets\css\style.css">
     <title>Document</title>
 </head>
-<body>
+<body class="main">
+    <div class = "main">
+        <form action="/register" method = "post">
+            <h2>아이디</h2>
+            <span><input type="text" name = "user_name" placeholder="아이디를 입력하세요"></span>
     
+            <h2>패스워드</h2>
+            <span><input type="password" name = "user_password" placeholder="패스워드를 입력하세요"></span>
+    
+            <h2>이메일</h2>
+            <span><input type="email" name = "user_email" placeholder="이메일을 입력하세요"></span>
+
+            <br>
+            <br>
+            <button type="submit">회원가입</button>
+        </form>
+    </div>
+
 </body>
 </html>

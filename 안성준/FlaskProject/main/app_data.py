@@ -1,10 +1,10 @@
 from flask import Flask, render_template, request
-from flask_ngrok import run_with_ngrok
+from flask import Blueprint
 import os
 import sqlite3
 import pandas as pd
 
-app = Flask(__name__)
+app = Blueprint("data",__name__, url_prefix="/app_data")
 
 '''
 DB 함수
@@ -67,6 +67,3 @@ def sql_processing():
         else :
             result_sql = "<html><body> " + result_sql + "</body></html>"
             return result_sql
-
-if __name__ == '__main__':
-    app.run()

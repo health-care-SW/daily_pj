@@ -14,7 +14,7 @@ def get_db(db_name):
                     host='localhost',
                     port=3306,
                     user='root',
-                    passwd='',
+                    passwd='ksh0213',
                     db=db_name,
                     charset='utf8')
 

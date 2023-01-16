@@ -1,11 +1,11 @@
 <html>
-
 <head>
     <title>전처리 페이지 UI</title>
+    <link rel="stylesheet" href="{{ url_for('static',filename='assets/css/style.css') }}">
 </head>
 
 <body>
-
+<div class="main">
     <form action="/get_selected_table" method="POST" enctype="multipart/form-data">
         <input type="text" name="table_name" placeholder="테이블 명" required="required" />
         <button type="submit">선택</button>
@@ -46,11 +46,11 @@
         <button>이미지 업로드</button>
         {% if label %}
             <span>
-                {{ label }}
+                <div style="background-image: url('/static{{ label }}'); background-size: cover; width: 400;"></div>
             </span>
         {% endif %}
     </form>
+</div>
 </body>
 
 </html>
-

@@ -33,7 +33,7 @@ def login():
         if user is not None:
             if bcrypt.check_password_hash(user.user_pw, user_pw):
                 session['login'] = user.user_id
-                return render_template("main.html")
+                return render_template("main.html", label=user_id)
             else:
                 return jsonify({"reesult":"fail"})
         else:

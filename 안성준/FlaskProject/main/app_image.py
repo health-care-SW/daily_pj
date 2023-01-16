@@ -1,9 +1,9 @@
 from flask import Flask, render_template, request
-from flask_ngrok import run_with_ngrok
+from flask import Blueprint
 import os
 from PIL import Image
 
-app = Flask(__name__)
+app = Blueprint("image",__name__, url_prefix="/app_image")
 
 '''
 이미지 처리 함수
@@ -27,10 +27,9 @@ def index():
 @app.route('/image_preprocess', methods=['POST'])
 def preprocessing():
     if request.method == 'POST':
-        file = request.files['uploaded_image']
-        if not file: return render_template('index.html', label="No Files")
+        img_name = request.form['label1']
 
-        img = Image.open(file)
+        img = Image.open('main/static/'+img_name)
 
         is_rotate_180 = request.form.get('pre_toggle_0')
         is_change_bw = request.form.get('pre_toggle_1')
@@ -45,22 +44,17 @@ def preprocessing():
         if is_change_size == 'on':
             img = image_resize(img, request.form.get('changed_width'), request.form.get('changed_height'))
 
-        img.save('result_image.png')
-
-        src_dir = os.path.dirname(os.path.abspath(__file__))
-        image_path = os.path.join(src_dir, 'result_image.png')
+        img.save('main/static/images/changed/'+img_name.split('/')[1])
+        image_path = 'images/changed/'+img_name.split('/')[1]
 
         # 결과 리턴
-        return render_template('image.html', label=image_path)
+        return render_template('image.html', label= img_name, labeling=image_path)
 
 @app.route('/upload_image', methods=['POST'])
 def upload_image_file():
     if request.method == 'POST':
-        file = request.files['upload_image']
+        file = request.files['uploaded_image']
         if not file: return render_template('image.html', label='no file')
         label = file.filename
-        file.save('static/' + file.filename)
-    return render_template('image.html', label=label)
-    
-if __name__ == '__main__':
-    app.run()
+        file.save('main/static/images/' + file.filename)
+    return render_template('image.html', label='images/'+label)

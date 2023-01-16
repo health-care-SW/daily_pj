@@ -1,0 +1,48 @@
+<html>
+
+<head>
+    <title>전처리 페이지 UI</title>
+</head>
+
+<body>
+
+    <form action="/app_image/image_preprocess" method="POST" enctype="multipart/form-data">
+        {% if label %}
+            <input type="text" name="label1" value="{{ label }}">
+        {% endif %}
+        <h1>이미지 전처리 종류 선택</h1>
+        <input type="checkbox" name="pre_toggle_0">
+        <span>180도 회전 </span>
+        <br>
+        <input type="checkbox" name="pre_toggle_1">
+        <span>흑백 변경 </span>
+        <br>
+        <input type="checkbox" name="pre_toggle_2">
+        <span>이미지 사이즈 변경 </span>
+        <br>
+        <input type="number" name="changed_width">
+        <span>이미지 가로 길이</span>
+        <br>
+        <input type="number" name="changed_height">
+        <span>이미지 세로 길이</span>
+        <br>
+        <button type="submit">변경</button>
+    </form>
+
+    <form action="/app_image/upload_image" method="POST" enctype="multipart/form-data">
+        <h1>이미지 업로드 하기</h1>
+        <input type="file" name="uploaded_image">
+        <button>이미지 업로드</button>
+    </form>
+
+    {% if label %}
+        <img src="{{ url_for('static', filename=label) }}">
+    {% endif %}
+
+    {% if labeling %}
+        <img src="{{ url_for('static', filename=labeling) }}">
+    {% endif %}
+
+</body>
+
+</html>

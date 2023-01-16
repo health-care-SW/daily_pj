@@ -30,9 +30,6 @@
             <br>
             <button type="submit">원본 및 처리된 이미지 확인</button>
             {% if label  %}
-                <span>
-                    {{ label }}
-                </span>
                 <img src="{{url_for('static', filename='assets/images/original.jpg')}}" alt="원본" >
                 <img src= "{{url_for('static', filename='assets/images/fix.jpg')}}" alt="수정본">
             {% endif %}

@@ -13,6 +13,10 @@ app.register_blueprint(board)
 app.secret_key = 'tjdnf'
 app.config['SESSION_TYPE'] = 'filesystem'
 
+def get_pwd():
+    with open("pwd.txt","r") as f:
+        return f.read()
+
 def get_app():
     return app
 
@@ -22,7 +26,7 @@ def get_db():
                     host='localhost',
                     port=3306,
                     user='root',
-                    passwd='327954',
+                    passwd= get_pwd(),
                     db="webProject",
                     charset='utf8')
 

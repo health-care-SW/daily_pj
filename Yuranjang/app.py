@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request
 import sqlite3
 import pandas as pd
-from flask_ngrok import run_with_ngrok
+from flask_ngrok import run_with_ngrok  #port를 우회해서 접속가능한 도메인 할당
 import os
 from PIL import Image
 
@@ -81,7 +81,7 @@ def sql_test():
 '''
 @app.route("/index")
 def index():
-    return render_template('image.html')
+    return render_template('index.html')
 
 @app.route('/image_preprocess', methods=['POST'])
 def preprocessing():
@@ -94,6 +94,7 @@ def preprocessing():
         is_rotate_180 = request.form.get('pre_toggle_0')
         is_change_bw = request.form.get('pre_toggle_1')
         is_change_size = request.form.get('pre_toggle_2')
+        img.save(f'static/{file.filename}')
 
         if is_rotate_180 == 'on':
             img = image_rotate(img)
@@ -104,13 +105,13 @@ def preprocessing():
         if is_change_size == 'on':
             img = image_resize(img, request.form.get('changed_width'), request.form.get('changed_height'))
 
-        img.save('result_image.png')
+        img.save(f'static/changed_{file.filename}')
 
-        src_dir = os.path.dirname(os.path.abspath(__file__))
-        image_path = os.path.join(src_dir, 'result_image.png')
+        # src_dir = os.path.dirname(os.path.abspath(__file__))
+        # image_path = os.path.join(src_dir, 'result_image.png')
 
         # 결과 리턴
-        return render_template('image.html', label=image_path)
+        return render_template('index.html', label=file.filename)
 
 
 #--------------------------------------------------------------------------------

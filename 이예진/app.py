@@ -1,70 +1,69 @@
 from flask import Flask, render_template, request
-import sqlite3
-import pandas as pd
-
-# db 객체를 받아 사용하는 함수
-
-
-def get_db(db_name):
-    return sqlite3.connect(db_name)
-
-
-def exe_sql(conn, command: str):
-
-    try:
-        conn.execute(command)
-        conn.commit()
-        # db에 명령을 보내고 동기화(?)
-
-        # 명령어의 맨 앞에 lower(소문자)를 적용해서
-        # select일 경우의 처리
-        if command.split()[0].lower() == 'select':
-            df = pd.read_sql(command, conn, index_col=None)
-            df_html = df.to_html()  # 데이터프레임을 html 객체로 변환
-            return df_html, 1  # 제대로 실행됐다면 1 리턴
-    except:
-        return None, 0  # 아니라면 0 리턴
-
+# from flask_ngrok import run_with_ngrok # port를 우회해서 접속가능한 도메인을 할당
+import os
+from PIL import Image
 
 app = Flask(__name__)
+# run_with_ngrok(app)
 
-# 데코레이터. 루트 호출시 아래 코드를 실행시킴
-@app.route('/')
-def hello_world():
-    return "Hello World"
+'''
+이미지 처리 함수
+'''
 
 
-@app.route('/sql')
+def image_resize(image, width, height):
+    return image.resize((int(width), int(height)))
+
+
+def image_rotate(image):
+    return image.transpose(Image.ROTATE_180)
+
+
+def image_change_bw(image):
+    return image.convert('L')
+
+
+'''
+플라스크
+'''
+
+
+@app.route("/")
 def index():
     return render_template('index.html')
 
 
-@app.route('/command', methods=['POST'])
-def command():
-    return "Test" + request.form.get('first_test')
-
-
-@app.route('/data')
-def data_page():
-    return render_template('data.html')
-
-
-@app.route('/dbsql', methods=["POST"])
-def sql_test():
+@app.route('/image_preprocess', methods=['POST'])
+def preprocessing():
     if request.method == 'POST':
-        db_name = request.form.get('db_name')
-        sql_command = request.form.get('sql')
+        file = request.files['uploaded_image']
+        if not file:
+            return render_template('index.html', label="No Files")
 
-        conn = get_db(db_name)
+        img = Image.open(file)
 
-        output, status = exe_sql(conn, sql_command)
-        if status == 1:
-            return render_template('data.html', label='정상 작동', output=output)
-        else:
-            return render_template('data.html', label="오류 발생", output=None)
-    else:
-        return render_template('data.html')
+        is_rotate_180 = request.form.get('pre_toggle_0')
+        is_change_bw = request.form.get('pre_toggle_1')
+        is_change_size = request.form.get('pre_toggle_2')
+
+        if is_rotate_180 == 'on':
+            img = image_rotate(img)
+
+        if is_change_bw == 'on':
+            img = image_change_bw(img)
+
+        if is_change_size == 'on':
+            img = image_resize(img, request.form.get(
+                'changed_width'), request.form.get('changed_height'))
+
+        img.save('result_image.png')
+
+        src_dir = os.path.dirname(os.path.abspath(__file__))
+        image_path = os.path.join(src_dir, 'result_image.png')
+
+        # 결과 리턴
+        return render_template('image.html', label=image_path)
 
 
-if __name__ == "__main__":
-    app.run(debug=True)
+if __name__ == '__main__':
+    app.run()

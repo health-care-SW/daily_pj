@@ -26,8 +26,9 @@ def index():
 def preprocessing():
     if request.method == 'POST':
 
-        file = request.files['uploaded_image']
-        #file = "C:\\Users\\JIHOON\\Desktop\\study\\board\\daily_pj\\김지훈\\Health_Care_Flask\\static\\images\\result_image.png"
+        img_path = "C:/Users/JIHOON/Desktop/study/board/daily_pj/김지훈/Health_Care_Flask/static/images"
+        #file = request.files['uploaded_image']
+        file = img_path + "/sekiro.png"
         if not file: return render_template('index.html', label="No Files")
 
         img = Image.open(file)
@@ -45,13 +46,13 @@ def preprocessing():
         if is_change_size == 'on':
             img = image_resize(img, request.form.get('changed_width'), request.form.get('changed_height'))
 
-        #img.save('result_image.png')
+        img.save(img_path + '/result_image.png')
 
         src_dir = os.path.dirname(os.path.abspath(__file__))
-        image_path = os.path.join(src_dir, 'result_image.png')
+        image_path = os.path.join(src_dir, '../static/images/sekiro.png')
 
         # 결과 리턴
-        return render_template('image.html', label=image_path)
+        return render_template('image.html', label='../static/images/' + '/result_image.png')
 
 if __name__ == '__main__':
     app.run(debug=True)

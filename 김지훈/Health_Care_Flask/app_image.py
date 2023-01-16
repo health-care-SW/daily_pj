@@ -25,7 +25,9 @@ def index():
 @app.route('/image_preprocess', methods=['POST'])
 def preprocessing():
     if request.method == 'POST':
+
         file = request.files['uploaded_image']
+        #file = "C:\\Users\\JIHOON\\Desktop\\study\\board\\daily_pj\\김지훈\\Health_Care_Flask\\static\\images\\result_image.png"
         if not file: return render_template('index.html', label="No Files")
 
         img = Image.open(file)
@@ -43,7 +45,7 @@ def preprocessing():
         if is_change_size == 'on':
             img = image_resize(img, request.form.get('changed_width'), request.form.get('changed_height'))
 
-        img.save('result_image.png')
+        #img.save('result_image.png')
 
         src_dir = os.path.dirname(os.path.abspath(__file__))
         image_path = os.path.join(src_dir, 'result_image.png')

@@ -1,0 +1,41 @@
+<html>
+<head>
+    <title>전처리 페이지 UI</title>
+    <link rel="stylesheet" href="C:\Users\didco\Downloads\2022_겨울방학\부트캠프\웹백엔드\flask_pj\static\assets\css\style.css">
+    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/style.css') }} "> -->
+</head>
+
+<body>
+<div class="main">
+
+    <form action="/upload_image" method="POST" enctype="multipart/form-data">
+        <h1>이미지 업로드 하기</h1>
+        <input type="file" name="uploaded_image">
+        <button>이미지 업로드</button>
+        <!-- {% if label %}
+            <span>
+                {{ label }}
+            </span>
+        {% endif %} -->
+    </form>
+
+    <form action="/get_image_pre_status" method="POST" enctype="multipart/form-data">
+        <h1>이미지 전처리 종류 선택</h1>
+        <input type="checkbox" name="pre_toggle_0">
+        <span>180도 회전 </span>
+        <br>
+        <input type="checkbox" name="pre_toggle_1">
+        <span>흑백 변경 </span>
+        <br>
+        <input type="checkbox" name="pre_toggle_2">
+        <span>이미지 사이즈 변경 </span>
+        <br>
+        <button type="submit">변경</button>
+    </form>
+
+
+</div>
+
+</body>
+
+</html>

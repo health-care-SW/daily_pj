@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flask Web Database</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename ='assets/css/style.css') }}">
+</head>
+<body>
+    <div class="main">
+        <form action="/command" method="post">
+            <input type="text" name="first_test" id="first_test" placeholder="sql_command" required/>
+            <button type="submit">제출</button>
+        </form>
+        <h1>
+            {% if result != None %}
+                {{ result }}
+            {% endif %}
+        </h1>
+    </div>
+</body>
+</html>

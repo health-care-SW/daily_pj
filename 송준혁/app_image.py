@@ -38,8 +38,7 @@ def preprocessing():
     if request.method == 'POST':
         file = request.files['uploaded_image']
         if not file:
-            return render_template('index.html', label="No Files")
-        # label = file.save('static')
+            return render_template('image.html', label="No Files")
 
         img = Image.open(file)
 
@@ -58,12 +57,10 @@ def preprocessing():
             img = image_resize(img, request.form.get(
                 'changed_width'), request.form.get('changed_height'))
 
-        src_dir = os.path.dirname(os.path.abspath(__file__))
-        image_path = os.path.join(src_dir, f'{file.filename}')
+        img.save(f'static/changed_{file.filename}')
 
-        print(src_dir)
         # 결과 리턴
-        return render_template('image.html', label=image_path)
+        return render_template('image.html', label=file.filename)
 
 
 if __name__ == '__main__':

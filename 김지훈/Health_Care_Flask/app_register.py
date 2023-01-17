@@ -18,5 +18,13 @@ def register_process():
     userPw = request.form.get('user_password')
     userEmail = request.form.get('user_email')
     user = User.User(userName, userPw, userEmail)
-    User.insert_user(user)
-    return redirect(url_for('index'))
+    if User.select_user_with_name(userName) == None and User.select_user_with_email(userEmail) == None:
+        print("register success!")
+        User.insert_user(user)
+        return redirect(url_for('hello'))
+    else:
+        print("register fail..")
+        return redirect(url_for('register'))
+    
+    
+    

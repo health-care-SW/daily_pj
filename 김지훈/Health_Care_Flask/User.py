@@ -44,6 +44,13 @@ def print_all_users_list():
         for user in users:
             print(user)
 
+def select_users():
+    with app.app_context():
+        users = db.session.query(User).all()
+
+    return users
+
+
 
 def select_user_with_id(id):
     with app.app_context():
@@ -57,6 +64,11 @@ def select_user_with_name(name):
 
     return user
 
+def select_user_with_email(email):
+    with app.app_context():
+        user = db.session.query(User).filter(User.user_email == email).first()
+
+    return user
 
 def insert_user(user):
     try:

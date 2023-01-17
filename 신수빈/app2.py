@@ -1,8 +1,33 @@
 from flask import Flask, render_template, request
 import os
 from PIL import Image
+from db_connect import db
+from flask_bcrypt import Bcrypt
+import pymysql
+from api import board
 
 app = Flask(__name__)
+app.register_blueprint(board)
+
+app.config['SQLALCHEMY_DATABASE_URI'] = "mysql+pymysql://hchang:devpass@127.0.0.1:3306/board"
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.secret_key = 'ekdwls'
+
+db.init_app(app)
+bcrypt = Bcrypt(app)
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
+app = Flask(__name__)
+app.register_blueprint(board)
+
+app.config['SQLALCHEMY_DATABASE_URI'] = "mysql+pymysql://hchang:devpass@127.0.0.1:3306/board"
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.secret_key = 'ekdwls'
+
+db.init_app(app)
+bcrypt = Bcrypt(app)
 
 '''
 이미지 처리 함수

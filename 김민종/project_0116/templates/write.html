@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Navbar</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <span class="nav-link active" aria-current="page">
+                            {%if session['login'] %}
+                                {{session['login']}}님
+                            {%else%}
+                                GUEST님
+                            {%endif%}
+                        </span>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/logout">로그아웃</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            메뉴
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/main">약제 분류</a></li>
+                            <li><a class="dropdown-item" href="/community">질문 게시판</a></li>
+                        </ul>
+                    </li>
+
+                </ul>
+                <form class="d-flex" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+    <div class="main" style="width: 70%; margin: auto;">
+        <br>
+        <h2 style="display: inline;">글 작성</h2>
+        <div style="height: 10px;"> </div>
+        <div class="container">
+            <form class="form-signin" method="post" action="/write_process" name="newWrite" enctype="multipart/form-data"> 
+				<br>
+				<label for="title">&nbsp;<strong>제목</strong></label><br>
+				<input type="text" name="title" id="title"class="form-control" placeholder="제목을 작성해 주세요" /> 
+				<br>
+				<label for="description">&nbsp;<strong>본문</strong></label><br>
+				<textarea wrap="soft" cols="10" rows="30" name="description" id="description" style="resize: none;" placeholder="본문을 작성해주세요" class="form-control"></textarea> 
+				<br>
+				<label for="date">&nbsp;<strong>날짜</strong></label><br>
+				<input type="text" name="date" id="date" class="form-control" value="{{time}}" readonly  /> 
+				<br>
+				<label for="name">&nbsp;<strong>작성자</strong></label> <br>
+				<input type="text" name="name" id="name" class="form-control" value="{{session['login']}}" readonly /> <br>
+				<br>
+				<label>&nbsp;<strong>사진</strong></label> <br>
+				<input type="file" name="filename"/><br>
+				<br>
+				<input class="btn btn-lg btn-primary btn-block" type="button" value="작성" onclick="chkAddWriting()"> 
+
+			</form>
+            
+        </div>
+    </div>
+    <div style="height: 50px;"></div>
+
+    <script src="../static/assets/js/validation.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

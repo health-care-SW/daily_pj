@@ -70,6 +70,28 @@ function chkSignin(){
 	document.signin.submit();
 }
 
+function chkAddWriting(){
+	var title = document.getElementById("title");
+	var dsc = document.getElementById("description");
+	var name = document.getElementById("name");
+	var date= document.getElementById("date");
+	
+	if(title.value.length < 2 || name.value.length >20){
+		alert("제목은 최소 2글자에서 최대 20글자까지 입력하세요");
+		name.select();
+		name.focus();
+		return false;
+	}
+	if(dsc.value.length < 2){
+		alert("내용은 최소 2글자이상 입력하세요");
+		dsc.select();
+		dsc.focus();
+		return false;
+	}
+	
+	document.newWrite.submit();
+}
+
 //  /* Ajax를 이용해 login() 함수를 완성하세요. */
 // function login_user() {
 //     let user_id = $("#email").val()

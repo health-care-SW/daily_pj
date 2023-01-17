@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, g
+from flask import Flask, render_template, request, redirect, url_for, g, jsonify
 import User
 
 from __main__ import app
@@ -14,17 +14,20 @@ def register():
 
 @app.route('/register_process', methods=["POST"])
 def register_process():
-    userName = request.form.get('user_name')
-    userPw = request.form.get('user_password')
-    userEmail = request.form.get('user_email')
-    user = User.User(userName, userPw, userEmail)
-    if User.select_user_with_name(userName) == None and User.select_user_with_email(userEmail) == None:
-        print("register success!")
-        User.insert_user(user)
-        return redirect(url_for('hello'))
-    else:
-        print("register fail..")
-        return redirect(url_for('register'))
+    userName = request.form.get('userName')
+    userPw = request.form.get('userPassword')
+    userEmail = request.form.get('userEmail')
+    # user = User.User(userName, userPw, userEmail)
+    # if User.select_user_with_name(userName) == None and User.select_user_with_email(userEmail) == None:
+    #     print("register success!")
+    #     User.insert_user(user)
+    #     return redirect(url_for('register'))
+    # else:
+    #     print("register fail..")
+    #     return redirect(url_for('register'))
+
+    print(f'비동기 테스트 {userName}')
+    return jsonify({'result' : 'fail'})
     
     
     

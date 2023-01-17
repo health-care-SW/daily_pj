@@ -20,11 +20,38 @@
 
             <br>
             <br>
-            <button type ="submit" id = "loginBtn">로그인</button>
+            <button onclick="login()" id = "loginBtn">로그인</button>
         </form>
         
     </div>
     <button class = 'mainBtn' onclick="window.location.href='/'">메인페이지</button>
 
 </body>
+<script>
+    async function login(){
+
+        let userName = document.querySelector("input[name='user_name']").value;
+        let userPassword = document.querySelector("input[name='user_password']").value;   
+
+        let urlParams = new URLSearchParams({
+            userName: userName,
+            userPassword: userPassword,
+        });
+
+        let fetchOptions = {
+            method: "POST",
+            body: urlParams,
+        }
+
+        let response = await fetch("/login", fetchOptions);
+        console.log(response);
+        let data = await response.json();
+        if( data.result == "success" ){
+            window.location.href="/";
+        }else if( data.result == "fail" ){
+        alert("아이디 또는 비밀번호가 올바르지 않습니다.");
+        window.location.href="/login";
+        }
+}
+</script>
 </html>

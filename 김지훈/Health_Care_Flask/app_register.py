@@ -17,17 +17,17 @@ def register_process():
     userName = request.form.get('userName')
     userPw = request.form.get('userPassword')
     userEmail = request.form.get('userEmail')
-    # user = User.User(userName, userPw, userEmail)
-    # if User.select_user_with_name(userName) == None and User.select_user_with_email(userEmail) == None:
-    #     print("register success!")
-    #     User.insert_user(user)
-    #     return redirect(url_for('register'))
-    # else:
-    #     print("register fail..")
-    #     return redirect(url_for('register'))
+    user = User.User(userName, userPw, userEmail)
+    if User.select_user_with_name(userName) == None and User.select_user_with_email(userEmail) == None:
+        #print("register success!")
+        User.insert_user(user)
+        return jsonify({'result' : 'success'})
+    else:
+        #print("register fail..")
+        return jsonify({'result' : 'fail'})
 
-    print(f'비동기 테스트 {userName}')
-    return jsonify({'result' : 'fail'})
+    # print(f'비동기 테스트 {userName}')
+    # return jsonify({'result' : 'success'})
     
     
     

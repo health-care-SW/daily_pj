@@ -22,10 +22,11 @@
 
             <br>
             <br>
-            <button type="submit">회원가입</button>
+            
+            <button id="btnRegister" onclick="register()">회원가입</button>
         </form>
         <button class = 'mainBtn' onclick="window.location.href='/'">메인페이지</button>
-        <button id="btnRegister" onclick="register()">가입</button>
+        
     </div>
     
 
@@ -53,9 +54,11 @@
         console.log(response);
         let data = await response.json();
         if( data.result == "success" ){
-        alert('Welcome!', '회원가입을 축하합니다. 로그인 페이지로 이동합니다.');
+        alert('회원가입을 축하합니다. 로그인 페이지로 이동합니다.');
+        window.location.href="/login";
         }else if( data.result == "fail" ){
-        alert("서버 오류!!");
+        alert("회원가입에 실패했습니다.");
+        window.location.href="/register";
     }
 }
 </script>

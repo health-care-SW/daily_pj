@@ -16,16 +16,16 @@ def login():
         return render_template("login.html")
 
     if request.method == 'POST':
-        user_name = request.form['user_name']
-        user_pw = request.form['user_password']
+        user_name = request.form.get('userName')
+        user_pw = request.form.get('userPassword')
         user = User.select_user_with_name(user_name)
 
         if user != None and user.user_password == user_pw:
             session['username'] = user_name
-            #return jsonify({"result" : "fail"})
-            return redirect(url_for("hello"))
+            return jsonify({'result' : 'success'})
 
-        return redirect(url_for("login"))
+        return jsonify({'result' : 'fail'})
+
 
 @app.route("/logout")
 def logout():

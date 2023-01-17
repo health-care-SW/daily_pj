@@ -6,7 +6,7 @@ from datetime import datetime
 db = SQLAlchemy()
 # create the app
 app = Flask(__name__)
-# configure the SQLite database, relative to the app instance folder
+
 app.config["SQLALCHEMY_DATABASE_URI"] = "mariadb+pymysql://root:0000@localhost:3306/shopping_mall"
 # initialize the app with the extension
 db.init_app(app)
@@ -47,10 +47,15 @@ def print_all_users_list():
 
 def select_user_with_id(id):
     with app.app_context():
-        users = db.session.query(User).filter(User.user_seq == id).all()
-        print(users[0])
+        user = db.session.query(User).filter(User.user_seq == id).first()
 
-    return users[0]
+    return user
+
+def select_user_with_name(name):
+    with app.app_context():
+        user = db.session.query(User).filter(User.user_name == name).first()
+
+    return user
 
 
 def insert_user(user):

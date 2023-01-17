@@ -21,14 +21,14 @@
         <button type="submit">변경</button>
     </form>
 
-    <img src = "../static/images/sekiro.png" style="width:160px; height:100px;">
+    <img src = "/static/images/sekiro.png" style="width:160px; height:100px;">
     <br>
 
-
+    <br>
     <form class="response">
-        {% if label %}
-            <img src = "../static/images/sekiro.png" style="width:320px; height:200px;">
-            <img src = "{{label}}" style="width:320px; height:200px;">
+        {% if resultImg %}
+            <img src = "{{ srcImg }}" style="width:320px; height:200px;">
+            <img src = "{{ resultImg}}" style="width:320px; height:200px;">
             
         {% endif %}
     </form>

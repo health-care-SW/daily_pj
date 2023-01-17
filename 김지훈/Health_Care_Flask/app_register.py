@@ -1,22 +1,18 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for
 import User
 
-app = Flask(__name__)
+from __main__ import app
 
-@app.route('/')
-def index():
+@app.route('/register')
+def register():
     return render_template("register.html")
 
 
-@app.route('/register', methods=["POST"])
-def register():
+@app.route('/register_process', methods=["POST"])
+def register_process():
     userName = request.form.get('user_name')
     userPw = request.form.get('user_password')
     userEmail = request.form.get('user_email')
     user = User.User(userName, userPw, userEmail)
     User.insert_user(user)
-    return render_template("register.html")
-
-if __name__ == "__main__":
-    print(123)
-    app.run(debug=True)
+    return redirect(url_for('index'))

@@ -2,7 +2,8 @@ from flask import Flask, render_template, request
 import os
 from PIL import Image
 
-app = Flask(__name__)
+from __main__ import app
+
 '''
 이미지 처리 함수
 '''
@@ -18,17 +19,19 @@ def image_change_bw(image):
 '''
 플라스크
 '''
-@app.route("/index")
-def index():
+@app.route("/image")
+def image():
     return render_template('image.html')
 
 @app.route('/image_preprocess', methods=['POST'])
 def preprocessing():
     if request.method == 'POST':
 
-        img_path = "C:/Users/JIHOON/Desktop/study/board/daily_pj/김지훈/Health_Care_Flask/static/images"
+        html_img_path = "/static/images"
+        img_path = "../static/images"
         #file = request.files['uploaded_image']
-        file = img_path + "/sekiro.png"
+        img_name = "/sekiro.png"
+        file = img_path + img_name
         if not file: return render_template('index.html', label="No Files")
 
         img = Image.open(file)
@@ -48,11 +51,11 @@ def preprocessing():
 
         img.save(img_path + '/result_image.png')
 
-        src_dir = os.path.dirname(os.path.abspath(__file__))
-        image_path = os.path.join(src_dir, '../static/images/sekiro.png')
+        # src_dir = os.path.dirname(os.path.abspath(__file__))
+        # image_path = os.path.join(src_dir, '../static/images/sekiro.png')
 
         # 결과 리턴
-        return render_template('image.html', label='../static/images/' + '/result_image.png')
+        return render_template('image.html', srcImg = html_img_path + '/sekiro.png', resultImg =html_img_path + '/result_image.png')
 
 if __name__ == '__main__':
     app.run(debug=True)

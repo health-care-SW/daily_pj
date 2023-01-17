@@ -21,7 +21,7 @@ def image_change_bw(image):
 '''
 플라스크
 '''
-@app.route("/index")
+@app.route("/")
 def index():
     return render_template('image.html')
 

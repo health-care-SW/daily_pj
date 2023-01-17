@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sofia+Sans:wght@500&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.15.21/dist/css/uikit.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.15.21/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.15.21/dist/js/uikit-icons.min.js"></script>
+    <title>JOIN</title>
+</head>
+    {% extends 'base.html'%}
+
+    {% block content %}
+    <h1>BECOME ONE OF US!</h1>
+    <form>
+        <div>
+            <input type="text" name="user_id" id="user_id" class="uk-input" placeholder="ID" required>
+        </div>
+        <div>
+            <input type="password" name="user_pw" id="user_pw" class="uk-input" placeholder="PW" required>
+        </div>
+        <button>JOIN</button>
+        
+        
+    </form>
+    
+
+
+
+    {% endblock %}
+</body>
+</html>

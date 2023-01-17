@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="'stylesheet" href="{{ url_for('static',filename='assets/css/image.css') }}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sofia+Sans:wght@500&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
+    
+    <title>Preprocess</title>
+</head>
+<body>
+        <form action="/image_preprocess" method="POST" enctype="multipart/form-data">
+            <h1>이미지 업로드 하기</h1>
+            <input type="file" name="uploaded_image">
+            
+            <h1>이미지 전처리 종류 선택</h1>
+            <label><input type="checkbox" name="pre_toggle_0">180도 회전 </label>
+            <br>
+            <label><input type="checkbox" name="pre_toggle_1">흑백 변경 </label>
+            <br>
+            <label><input type="checkbox" name="pre_toggle_2">이미지 사이즈 변경</label>
+            <span>
+                <input type="number" name="width" placeholder="width" style="display:none;"> 
+                <input type="number" name="height" placeholder="height" style="display:none;">
+            </span>
+            <br>
+            <button>업로드</button>
+        </form>
+        <div class="response">
+            {% if label %}
+                <img src="/static/{{label}}" alt="">
+                <img src="/static/result_{{label}}" alt="">
+            {% endif %}
+        </div>
+        <script src="/static/assets/js/script.js"></script>
+</body>
+</html>

@@ -8,6 +8,10 @@ app.config["PERMANENT_SESSION_LIFETIME"] = timedelta(minutes=3)
 
 @app.route("/login", methods = ['GET', 'POST'])
 def login():
+    #이미 로그인 했다면 메인페이지
+    if g.user != None:
+        return redirect(url_for("hello"))
+
     if request.method == "GET":
         return render_template("login.html")
 

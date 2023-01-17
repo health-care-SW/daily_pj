@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, g, redirect, url_for
 import os
 from PIL import Image
 
@@ -21,6 +21,10 @@ def image_change_bw(image):
 '''
 @app.route("/image")
 def image():
+    #로그인하지 않았다면 메인페이지
+    if g.user == None:
+        return redirect(url_for("hello"))
+
     return render_template('image.html')
 
 @app.route('/image_preprocess', methods=['POST'])
@@ -28,7 +32,7 @@ def preprocessing():
     if request.method == 'POST':
 
         html_img_path = "/static/images"
-        img_path = "../static/images"
+        img_path = "./static/images"
         #file = request.files['uploaded_image']
         img_name = "/sekiro.png"
         file = img_path + img_name

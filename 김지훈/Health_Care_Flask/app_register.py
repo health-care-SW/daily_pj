@@ -1,10 +1,14 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, g
 import User
 
 from __main__ import app
 
 @app.route('/register')
 def register():
+    #이미 로그인 했다면 메인페이지
+    if g.user != None:
+        return redirect(url_for("hello"))
+
     return render_template("register.html")
 
 

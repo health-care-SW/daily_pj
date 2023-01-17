@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for, g
 
 import sqlite3
 import pandas as pd
@@ -28,6 +28,10 @@ def exe_sql(conn, command):
 
 @app.route('/sql')
 def sqlIndex():
+    #로그인하지 않았다면 메인페이지
+    if g.user == None:
+        return redirect(url_for("hello"))
+
     return render_template("/sql_command.html")
 
 @app.route('/command', methods=['POST'])

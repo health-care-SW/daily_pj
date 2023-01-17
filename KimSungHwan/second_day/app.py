@@ -1,109 +1,66 @@
-from flask import Flask, render_template, request
-import sqlite3
-import pymysql
-import pandas as pd
-
+import os #디렉토리 절대 경로
+from flask import Flask
+from flask import render_template #template폴더 안에 파일을 쓰겠다
+from flask import request #회원정보를 제출할 때 쓰는 request, post요청 처리
+from flask import redirect #리다이렉트
+#from flask_sqlalchemy import SQLAlchemy
+from Models import db
+from Models import User
+from flask import session #세션
+from flask_wtf.csrf import CSRFProtect #csrf
+from Forms import RegisterForm, LoginForm
 app = Flask(__name__)
 
-def get_db(db_name):
-    # 디비 연결(sqlite3)
-    # return sqlite3.connect(db_name)
-    
-    # 디비 연결(mysql)
-    return pymysql.connect(
-                    host='localhost',
-                    port=3306,
-                    user='root',
-                    passwd='ksh0213',
-                    db=db_name,
-                    charset='utf8')
-
-# sql 실행
-def execute_sql(db_name, command):
-    # 실행 시 예외처리
-    try:
-        # db를 커넥션을 가져옴
-        conn = get_db(db_name)
-        # db 탐색을 위한 커서를 만듦
-        cursor = conn.cursor()
-        # 커서를 통해 명령을 실행
-        cursor.execute(command)
-        # 결과를 저장
-        conn.commit()
-        
-        # 셀렉트 문 일때
-        if command.split()[0].lower() == 'select':
-            # 쿼리를 실행해서 read_sql_query를 통해 DataFrame으로 바꿈
-            df = pd.read_sql_query(command, conn, index_col=None)
-            # df를 html 형식으로 바꿈 (table)
-            html = df.to_html()
-            conn.close()
-            # 반환
-            return html, 1
-        conn.close()
-        return True, 1    
-    except Exception as e:
-        return None, e
-
-
-@app.route('/data')
-def data():
-    return render_template("data.html")
-
-# 디비 실행 페이지
-@app.route('/dbsql', methods=["POST"])
-def sql_test():
-    # POST (데이터 받기)로 데이터를 받으면
-    if request.method == "POST":
-        # 폼으로 부터 데이터 받음
-        db_name = request.form.get("db_name")
-        sql_command = request.form.get("sql")
-    
-        # sql 실행
-        output, status = execute_sql(db_name, sql_command)
-        
-        # 실행 후 결과에 따라 정상, 오류, sql query html 결과 파싱
-        if output != None: # 정상처리
-            # select 문 일 때 output을 표현
-            if sql_command.split()[0].lower() == 'select':
-                return render_template("data.html", label="정상", output = None) + output
-            # select문이 아니면 표현 안함  -- 이 조건을 처리하지 않으면 에러 발생 bool + str exception
-            else: 
-                return render_template("data.html", label="정상", output = None)
-        elif output == None: # 오류 발생
-            return render_template("data.html", label="오류 발생" + str(status), output=None)
-
-    return render_template("data.html")
-
-
 @app.route('/')
-def hello_world():
-    return "<a href='/sql' style='display:block;'>sql</a> <a href='/data'>dbsql</a>"
+def mainpage():
+    userid = session.get('userid',None)
+    return render_template('main.html', userid=userid)
+    
 
-@app.route('/sql')
-def index():
-    return render_template("index.html")
+@app.route('/register', methods=['GET', 'POST']) #GET(정보보기), POST(정보수정) 메서드 허용
+def register():
+    form = RegisterForm()
+    if form.validate_on_submit(): #유효성 검사. 내용 채우지 않은 항목이 있는지까지 체크
+        usertable = User() 
+        usertable.userid = form.data.get('userid')
+        usertable.email = form.data.get('email')
+        usertable.password = form.data.get('password')
 
-@app.route('/command', methods=['POST','GET'])
-def command():
-    if request.method == 'POST':
-        string = request.form.get('first_test')
-        ll = list(string)
-        res = "잘못된 형식"
-        try:
-            if ll[1] == '+':
-                res = int(ll[0]) + int(ll[2])
-            elif ll[1] == '-':
-                res = int(ll[0]) - int(ll[2])
-            elif ll[1] == '*':
-                res = int(ll[0]) * int(ll[2])
-            elif ll[1] == '/':
-                res = int(ll[0]) / int(ll[2])
-        except:
-            pass    
-        return render_template("index.html", result=res)
-        # return "test "+ string
+        db.session.add(usertable) #DB저장
+        db.session.commit() #변동사항 반영
+        
+        return "회원가입 성공" 
+    return render_template('register.html', form=form) #form이 어떤 form인지 명시한다
 
+@app.route('/login', methods=['GET','POST'])  
+def login():
+    form = LoginForm() #로그인폼
+    if form.validate_on_submit(): #유효성 검사
+        print('{}가 로그인 했습니다'.format(form.data.get('userid')))
+        session['userid']=form.data.get('userid') #form에서 가져온 userid를 세션에 저장
+        return redirect('/') #성공하면 main.html로
+    return render_template('login.html', form=form)
+
+@app.route('/logout', methods=['GET'])
+def logout():
+    session.pop('userid', None)
+    return redirect('/')
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    #데이터베이스---------
+    basedir = os.path.abspath(os.path.dirname(__file__)) #현재 파일이 있는 디렉토리 절대 경로
+    dbfile = os.path.join(basedir, 'db.sqlite') #데이터베이스 파일을 만든다
+
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + dbfile
+    app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True #사용자에게 정보 전달완료하면 teadown. 그 때마다 커밋=DB반영
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False #추가 메모리를 사용하므로 꺼둔다
+    app.config['SECRET_KEY']='asdfasdfasdfqwerty' #해시값은 임의로 적음
+
+    csrf = CSRFProtect()
+    csrf.init_app(app)
+
+    db.init_app(app) #app설정값 초기화
+    db.app = app #Models.py에서 db를 가져와서 db.app에 app을 명시적으로 넣는다
+    db.create_all() #DB생성
+
+    app.run(host="127.0.0.1", port=5000, debug=True)

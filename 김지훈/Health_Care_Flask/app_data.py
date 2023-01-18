@@ -38,12 +38,27 @@ def sqlIndex():
 def command():
     getStr = request.form.get('first_test')
 
-    if '+' in getStr: 
-        a,b = getStr.split('+')
-        res = int(a) + int(b)
-
-        return 'command: ' + str(res)
-    else:
+    try:
+        if '+' in getStr: 
+            a,b = getStr.split('+')
+            res = int(a) + int(b)
+            return 'command: ' + str(res)
+        elif '-' in getStr: 
+            a,b = getStr.split('-')
+            res = int(a) - int(b)
+            return 'command: ' + str(res)
+        elif '*' in getStr: 
+            a,b = getStr.split('*')
+            res = int(a) * int(b)
+            return 'command: ' + str(res)
+        elif '/' in getStr: 
+            a,b = getStr.split('/')
+            res = int(a) / int(b)
+            return 'command: ' + str(res)
+        else:
+            return 'invalid command'
+            
+    except Exception as e:
         return 'invalid command'
 
 @app.route('/data')

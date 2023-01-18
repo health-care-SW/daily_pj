@@ -8,6 +8,10 @@ ROWS_PER_PAGE = 20
 #게시글 리스트
 @app.route('/boardlist')
 def boardlist():
+    #로그인 체크
+    if g.user == None:
+        return redirect(url_for("hello"))
+
     pageNum = request.args.get('page', default=1, type = int)
     articlelist = Board.select_board_paging(pageNum, ROWS_PER_PAGE)
     max_page = math.ceil(articlelist.total / ROWS_PER_PAGE)
@@ -26,6 +30,10 @@ def boardlist():
 #게시글 작성
 @app.route('/boardwrite', methods = ["GET", "POST"])
 def boardwrite():
+    #로그인 체크
+    if g.user == None:
+        return redirect(url_for("hello"))
+
     if request.method == 'GET':
         return render_template("boardwrite.html")
 
@@ -43,6 +51,10 @@ def boardwrite():
 # 게시글 열람
 @app.route('/boarddetail/<id>')
 def boarddetail(id):
+    #로그인 체크
+    if g.user == None:
+        return redirect(url_for("hello"))
+
     article = Board.select_board_with_id(id)
     return render_template("boarddetail.html", article = article)
 
@@ -50,7 +62,10 @@ def boarddetail(id):
 # 게시글 삭제
 @app.route('/boarddelete')
 def boardDelete():
- 
+    #로그인 체크
+    if g.user == None:
+        return redirect(url_for("hello"))
+
     board_id = request.args.get("board_id")
     Board.delete_board_with_id(board_id)
 

@@ -80,11 +80,11 @@ def insert_user(user):
 
 
 def delete_user(user):
-    ...
+    pass
 
 
 def update_user(user):
-    ...
+    pass
 
 
 if __name__ == "__main__":

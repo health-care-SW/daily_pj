@@ -6,11 +6,11 @@ app = Flask(__name__)
 # 실제로 이렇게 관리하면 망함
 app.secret_key = 'secretkey'
 
-
 import app_image
 import app_register
 import app_data
 import app_login
+import app_board
 
 @app.route('/')
 def hello():

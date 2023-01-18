@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{article.board_title}}</title>
+    <style>
+        .layout{
+            width : 500px;
+            margin : 0 auto;
+            margin-top : 40px;
+        }
+    
+    
+    </style>
+</head>
+<body>
+    <div class = "layout">
+        <h1>제목: {{article.board_title}}</h1>
+        <div>게시일: {{article.board_register_date}}</div>
+        <p>{{article.board_content}}</p>
+            
+    </div>
+</body>
+</html>

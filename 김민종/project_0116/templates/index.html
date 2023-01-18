@@ -17,8 +17,8 @@
         </script>
     {% endif %}
     <div class="container" style="width: 500px;" >
-        <form class="form-signin" action="/login" method="post" name="login"> 
-        <!-- <form class="form-signin" action="" method="post" name="login"> -->
+        <!-- <form class="form-signin" action="/login" method="post" name="login">  -->
+        <form class="form-signin" method="post" name="login">
             <br><br>
             <h2 class="form-signin-heading">로그인</h2>
             <br>
@@ -30,11 +30,13 @@
             <br>
 			<a href="/signin">계정이 없으시다면 회원가입</a>
             <br><br>
-            <!-- <button class="btn btn-lg btn-primary btn-block" id="submit" type="button" onclick="chkLogin()" value="로그인"> -->
-            <input class="btn btn-lg btn-primary btn-block" type="button" onclick="chkLogin()" value="로그인">
+            <button class="btn btn-lg btn-primary btn-block" id="submit" type="button" onclick="chkLogin()" value="로그인">
+            <!-- <input class="btn btn-lg btn-primary btn-block" type="button" onclick="chkLogin()" value="로그인"> -->
 
         </form>
     </div>
     <script type="text/javascript" src="../static/assets/js/validation.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.3.js"
+    integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
 </body>
 </html>

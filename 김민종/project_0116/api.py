@@ -21,11 +21,11 @@ def login():
     if request.method == 'GET':
         return render_template("index.html")
     else:
-        user_id = request.form['id']
-        user_pw = request.form['pwd']
-        # data = json.loads(request.data)
-        # user_id = data.get('id')
-        # user_pw = data.get('pwd')
+        # user_id = request.form['id']
+        # user_pw = request.form['pwd']
+        data = json.loads(request.data)
+        user_id = data.get('id')
+        user_pw = data.get('pwd')
         # print(user_id)
         # print(user_pw)
         try:
@@ -35,8 +35,8 @@ def login():
         if user is not None:
             if bcrypt.check_password_hash(user.user_pw, user_pw):
                 session['login'] = user.user_id
-                return redirect("/main")
-                # return jsonify({"result":"success"})
+                # return redirect("/main")
+                return jsonify({"result":"success"})
             else:
                 return jsonify({"reesult":"fail"})
         else:

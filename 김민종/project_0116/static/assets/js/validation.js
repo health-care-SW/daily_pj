@@ -38,8 +38,8 @@ function chkLogin() {
 		pwd.focus();
 		return false;
 	}
-    document.login.submit();
-    // login_user();
+    // document.login.submit();
+    login_user();
 }
 
 function chkSignin(){
@@ -93,27 +93,27 @@ function chkAddWriting(){
 }
 
  /* Ajax를 이용해 login() 함수를 완성하세요. */
-// function login_user() {
-//     let user_id = $("#email").val()
-//     let user_pw = $("#password").val()
-// 	var d = {
-// 		'id': user_id,
-// 		'pwd': user_pw
-// 	}
-// 	$.ajax({
-// 		url: '/login',
-// 		type: 'post',
-// 		contentType: 'application/json',
-// 		data:  JSON.stringify(d),
-// 		success: function (res) {
-// 			if (res['result'] == 'success') {
-// 				alert("로그인 성공")
-// 				window.location.href = '/'
-// 			} else {
-// 				alert("로그인 실패!")
-// 				window.location.reload()
-// 			}
-// 		}
-// 	})
+function login_user() {
+    let user_id = $("#email").val()
+    let user_pw = $("#password").val()
+	var d = {
+		'id': user_id,
+		'pwd': user_pw
+	}
+	$.ajax({
+		url: '/login',
+		type: 'POST',
+		contentType: 'application/json',
+		data:  JSON.stringify(d),
+		success: function (res) {
+			if (res['result'] == 'success') {
+				alert("로그인 성공")
+				window.location.href = '/main'
+			} else {
+				alert("로그인 실패!")
+				window.location.reload()
+			}
+		}
+	})
     
-// }
+}

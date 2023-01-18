@@ -35,13 +35,13 @@ def logout():
 @app.before_request
 def load_logged_in_user():
     user_name = session.get('username')
-    print(session)
+    #print(session)
     if user_name is None:
         g.user = None
     else:
         g.user = User.select_user_with_name(user_name)
     
-    print(g.user)
+    #print(g.user)
 
 
 

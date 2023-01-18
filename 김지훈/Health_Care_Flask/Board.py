@@ -44,13 +44,20 @@ def select_board_all():
 def select_board_paging(page, rows_per_page = 20):
     with app.app_context():
         boardlist = db.session.query(Board).order_by(Board.board_id.desc()).paginate(page = page, per_page = rows_per_page)
-        print("page", boardlist.last)
     return boardlist
 
 def insert_board(board):
     try:
         with app.app_context():
             db.session.add(board)
+            db.session.commit()
+    except Exception as e:
+        print(e.args)
+
+def delete_board_with_id(id):
+    try:
+        with app.app_context():
+            db.session.query(Board).filter(Board.board_id == id).delete()
             db.session.commit()
     except Exception as e:
         print(e.args)

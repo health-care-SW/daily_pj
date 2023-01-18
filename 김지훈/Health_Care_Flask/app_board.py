@@ -15,7 +15,7 @@ def boardlist():
     start_page = max(1, pageNum - 5)
     end_page = min(pageNum + 5, max_page)
 
-    print(f'start: {start_page}, end: {end_page}')
+    #print(f'start: {start_page}, end: {end_page}')
     #print(articlelist[0].board_title)
 
     return render_template("boardlist.html", articlelist = articlelist,
@@ -28,11 +28,13 @@ def boardlist():
 def boardwrite():
     if request.method == 'GET':
         return render_template("boardwrite.html")
-        
+
     if request.method == 'POST':
         title = request.form.get("title")
         content = request.form.get("content")
         article = Board.Board(title, content)
+
+        #print(f'post content: {content}, title: {title}')
         Board.insert_board(article)
         return redirect(url_for("boardlist"))
 
@@ -43,5 +45,15 @@ def boardwrite():
 def boarddetail(id):
     article = Board.select_board_with_id(id)
     return render_template("boarddetail.html", article = article)
+
+
+# 게시글 삭제
+@app.route('/boarddelete')
+def boardDelete():
+ 
+    board_id = request.args.get("board_id")
+    Board.delete_board_with_id(board_id)
+
+    return redirect(url_for("boardlist"))
 
 

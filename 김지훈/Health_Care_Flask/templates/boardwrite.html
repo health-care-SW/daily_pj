@@ -23,15 +23,36 @@
         min-height : 300px;
     }
     </style>
-    
+
 </head>
 <body>
     <div class="layout">
-        <form action = "/boardwrite" method="post" enctype="multipart/form-data">
-            <input name = "title" type = "text">
-            <textarea name = "content"></textarea>
-            <button type = submit>작성</button>
+        <form id = "writeForm" action = "/boardwrite" method = "post" enctype="multipart/form-data">
+            <input name = "title" type = "text" placeholder="제목을 입력하세요">
+            <textarea name = "content" placeholder="내용을 입력하세요"></textarea>
+            <button onclick = "validate" >작성</button>
         </form>
     </div>
+
+    <script>
+        function validate(){
+            var title = document.querySelector("input[name='title']").value;
+            var content = document.querySelector("input[name='content']").value;
+            var writeForm = document.querySelector("#writeForm").value;
+            if(title.length == 0){
+                alert("제목을 입력하세요")
+                return false;
+            }
+            else if(content.length == 0){
+                alert("내용을 입력하세요")
+                return false;
+            }
+            else{
+                writeForm.submit();
+                return true;
+            }
+
+        }
+    </script>
 </body>
 </html>

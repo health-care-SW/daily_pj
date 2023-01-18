@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for,jsonify, Bl
 from flask_bcrypt import Bcrypt
 from model import User
 import json
-
+from Database import Database
 
 board = Blueprint('board',__name__)
 bcrypt = Bcrypt()
@@ -33,7 +33,7 @@ def login():
         if user is not None:
             if bcrypt.check_password_hash(user.user_pw, user_pw):
                 session['login'] = user.user_id
-                return render_template("main.html", label=user_id)
+                return redirect("/main")
             else:
                 return jsonify({"reesult":"fail"})
         else:
@@ -49,3 +49,8 @@ def logout():
             print("session not exist")
         session["login"] = None
         return redirect('/')
+
+@board.route("/main", methods=["GET","POST"])
+def main():
+    if request.method == "POST" or request.method == "GET":
+        return render_template("main.html")

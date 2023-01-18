@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>게시판</title>
+    <style>
+        .layout{
+            width : 500px;
+            margin : 0 auto;
+            margin-top : 40px;
+        }
+    
+    
+    </style>
+</head>
+<body>
+    <div class="layout">
+        <table>
+            <thead>
+                <tr>
+                    <th>글번호</th>
+                    <th>제목</th>
+                    <th>게시일</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for article in articlelist %}
+                <tr>
+                    <td>{{article.board_id}}</td>
+                    <td>
+                        <a href="/boarddetail/{{article.board_id}}">
+                        {{article.board_title}}
+                        </a>
+                    </td>
+                    <td>{{article.board_register_date}}</td>
+                </tr>
+                {% endfor%} 
+
+            </tbody>
+        </table>
+
+        {% for page in range(start_page, end_page+1) %}
+        <th:block>
+            {% if page != nowPage %}
+            <a href="/boardlist?page={{page}}">{{page}}</a>
+            {% elif page == nowPage %}
+            <strong>{{page}}</strong>
+            {% endif %}
+        </th:block>
+        {% endfor %}
+
+        <br>
+        <br>
+        <button class = 'boardWriteBtn' onclick="window.location.href='/boardwrite'">글 작성</button>
+    </div>
+</body>
+</html>

@@ -5,11 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="..\static\assets\css\style.css">
-    <title>Document</title>
+    <title>회원가입</title>
 </head>
 <body class="main">
     <div class = "main">
-        <form action="/register" method = "post">
+        <form action="/register_process" method = "post">
+            <h1>회원가입</h1>
             <h2>아이디</h2>
             <span><input type="text" name = "user_name" placeholder="아이디를 입력하세요"></span>
     
@@ -21,9 +22,44 @@
 
             <br>
             <br>
-            <button type="submit">회원가입</button>
+            
+            <button id="btnRegister" onclick="register()">회원가입</button>
         </form>
+        <button class = 'mainBtn' onclick="window.location.href='/'">메인페이지</button>
+        
     </div>
+    
 
 </body>
+
+<script>
+    async function register() {
+   
+    var userName = document.querySelector("input[name='user_name']").value;
+    var userPassword = document.querySelector("input[name='user_password']").value;   
+    var userEmail = document.querySelector("input[name='user_email']").value;   
+    
+    let urlParams = new URLSearchParams({
+        userName: userName,
+        userEmail: userEmail,
+        userPassword: userPassword,
+        });
+    
+    let fetchOptions = {
+            method: "POST",
+            body: urlParams,
+        }
+    
+        let response = await fetch("/register_process", fetchOptions);
+        console.log(response);
+        let data = await response.json();
+        if( data.result == "success" ){
+        alert('회원가입을 축하합니다. 로그인 페이지로 이동합니다.');
+        window.location.href="/login";
+        }else if( data.result == "fail" ){
+        alert("회원가입에 실패했습니다.");
+        window.location.href="/register";
+    }
+}
+</script>
 </html>

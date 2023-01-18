@@ -1,21 +1,18 @@
 import pymysql
-from flask_mysqldb import MySQL
 from flask import Flask
 from api import board
 from db_connect import db
 from flask_bcrypt import Bcrypt
-from config import DB_URL, db
+from config import DB_URL
 
 app = Flask(__name__)
 app.register_blueprint(board)
 
-app.config['MYSQL_HOST'] = db['host']
-app.config['MYSQL_USER'] = db['user']
-app.config['MYSQL_PASSWORD'] = db['password']
-app.config['MYSQL_DB'] = db['database']
-app.config['MYSQL_PORT'] = db['port']
+app.config['SQLALCHEMY_DATABASE_URI'] = DB_URL
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.secret_key = 'ekdwls'
 
-mysql = MySQL(app)
+db.init_app(app)
 bcrypt = Bcrypt(app)
 
 if __name__ == '__main__':

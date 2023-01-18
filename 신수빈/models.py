@@ -1,6 +1,4 @@
-from flask_sqlalchemy import SQLAlchemy
-db = SQLAlchemy()
-
+from db_connect import db
 from datetime import datetime
 
 class User(db.Model):

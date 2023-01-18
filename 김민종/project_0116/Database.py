@@ -14,3 +14,10 @@ class Database():
                         passwd= Database.get_pwd(),
                         db="webProject",
                         charset='utf8')
+
+    def execute_query(sql, *params):
+        conn = Database.get_db()
+        cursor = conn.cursor()
+        cursor.execute(sql, params)
+        conn.commit()
+        return cursor

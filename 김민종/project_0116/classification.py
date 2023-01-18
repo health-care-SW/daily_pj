@@ -60,7 +60,6 @@ def preprocessing():
         img.save('./static/assets/images/fix.png')
 
         # 결과 리턴
-        # return render_template('main.html', label="/images/original.jpg")
         return redirect("/classification")
 
 @board2.route("/classification", methods=["GET","POST"])

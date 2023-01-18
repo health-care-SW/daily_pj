@@ -7,12 +7,15 @@ import pymysql
 import pandas as pd
 import os
 from Database import Database
+from util import str2time
 
 app = Flask(__name__)
 bcrypt = Bcrypt(app)
 app.register_blueprint(board)
 app.register_blueprint(board2)
 app.register_blueprint(board3)
+
+app.jinja_env.filters['datetime'] = str2time
 
 app.secret_key = 'tjdnf'
 app.config['SESSION_TYPE'] = 'filesystem'
@@ -43,10 +46,8 @@ def check_duplication():
         id = request.form.get("inputID")
         if id == "":
             return render_template("signin.html",label="아무것도 입력되지 않았습니다. 입력해주세요",id= None, dup=False)
-        conn = Database.get_db()
-        cursor = conn.cursor()
         sql = "select * from user;"
-        cursor.execute(sql)
+        cursor = Database.execute_query(sql)
         rows = cursor.fetchall()
         for row in rows:
             if row[2] == id:
@@ -66,11 +67,8 @@ def sign_in_process():
         email = request.form.get("inputEmail")                
         phone_num = request.form.get("inputPhoneNum")         
         try:
-            conn = Database.get_db()
-            cursor = conn.cursor()
             sql = "insert into user values(%s,%s,%s,%s);"
-            cursor.execute(sql, (id, crypted_pwd, email, phone_num))
-            conn.commit()
+            Database.execute_query(sql, id, crypted_pwd, email, phone_num)
             return redirect(url_for("main", label="회원가입 성공! 로그인해주세요"))
         
         except Exception as e:

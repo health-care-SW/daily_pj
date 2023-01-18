@@ -11,9 +11,12 @@
 </head>
 
 <body>
+    {%if label%}
+    <script> alert('{{label}}')</script>
+    {%endif%}
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Navbar</a>
+            <a class="navbar-brand" href="/main">Main</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -78,7 +81,7 @@
             <br>
             <input type="checkbox" name="pre_toggle_2" onclick="hide(this)">
             <span>이미지 사이즈 변경 </span>
-            <br>
+            <br><br><br>
             <div id="size" style="display:none">
                 <h1>이미지 사이즈 변경</h1>
                 <input type="text" name="changed_width" placeholder="넓이(width) 입력"><br>

@@ -9,7 +9,7 @@
 </head>
 <body>
     <br><br>
-    <h1 style="text-align: center;">약제분류 사이트에 오신 것을 환영합니다!</h1>
+    <h1 style="text-align: center;">어서오세요! 환영합니다!</h1>
     <h6 style="text-align: center;">우선 로그인을 해주세요</h6>
     {%if label %}
         <script>
@@ -17,7 +17,8 @@
         </script>
     {% endif %}
     <div class="container" style="width: 500px;" >
-        <form class="form-signin" action="/login" method="post" name="login">
+        <form class="form-signin" action="/login" method="post" name="login"> 
+        <!-- <form class="form-signin" action="" method="post" name="login"> -->
             <br><br>
             <h2 class="form-signin-heading">로그인</h2>
             <br>
@@ -29,6 +30,7 @@
             <br>
 			<a href="/signin">계정이 없으시다면 회원가입</a>
             <br><br>
+            <!-- <button class="btn btn-lg btn-primary btn-block" id="submit" type="button" onclick="chkLogin()" value="로그인"> -->
             <input class="btn btn-lg btn-primary btn-block" type="button" onclick="chkLogin()" value="로그인">
 
         </form>

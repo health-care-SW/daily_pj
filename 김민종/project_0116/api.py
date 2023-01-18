@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for,jsonify, Blueprint, session, g
+from flask import Flask, render_template, request, redirect, url_for,jsonify, Blueprint, session, g, make_response
 from flask_bcrypt import Bcrypt
 from model import User
 import json
@@ -26,6 +26,8 @@ def login():
         # data = json.loads(request.data)
         # user_id = data.get('id')
         # user_pw = data.get('pwd')
+        # print(user_id)
+        # print(user_pw)
         try:
             user = User.find(user_id)
         except:
@@ -34,6 +36,7 @@ def login():
             if bcrypt.check_password_hash(user.user_pw, user_pw):
                 session['login'] = user.user_id
                 return redirect("/main")
+                # return jsonify({"result":"success"})
             else:
                 return jsonify({"reesult":"fail"})
         else:

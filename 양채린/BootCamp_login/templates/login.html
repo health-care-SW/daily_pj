@@ -4,26 +4,28 @@
 <script>
     /* Ajax를 이용해 login() 함수를 완성하세요. */
     function login() {
-        let user_id = $("#userId").val()
-        let user_pw = $("userPw").val()
-    }
-            $.ajax({
-        url: '/login',
-        type: 'post',
-        data: {
-            'user_id': user_id,
-            'user_pw': user_pw
-        },
-        success: function (res) {
-            if (res['result'] == 'success') {
-                alert("로그인 성공")
-                window.location.href = '/'
-            } else {
-                alert("로그인 실패!")
-                window.location.reload()
+        let user_id = $("#userId").val();
+        let user_pw = $("#userPw").val();
+        $.ajax({
+            url: '/login',
+            type: 'POST',
+            data: JSON.stringify({
+                'user_id': user_id,
+                'user_pw': user_pw
+            }),
+            contentType: "application/json",
+            dataType: "JSON",
+            success: function (res) {
+                if (res['result'] == 'success') {
+                    alert("로그인 성공")
+                    window.location.href = '/post'
+                } else {
+                    alert("로그인 실패!")
+                    window.location.reload()
+                }
             }
-        }
-    })
+        })
+    }
 </script>
 {% endblock %}
 

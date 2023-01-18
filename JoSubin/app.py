@@ -1,57 +1,51 @@
-from flask import Flask, render_template, request
-# from flask_ngrok import run_with_ngrok # port를 우회해서 접속가능한 도메인을 할당
+from flask import Flask, render_template, request, redirect
+from models import db
 import os
-from PIL import Image
-
+from models import Fcuser
 app = Flask(__name__)
-# run_with_ngrok(app)
 
-'''
-이미지 처리 함수
-'''
-def image_resize(image, width, height):
-    return image.resize((int(width), int(height)))
+@app.route('/', methods=['GET','POST'])
+def hello():
+    return render_template("hello.html")
+@app.route('/register', methods=['GET','POST'])
+def register():
+    if request.method == 'GET':
+        return render_template("register.html")
+    else:
+        #회원정보 생성
+        userid = request.form.get('userid') 
+        username = request.form.get('username')
+        password = request.form.get('password')
+        re_password = request.form.get('re_password')
+        print(password)
 
-def image_rotate(image):
-    return image.transpose(Image.ROTATE_180)
 
-def image_change_bw(image):
-    return image.convert('L')
+        if not (userid and username and password and re_password) :
+            return "모두 입력해주세요"
+        elif password != re_password:
+            return "비밀번호를 확인해주세요"
+        else:
+            fcuser = Fcuser()         
+            fcuser.password = password 
+            fcuser.userid = userid
+            fcuser.username = username      
+            db.session.add(fcuser)
+            db.session.commit()
+            return "회원가입 완료"
 
-'''
-플라스크
-'''
-@app.route("/")
-def index():
-    return render_template('index.html')
+        return redirect('/')
 
-@app.route('/image_preprocess', methods=['POST'])
-def preprocessing():
-    if request.method == 'POST':
-        file = request.files['uploaded_image']
-        if not file: return render_template('index.html', label="No Files")
+if __name__ == "__main__":
+    basedir = os.path.abspath(os.path.dirname(__file__))  # database 경로를 절대경로로 설정
+    dbfile = os.path.join(basedir, 'db.sqlite') # 데이터베이스 경로와 이름
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + dbfile
+    app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-        img = Image.open(file)
+    db.init_app(app)
+    db.app = app
+    with app.app_context():
+        db.create_all()
 
-        is_rotate_180 = request.form.get('pre_toggle_0')
-        is_change_bw = request.form.get('pre_toggle_1')
-        is_change_size = request.form.get('pre_toggle_2')
 
-        if is_rotate_180 == 'on':
-            img = image_rotate(img)
-
-        if is_change_bw == 'on':
-            img = image_change_bw(img)
-
-        if is_change_size == 'on':
-            img = image_resize(img, request.form.get('changed_width'), request.form.get('changed_height'))
-
-        img.save('result_image.png')
-        src_dir = os.path.dirname(os.path.abspath(__file__))
-        image_path = os.path.join(src_dir, 'result_image.png')
-
-        # 결과 리턴
-        return render_template('index.html', label=image_path)
-
-if __name__ == '__main__':
-    app.run()
+    app.run(host='127.0.0.1', port=5000, debug=True) 

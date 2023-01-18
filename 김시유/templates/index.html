@@ -1,37 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="stylesheet"
-      href="{{url_for('static',filename='assets/css/styles.css')}}"
-    /> <!--정의된 기능 이외의 새로운 기능을 부여했을 때 {{ 사용 }}-->
-    <title>mysql</title>
-  </head>
-  <body>
-    <!-- <div class="main">
-      <form action="test">
-        <label for="first_test">first_test : </label>
-        <input
-          type="text"
-          name="first_test"
-          placeholder="sql command"
-          required
-        />
-        <button>Submit</button> -->
+{% extends "base.html" %}
+{% block content %}
 
-        <form action="/command" method="POST">
-            <label for="command">first_test : </label>
-            <input
-              type="text"
-              name="command"
-              placeholder="1+1"
-              required
-            />
-            <button>Submit</button>
-      </form>
-    </div>
-  </body>
-</html>
+<div class="box">
+	<h1>Flask Authentication</h1>
+    {% if not logged_in: %}
+  <a href="{{ url_for('login') }}" class="btn btn-primary btn-block btn-large">Login</a>
+  <a href="{{ url_for('register') }}" class="btn btn-secondary btn-block btn-large">Register</a>
+    {% endif %}
+</div>
+
+{% endblock %}

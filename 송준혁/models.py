@@ -1,6 +1,8 @@
-from db_connect import db
 from datetime import datetime
+from flask_sqlalchemy import SQLAlchemy
 # from werkzeug.security import generate_password_hash, check_password_hash
+
+db = SQLAlchemy()
 
 
 class User(db.Model):

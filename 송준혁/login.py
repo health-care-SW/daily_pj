@@ -1,7 +1,7 @@
 import pymysql
 from flask import Flask
 from api import board
-from db_connect import db
+from api import db
 from flask_bcrypt import Bcrypt
 
 app = Flask(__name__)

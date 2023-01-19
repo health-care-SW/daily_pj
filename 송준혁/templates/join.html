@@ -5,6 +5,8 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
   <title>회원가입</title>
 </head>
 
@@ -18,26 +20,26 @@
 
 <!-- content block과 필요한 코드를 작성하세요. -->
 {% block content %}
-<h2 class="title">Hchang 회원가입</h2>
+<h2 class="title">회원가입</h2>
 <hr />
 <div class="card">
   <div class="card-body">
     <div class="mb-3 row">
       <label class="col-sm-2 col-form-label">ID</label>
       <div class="col-sm-10">
-        <input type="text" id="userId" class="form-control" placeholder="junhyuk" />
+        <input type="text" id="userId" class="form-control" placeholder="ID를 입력하세요" />
       </div>
     </div>
     <div class="mb-3 row">
       <label class="col-sm-2 col-form-label">Password</label>
       <div class="col-sm-10">
-        <input type="password" class="form-control" id="userPw" />
+        <input type="password" class="form-control" id="userPw" placeholder="비밀번호를 입력하세요" />
       </div>
     </div>
     <div class="mb-3 row">
       <label class="col-sm-2 col-form-label">Password Check</label>
       <div class="col-sm-10">
-        <input type="password" class="form-control" id="userPw2" />
+        <input type="password" class="form-control" id="userPw2" placeholder="비밀번호를 다시 입력하세요" />
       </div>
     </div>
     <button class="btn btn-primary" onclick="regist()">회원가입하기</button>
@@ -47,27 +49,19 @@
 <hr />
 
 {% endblock %}
+
 <!-- scripts block과 필요한 코드를 작성하세요. -->
 {% block scripts %}
 <script>
   function regist() {
-    let user_id = $("#userId").val();
-    let user_pw = $("#userPw").val();
-    let user_pw2 = $("#userPw2").val();
-    console.log(user_id);
-    console.log(user_pw);
-    console.log(user_pw2);
-
+    let u_id = $("#userId").val();
+    let u_pw = $("#userPw").val();
+    let u_pw2 = $("#userPw2").val();
+    let info = { 'user_id': u_id, 'user_pw': u_pw }
     $.ajax({
+      type: 'POST', // 전송방식
       url: "/join",
-      type: "POST",
-      data: JSON.stringify({
-        user_id: user_id,
-        user_pw: user_pw,
-        user_pw2: user_pw2,
-      }),
-      contentType: "application/json",
-      dataType: "JSON",
+      data: JSON.stringify(info),
       success: function (res) {
         if (res["result"] === "success") {
           alert("등록!");

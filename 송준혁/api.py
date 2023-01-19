@@ -1,7 +1,7 @@
 from flask import Flask, redirect, request, render_template, jsonify, Blueprint, session, g
-from models import User, Post
-from db_connect import db
+from models import User, Post, db
 from flask_bcrypt import Bcrypt
+from datetime import timedelta
 
 board = Blueprint('board', __name__)
 bcrypt = Bcrypt()
@@ -19,6 +19,11 @@ def load_logged_in_user():
         g.user = db.session.query(User).filter(User.id == user_id).first()
 
 
+def before_request():
+    session.permanent = True
+    app.permanent_session_lifetime = timedelta(minutes=1)
+
+
 @board.route("/")
 def home():
     return render_template("base.html")
@@ -33,7 +38,7 @@ def post():
 def join():
     if request.method == 'GET':
         return render_template('join.html')
-    else:
+    elif request.method == 'POST':
         user_id = request.form['user_id']
         user_pw = request.form['user_pw']
         pw_hash = bcrypt.generate_password_hash(user_pw)
@@ -50,11 +55,14 @@ def join():
 def login():
     if request.method == 'GET':
         return render_template("login.html")
-    else:
+    elif request.method == 'POST':
         user_id = request.form['user_id']
         user_pw = request.form['user_pw']
+        print(user_id)
+        print(user_pw)
         user = User.query.filter(User.user_id == user_id).first()
 
+        # 처음 실행 되었을시
         if user is not None:
             if bcrypt.check_password_hash(user.user_pw, user_pw):
                 session['login'] = user.id

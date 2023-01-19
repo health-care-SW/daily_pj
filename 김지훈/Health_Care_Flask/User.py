@@ -16,7 +16,7 @@ class User(db.Model):
     __tablename__ = 'users'
     user_seq = db.Column(db.Integer, primary_key=True)
     user_name = db.Column(db.String(100), unique=True, nullable=False)
-    user_password = db.Column(db.String(50), nullable=False)
+    user_password = db.Column(db.String(100), nullable=False)
     user_email = db.Column(db.String(100), nullable=False, unique=True)
     user_profile_image_url = db.Column(db.String(500), default = "default.png")
     user_register_date = db.Column(db.DateTime(timezone=True), default=datetime.now())

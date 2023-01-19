@@ -28,8 +28,9 @@ def join():
     if request.method == 'GET':
         return render_template('join.html')
     else:
-        user_id = request.form['user_id']
-        user_pw = request.form['user_pw']
+        jsonData = request.get_json()
+        user_id = jsonData['user_id']
+        user_pw = jsonData['user_pw']
         pw_hash = bcrypt.generate_password_hash(user_pw)
 
         user = User(user_id, pw_hash)
@@ -43,8 +44,9 @@ def login():
     if request.method == 'GET':
         return render_template("login.html")
     else:
-        user_id = request.form['user_id']
-        user_pw = request.form['user_pw']
+        jsonData = request.get_json()
+        user_id = jsonData['user_id']
+        user_pw = jsonData['user_pw']
         user = User.query.filter(User.user_id == user_id).first()
 
         if user is not None:

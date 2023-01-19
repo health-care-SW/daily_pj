@@ -36,3 +36,7 @@ def login():
 @app.route("/register", methods=['POST'])
 def sugnup():
     return render_template("register.html")
+
+@app.route("/logout",methods=['GET'])
+def logout():
+    return render_template("index.html",label=None)

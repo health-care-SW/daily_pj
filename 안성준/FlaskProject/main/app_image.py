@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, session
 from flask import current_app as app
 from flask import Blueprint
 import os

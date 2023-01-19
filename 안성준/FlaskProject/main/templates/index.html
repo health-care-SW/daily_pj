@@ -21,9 +21,14 @@
             <div class="container">
                 <a class="navbar-brand" href="#!">Mad</a>
                 {% if label%}
-                <h5 class="text">{{ label }}</h5>
+                    <div class="justify-content-end">
+                        <h5 class="text" style="display: inline;">{{ label }}  </h5>
+                        <form action="/logout" style="display: inline;">
+                            <button type="submit" class="btn btn-primary">로그아웃</button>
+                        </form>
+                    </div>
                 {% else %}
-                <a class="btn btn-primary" href="http://127.0.0.1:5000/login">로그인</a>
+                    <a class="btn btn-primary" href="http://127.0.0.1:5000/login">로그인</a>
                 {% endif %}
             </div>
         </nav>

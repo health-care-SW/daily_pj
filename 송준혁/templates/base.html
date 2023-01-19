@@ -1,0 +1,52 @@
+<html>
+<head>
+    <title>Flask 로그인 구현 </title>
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+
+    <!-- style 코드를 작성하세요. -->
+    <style>
+        .wrap{
+            width: 680px;
+            margin: 10px auto;
+        }
+        .title{
+            text-align: center;
+        }
+
+        .nav-link{
+            display: block;
+            text-align: center;
+        }
+    </style>
+    <!-- block을 만들어주세요. -->
+</head>
+
+<body>
+    <div class="wrap">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="https://github.com/SongJunHyuk/daily_pj/tree/main/%EC%86%A1%EC%A4%80%ED%98%81"> * Github 코드 *</a>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                    <div class="navbar-nav">
+                        <a class="nav-link" href="/login">로그인</a>
+                        <br>
+                        <a class="nav-link" href="/join">회원가입</a>
+                        <br>
+                        <a class="nav-link" href="/logout">로그아웃</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <hr>
+        <!-- 3번을 하세요 -->
+        {% block content %}
+        {% endblock %}
+    </div>
+</body>
+<!-- ajax를 처리하기 위해 body 아래에 넣습니다. -->
+{% block scripts %}
+{% endblock %}
+
+</html>

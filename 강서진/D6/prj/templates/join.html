@@ -1,0 +1,21 @@
+{% extends 'base.html'%}
+
+    {% block content %}
+    <h1>BECOME ONE OF US!</h1>
+    <form action="/join" method="POST">
+        <div>
+            <input type="text" name="username" id="username" class="uk-input uk-form-width-large" placeholder="ID" required>
+        </div>
+        <div>
+            <input type="email" name="user_email" id="user_email" class="uk-input uk-form-width-large" placeholder="EMAIL" required>
+        </div>
+        <div>
+            <input type="password" name="user_pw" id="user_pw" class="uk-input uk-form-width-large" placeholder="PW" required>
+        </div>
+        
+        <button class="uk-button uk-button-default">JOIN</button>
+        
+        
+    </form>
+    
+    {% endblock %}

@@ -1,14 +1,12 @@
 from flask import redirect, request, render_template, jsonify, Blueprint, session, g
 from models import User, Post
+from db_connect import db
 from flask_bcrypt import Bcrypt
-from flask_sqlalchemy import SQLAlchemy
-
-db = SQLAlchemy()
-
 
 board = Blueprint('board',__name__)
 bcrypt = Bcrypt()
 
+# before_app_request를 이용해 로그인한 사용자를 확인하는 기능을 추가하세요.
 @board.before_app_request
 def load_logged_in_user():
     user_id = session.get('login')
@@ -39,6 +37,7 @@ def join():
         db.session.commit()
         return jsonify({"result":"success"})
 
+# 로그인을 위한 login() 함수를 완성하세요.
 @board.route("/login",methods=['GET','POST'])
 def login():
     if request.method == 'GET':
@@ -57,6 +56,7 @@ def login():
         else:
             return jsonify({"result":"fail"})
 
+# 로그아웃을 위한 logout() 함수를 완성하세요.
 
 @board.route("/logout")
 def logout():

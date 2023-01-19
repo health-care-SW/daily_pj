@@ -1,2 +1,0 @@
-pip uninstall flask_sqlalchemy
-pip install --upgrade flask_sqlalchemy==2.5.1

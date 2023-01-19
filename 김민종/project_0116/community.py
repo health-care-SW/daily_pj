@@ -1,4 +1,5 @@
 from flask import render_template, request, redirect, url_for, Blueprint, session, g
+from flask_paginate import Pagination, get_page_args
 from model import User
 from datetime import datetime
 from Database import Database
@@ -6,6 +7,7 @@ from util import str2time
 from util import check_session
 import uuid
 import os
+import math
 
 
 commu = Blueprint('community',__name__)
@@ -23,13 +25,40 @@ def load_logged_in_user():
 def community():
     if request.method == "POST" or request.method == "GET":
         try:
+            page = request.args.get("page",1,type=int)
+            
+            
+            limit = 5
             sql = "select * from writing;"
             cursor = Database().execute_query(sql)
             rows = cursor.fetchall()
             ll = str2time(rows, 2)
-            return render_template("/board/community.html",result = ll)
+            ll.insert(0,"0")
+            total_cnt = len(ll)
+            last_page_num = math.ceil(total_cnt / limit) # 반드시 올림을 해줘야함
+            # 페이지 블럭을 5개씩 표기
+            block_size = 5
+            # 현재 블럭의 위치 (첫 번째 블럭이라면, block_num = 0)
+            block_num = int((page - 1) / block_size)
+            # 현재 블럭의 맨 처음 페이지 넘버 (첫 번째 블럭이라면, block_start = 1, 두 번째 블럭이라면, block_start = 6)
+            block_start = (block_size * block_num) + 1
+            # 현재 블럭의 맨 끝 페이지 넘버 (첫 번째 블럭이라면, block_end = 5)
+            block_end = block_start + (block_size - 1)
+
+            
+            if page == 0:
+                return redirect("community?page=1")
+            if page == last_page_num+ 1:
+                return redirect("community?page=%d"%(last_page_num))
+
+            return render_template("/board/community.html",result = ll,
+                                                            limit=limit,
+                                                            page=page,
+                                                            block_start=block_start,
+                                                            block_end=block_end,
+                                                            last_page_num=last_page_num)
         except Exception as e:
-            return redirect(url_for("community.community", label="오류 발생"))
+            return redirect(url_for("community.community", label="오류 발생"+str(e)))
 
     return render_template("/board/community.html")
 

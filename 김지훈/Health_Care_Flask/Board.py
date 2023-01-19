@@ -81,5 +81,4 @@ def delete_board_with_id(id):
 if __name__ == "__main__":
     #create_table()
     #insert_dummy_article()
-    select2()
     pass

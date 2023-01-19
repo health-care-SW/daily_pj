@@ -68,7 +68,7 @@ def login():
         try:
             user = User.find(user_id)
         except:
-            return jsonify({"reesult":"fail"})
+            return jsonify({"result":"fail"})
         if user is not None:
             if bcrypt.check_password_hash(user.user_pw, user_pw):
                 session['login'] = user.user_id

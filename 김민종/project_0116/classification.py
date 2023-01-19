@@ -75,6 +75,13 @@ def classification():
     else:
         return redirect(url_for("board.main", error=1))
 
+
+@classi.route("/result",methods=["POST","GET"])
+def deny_result():
+    if request.method == 'POST' or request.method == 'GET':
+        return redirect(url_for("board.main",error=1))
+
+
 @classi.route("/result/<pre>&<idx>&<percent>",methods=["POST","GET"])
 def result(pre,idx,percent):
     if request.method == 'POST' or request.method == 'GET':

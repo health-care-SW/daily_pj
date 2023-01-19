@@ -1,12 +1,3 @@
-// window.onload = function() {
-//     show_click.addEventListener("click", function () {
-//         open_update();
-//     });
-//     cancel.addEventListener("click", function () {
-//         cancel();
-//     });
-// }
-
 function open_update() {
     var show_click = document.getElementById("show_area");
     var update = document.getElementById("update");

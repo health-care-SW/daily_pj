@@ -1,4 +1,4 @@
-from Database import Database
+from Database import Database 
 class User():
     __tablename__ ='user'
 
@@ -7,7 +7,7 @@ class User():
         self.user_pw = user_pw
 
     def find(id):
-        conn = Database.get_db()
+        conn = Database().get_db()
         cursor = conn.cursor()
         sql = "select * from user where id=%s;"
         cursor.execute(sql,(id))

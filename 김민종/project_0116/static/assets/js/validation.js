@@ -38,7 +38,6 @@ function chkLogin() {
 		pwd.focus();
 		return false;
 	}
-    // document.login.submit();
     login_user();
 }
 

@@ -1,0 +1,40 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/main">Main</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <span class="nav-link active" aria-current="page">
+                        {%if session['login'] %}
+                            {{session['login']}}님
+                        {%else%}
+                            GUEST님
+                        {%endif%}
+                    </span>
+                </li>
+                <li class="nav-item">
+                    {%if session['login'] %}
+                        <a class="nav-link" href="/logout">로그아웃</a>
+                    {%else%}
+                        <a class="nav-link" href="/">로그인</a>
+                    {%endif%}                        
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        메뉴
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="/main">약제 분류</a></li>
+                        <li><a class="dropdown-item" href="/community">질문 게시판</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

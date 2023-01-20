@@ -1,0 +1,23 @@
+[sql]
+- app.py		: main 파일/연결 주관
+	- '/'			: Hello World 출력
+	- '/sql'		: index.html 랜더링
+	- '/command'	: first_test form에서 받아온 데이터 출력
+	- '/data'		: data.html 랜더링
+	- '/dbsql'		: sql 처리 후 data.html 랜더링
+- myspace		: test용 db
+- data.html	: sql 처리 페이지 (사용자에게 보여지는 페이지)
+
+
+[img data]
+- app_img.py	: img data 페이지 연결 주관
+	- '/'						: image.html 랜더링
+	-'/get_column_name_change'	: 칼럼 이름 변경
+	-'/get_image_pre_status'	: 이미지 전처리
+	-'/get_selected_table'		:
+	-'/get_selected_table2'		:
+	-'/upload_image'			: 이미지 업로드
+	-'/about'					: about.html 랜더링 (프로젝트 설명 페이지 보여주기)
+- image.html	: 이미지 처리 페이지 (사용자에게 보여지는 페이지)
+- index.html	: 사용자에게 보여주는 메인 페이지 (이미지 처리)
+- app_data.py	:

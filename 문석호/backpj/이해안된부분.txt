@@ -1,0 +1,37 @@
+decorator: 어떤 함수가 실행되기 전에 먼저 실행되는 함수로 감싸는 것과 비슷
+ex)
+@app.route("/login")
+def login():
+>> login을 실행하기 전에 app.route("/login")을 실행하고 login()의 내용을 실행
+
+
+
+sqlalchemy: ORM의 일종
+* ORM이란?: 객체와 RDB의 데이터를 자동으로 매핑시키는 것으로 
+객체 모델과 관계형 모델 간의 불일치가 존재하기 때문에 이 갭을 메꾸기 위한 API
+
+예제 프로그램에서는 db_connect.py에 db라는 객체에 orm을 담아
+다른 코드에서 이를 불러와 사용하는 형태
+
+
+
+ajax란?: 빠르게 동작하는 동적인 웹 페이지를 만들기 위한 개발 기법의 하나로
+웹 페이지 전체를 로딩하지 않고, 웹 페이지의 일부만 갱신하는 기법
+
+$.ajax({
+        url: '/login',
+        type: 'post',
+        data: {
+            'user_id': user_id,
+            'user_pw': user_pw
+        },
+        success: function (res) {
+            if (res['result'] == 'success') {
+                alert("로그인 성공")
+                window.location.href = '/'
+            } else {
+                alert("로그인 실패!")
+                window.location.reload()
+            }
+        }
+    })

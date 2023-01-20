@@ -27,10 +27,10 @@ def check_duplication():
         if id == "":
             return render_template("signin.html",label="아무것도 입력되지 않았습니다. 입력해주세요",id= None, dup=False)
         sql = "select * from user;"
-        cursor = Database.execute_query(sql)
+        cursor = Database().execute_query(sql)
         rows = cursor.fetchall()
         for row in rows:
-            if row[2] == id:
+            if row[0] == id:
                 is_dup = True
                 break
         if is_dup:
@@ -48,7 +48,7 @@ def sign_in_process():
         phone_num = request.form.get("inputPhoneNum")         
         try:
             sql = "insert into user values(%s,%s,%s,%s);"
-            Database.execute_query(sql, id, crypted_pwd, email, phone_num)
+            Database().execute_query(sql, id, crypted_pwd, email, phone_num)
             return redirect(url_for("main", label="회원가입 성공! 로그인해주세요"))
         
         except Exception as e:

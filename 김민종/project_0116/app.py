@@ -32,5 +32,9 @@ def main():
         print("session not exist")
     return render_template("index.html")
 
+@app.errorhandler(404)
+def not_found(e):
+    return render_template("./error/error_page.html",code = e)
+
 if __name__ == "__main__":
     app.run(debug=True)

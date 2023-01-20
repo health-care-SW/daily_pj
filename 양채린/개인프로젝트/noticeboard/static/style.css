@@ -4,9 +4,10 @@
 }
 
 .lightblue{
-    background-color: $blue-200
+    background-color: #E8F5FF		
 }
 
 .darkerblue{
-    background-color: $blue-100
+    background-color: #b4dbf6;
+    border-style: none;
 }

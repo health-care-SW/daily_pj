@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="uk-margin-left uk-margin-right">
+<h3>BLOG</h3>
+<form action="/post" method="GET">
+    <button class="uk-button uk-button-default uk-button-small">POST</button>
+</form>
+
+<hr>
+<div>
+{% if post_list %}
+    <ul class="uk-list uk-list-divider">
+        {% for post in post_list %}
+
+        <li>
+            <a href="/content/{{ post.id }}/">{{ post.title }}</a>
+            <span> by {{ post.author }}</span>
+            <br>
+            <span> created: {{ post.created_at }}</span>
+            <br>
+            {% if post.modified_at %}
+                <span> modified: {{ post.modified_at }}</span>
+            {% endif %}
+        </li>
+
+            {% if session['login'] == post.author %}
+            <div class="uk-button-group">
+            <form action="/edit/{{ post.id }}" class="uk-width-xsmall">
+                <button class="uk-button uk-button-default uk-button-small">Edit</button>
+            </form>
+            <form action="/delete/{{ post.id }}">
+                <button class="uk-button uk-button-default uk-button-small">Delete</button>
+            </form>
+            </div>
+            {% endif %}
+
+        {% endfor %}
+        <hr>
+    </ul>
+{% else %}
+    <a href="/blog">back to list</a>
+    <form action="/post" method="GET">
+        <button class="uk-button uk-button-default uk-button-small">POST</button>
+    </form>
+{% endif %}
+</div>
+</div>
+{% endblock %}

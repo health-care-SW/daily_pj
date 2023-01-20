@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="uk-margin-left uk-margin-right">
+    <h3>DB Management</h3>
+        <form action="/sql/dbsql" method="POST">
+        <h4>DB name</h4>
+        <div>
+            <input type="text" class="uk-textarea uk-form-width-medium" name="db_name" placeholder="ex)name.db"> </span>
+        </div>
+        <h4>SQL Query (one at a time)</h4>
+            <textarea name="sql" class="uk-textarea" cols="30" placeholder="ex) SELECT * FROM table_name"></textarea>
+        <br>
+
+        <button class="uk-button uk-button-default" type="submit">Execute</button>
+
+        {% if label %}
+            <div class="result_label">
+                <p>{{ label }}</p>
+                <div>{{ output }}</div>
+            </div>
+        {% endif %}
+
+    </form>
+</div>
+{% endblock %}

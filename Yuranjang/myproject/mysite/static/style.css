@@ -6,3 +6,7 @@ a {
 .hlwd{
     text-align: center;
 }
+
+.wrapper{
+    margin: 10px 20px;
+}

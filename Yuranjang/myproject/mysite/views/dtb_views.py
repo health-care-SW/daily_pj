@@ -40,7 +40,7 @@ def sql_test():
 
         output, status = exe_sql(conn, sql_command)
         if status == 1:
-            return render_template('dtb/dtb.html', label="정상 작동") + output
+            return render_template('dtb/dtb.html', label="정상 작동")
         elif status == 2:
             return render_template('dtb/show_table.html') + output
         else:

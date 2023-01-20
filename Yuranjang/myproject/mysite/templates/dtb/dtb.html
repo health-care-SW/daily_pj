@@ -16,7 +16,8 @@
 <body>
     <!-- 네비게이션바 -->
     {% include "navbar.html" %}
-    <h1 class="p-3">SQL 처리 페이지</h1>
+    <div class="wrapper">
+        <h1 class="p-3">SQL 처리 페이지</h1>
         <form action="/dtb/dbsql/" method="POST">
         <h2 class="p-3">데이터베이스 이름</h2>
         <span class="p-3"> <input type="text" name="db_name" placeholder="ex)name.db"> </span>
@@ -25,7 +26,7 @@
         <textarea class="mx-3" name="sql" cols="40" rows="10" placeholder="ex) SELECT * FROM table_name"></textarea>
         <br>
         {% if label %}
-            <span class="result_lable">
+            <span class="result_lable p-3">
                 {% block content %}
                 {{ label }}
                 {% endblock %}
@@ -36,6 +37,7 @@
 
         <button class="m-3" type="submit">SQL 전송</button>
 
-    </form>
+        </form>
+    </div>
 </body>
 </html>

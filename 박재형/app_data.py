@@ -1,72 +1,58 @@
-from flask import Flask, render_template, request
-# from flask_ngrok import run_with_ngrok
-import os
+from flask import Flask, render_template, request, Blueprint
 import sqlite3
 import pandas as pd
 
-app = Flask(__name__)
-# run_with_ngrok(app)
+data = Blueprint('data', __name__)
 
-'''
-DB 함수
-'''
+
 def get_db(db_name):
     return sqlite3.connect(db_name)
 
-def sql_command(conn, command):
 
-    try :
-
+def exe_sql(conn, command: str):
+    try:
         conn.execute(command)
         conn.commit()
-        command = command.lower()
 
-        if "select" in command:
-
-            command_split = command.split(" ")
-            select_command = "SELECT * FROM " + command_split[command_split.index("from")+1]
-            df = pd.read_sql(select_command, conn, index_col=None)
-            html = df.to_html()
-
-            conn.close()
-
-            return html, 1
-
-        conn.close()
-
-        return True, 1
-
-    except Exception as exception:
-
-        conn.close()
-
-        return False, exception
+        if command.split()[0].lower() == 'select':
+            df = pd.read_sql(command, conn, index_col=None)
+            df_html = df.to_html()
+            return df_html, 1
+    except:
+        return None, 0
 
 
-'''
-File upload
-'''
-@app.route("/index")
+@data.route('/sql')
 def index():
+    return render_template('index.html')
+
+
+@data.route('/command', methods=['POST'])
+def command():
+    return "TEST" + request.form.get('first_test')  # render_template('index.html')
+
+
+@data.route('/data')
+def data_page():
     return render_template('data.html')
 
-@app.route('/dbsql', methods=['POST'])
-def sql_processing():
+
+@data.route('/dbsql', methods=["POST"])
+def sql_test():
     if request.method == 'POST':
+        db_name = request.form.get('db_name')
+        sql_command = request.form.get('sql')
 
-        con = get_db('/' + request.form.get('db_name'))
-        sql = request.form.get('sql')
-        result_sql, excep = sql_command(con, sql)
+        conn = get_db(db_name)
 
-        if result_sql == False :
-            return render_template('data.html', label="비정상" +  str(excep))
+        output, status = exe_sql(conn, sql_command)
+        if status == 1:
+            # 잘 처리됨
+            ...
 
-        elif result_sql == True :
-            return render_template('data.html', label="정상 작동")
+        else:
+            return render_template('data.html', label="오류 발생")
 
-        else :
-            result_sql = "<html><body> " + result_sql + "</body></html>"
-            return result_sql
 
-if __name__ == '__main__':
-    app.run()
+if __name__ == "__main__":
+    data.run(debug=True)

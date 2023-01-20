@@ -2,33 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Title</title>
 </head>
 <body>
-    <div class="query">
-        <form action="/image_preprocess" method="POST" enctype="multipart/form-data">
-            <h1>이미지 업로드 하기</h1>
-            <input type="file" name="uploaded_image">
-            <h1>이미지 전처리 종류 선택</h1>
-            <input type="checkbox" name="pre_toggle_0">
-            <span>180도 회전 </span>
-            <br>
-            <input type="checkbox" name="pre_toggle_1">
-            <span>흑백 변경 </span>
-            <br>
-            <input type="checkbox" name="pre_toggle_2">
-            <span>이미지 사이즈 변경 </span>
-            <br>
-            <button>변경</button>
-        </form>
-    </div>
-    <div class="respone">
-        {% if label %}
-            <img src="/static/{{label}}" alt="">
-            <img src="/static/changed_{{label}}" alt="">
-        {% endif %}
-    </div>
+    <h1>FLASK 서비스 구현</h1>
+    <button onclick="location.href='login'">로그인</button>
+    <button onclick="location.href='join'">회원가입</button>
+    <button onclick="location.href='image'">이미지처리</button>
+    <button onclick="location.href='data'">SQL처리</button>
 </body>
 </html>

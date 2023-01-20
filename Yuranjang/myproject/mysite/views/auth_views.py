@@ -20,7 +20,7 @@ def signup():
                         email=form.email.data)
             db.session.add(user)
             db.session.commit()
-            return redirect(url_for('main.index'))
+            return redirect(url_for('main.hello_world'))
         else:
             flash('이미 존재하는 사용자입니다.')
     return render_template('auth/signup.html', form=form)
@@ -39,7 +39,7 @@ def login():
         if error is None:
             session.clear()
             session['user_id'] = user.id
-            return redirect(url_for('main.index'))
+            return redirect(url_for('main.hello_world'))
         flash(error)
     return render_template('auth/login.html', form=form)
 
@@ -56,4 +56,4 @@ def load_logged_in_user():
 @bp.route('/logout/')
 def logout():
     session.clear()
-    return redirect(url_for('main.index'))
+    return redirect(url_for('main.hello_world'))

@@ -1,3 +1,8 @@
-.hlwd {
-  text-align: center; /* Quirks Mode 를 위한 가운데 정렬 */
+a {
+    text-decoration:none;
+    color: inherit;
+}
+
+.hlwd{
+    text-align: center;
 }

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Welcome to Flask Page</title>
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="upgrade-insecure-requests"
+    />
+        <!-- Google Fonts -->
+        <link
+        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,600,600i,700,700i"
+        rel="stylesheet"
+      />
+  
+      <!-- Vendor CSS Files -->
+      <link
+        href="assets/vendor/bootstrap/css/bootstrap.min.css"
+        rel="stylesheet"
+      />
+      <link
+        href="assets/vendor/bootstrap-icons/bootstrap-icons.css"
+        rel="stylesheet"
+      />
+  
+      <!-- Template Main CSS File -->
+      <link href="static/assets/css/style.css" rel="stylesheet" />
+  
+      <!-- =======================================================
+    * Template Name: WeBuild - v4.9.0
+    * Template URL: https://bootstrapmade.com/free-bootstrap-coming-soon-template-countdwon/
+    * Author: BootstrapMade.com
+    * License: https://bootstrapmade.com/license/
+    ======================================================== -->
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+  </head>
+
+  <body>
+    <header id="header">
+      <div
+        class="container-fluid d-flex justify-content-between align-items-center"
+      >
+      <div class="logo">
+        <h1 class="text-light">
+          <a href="/"><span>Flask</span></a>
+        </h1>
+      </div>
+
+      <div class="contact-link float-right">
+        <a href="/login" class="scrollto">Login</a>
+      </div>
+    </div>
+    </header>
+    <!-- End #header -->
+
+    <section id="hero">
+      <div class="hero-container">
+        <h1>Welcome to Flask Page!</h1>
+        <h2>
+          We learned about how to make Web pages using Flask:)<br />
+          This page is made to check Login/Logout!
+        </h2>
+        <form
+          method="post"
+          role="form"
+          class="php-email-form"
+        >
+          <div class="row no-gutters">
+            <div class="col-md-6 form-group pr-md-1">
+              <input
+                type="text"
+                name="name"
+                class="form-control"
+                id="name"
+                placeholder="Your Name"
+                required
+              />
+            </div>
+            <div class="col-md-6 form-group pl-md-1">
+              <input
+                type="email"
+                class="form-control"
+                name="email"
+                id="email"
+                placeholder="Your Email"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="my-3">
+            <div class="loading">Loading</div>
+            <div class="error-message"></div>
+            <div class="sent-message">
+              Your notification request was sent. Thank you!
+            </div>
+          </div>
+          <div class="text-center">
+            <button type="submit">Submit</button><button type="join"><a href ='/join'>Join</a></button>
+          </div>
+        </form>
+      </div>
+    </section>
+      <!-- 3번을 하세요 -->
+      {% block content %} {% endblock %}
+    </div>
+  </body>
+  <!-- ajax를 처리하기 위해 body 아래에 넣습니다. -->
+  {% block scripts %} {% endblock %}
+</html>

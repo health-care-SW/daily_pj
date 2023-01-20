@@ -3,7 +3,7 @@ from models import db
 import os
 from models import Fcuser
 from flask import session 
-from flask_wtf.csrf import CSRFProtect
+from flask_wtf import CSRFProtect
 from forms import RegisterForm, LoginForm
 
 app = Flask(__name__)
@@ -48,6 +48,11 @@ def login():
         return redirect('/') #로그인에 성공하면 홈화면으로 redirect
             
     return render_template('login.html', form=form)
+
+@app.route('/logout',methods=['GET'])
+def logout():
+    session.pop('userid',None)
+    return redirect('/')
 
 if __name__ == "__main__":
     basedir = os.path.abspath(os.path.dirname(__file__))  # database 경로를 절대경로로 설정

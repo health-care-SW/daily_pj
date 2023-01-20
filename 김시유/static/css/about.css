@@ -1,0 +1,284 @@
+section {
+  font-family: "Poppins", sans-serif;
+  padding: 5rem 0;
+}
+section:nth-child(2n) {
+  background-color: gray !important;
+}
+section .title {
+  margin-bottom: 3rem;
+}
+section .title h4 {
+  font-size: 1.35rem;
+  color: #8f2222;
+  position: relative;
+}
+section .title h2 {
+  font-size: 3.5rem;
+}
+section.title p {
+  font-size: 1.15rem;
+}
+/* float 속성 해제 */
+section .about-self::after {
+  content: "";
+  clear: both;
+  display: block;
+}
+/* 본문 너비 절반 지정 & 왼쪽배치 */
+section .about-self .left {
+  width: 50%;
+  float: left;
+}
+/* 이미지 크기가 부모영역 안넘게 부모영역의 최대크기로 지정 */
+section .about-self .left img {
+  max-width: 100%;
+}
+/* 본문 너비 절반 지정 & 오른쪽 배치 */
+section .about-self .right {
+  width: 50%;
+  float: left;
+  padding: 0 2rem;
+}
+/* 본문 올느쪽 h3의 글자 크기와 여백 지정 */
+section .about-self .right h3 {
+  font-size: 2.25rem;
+  margin-bottom: 1rem;
+}
+/* 본문 오른쪽 strong의 색상강조 */
+section .about-self .right h3 strong {
+  color: #8f2222;
+}
+section .about-self .right p {
+  font-size: 1.15rem;
+  margin: 1rem 0;
+}
+section .about-self .right .social a {
+  font-size: 2.5rem;
+  margin-right: 0.2rem;
+}
+
+/* float속성 해제 */
+section .do-me::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+/* 사각형 크기와 간격, 내부여백설정 내부사각형 90% 간격 5%씩 */
+section .do-me .do-inner {
+  background-color: white;
+  width: 30%;
+  padding: 2rem;
+  float: left;
+  margin-right: 5%;
+  cursor: pointer;
+}
+/* 마지막 사각형의 외부여백 설정 */
+section .do-me .do-inner:last-child {
+  margin-right: 0;
+}
+/* 아이콘 폰트 크기와 색상 */
+section .do-me .do-inner .icon i {
+  font-size: 2.5rem;
+  color: #ff6a6a;
+}
+/* html, css, js 텍스트 크기와 간격 */
+section .do-me .do-inner .content h3 {
+  font-size: 2rem;
+  margin: 1rem 0;
+}
+/* 사각형 텍스트 크기 */
+section .do-me .do-inner .content p {
+  font-size: 1.15rem;
+}
+/* do-inner호버효과 배경색 텍스트 색상 변경 */
+section .do-me .do-inner:hover {
+  background-color: lightcoral;
+  color: white;
+}
+/* do-inner 호버효과 아이콘 폰트색상변경 */
+section .do-me .do-inner:hover i {
+  color: white;
+}
+.bg {
+  background: url(static/assets/images/다운로드.jpg) center center;
+  background-size: cover;
+  background-attachment: fixed;
+  height: 650px;
+}
+
+/* clear속성으로 float속성값 해제 */
+section .portfolio-me::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+/* portfolio-inner 사각형 꾸미리 */
+section .portfolio-me .portfolio-inner {
+  width: 30%;
+  margin-right: 5%;
+  padding: 1rem 1rem 1.5rem 1rem;
+  float: left;
+  background-color: #f8f8f8;
+  border: 1px solid #ccc;
+  margin-bottom: 3rem;
+}
+section .portfolio-me .portfolio-inner:nth-child(3n) {
+  margin-right: 0;
+}
+/* 이미지 크기가 부모요소 안넘게 100%로 지정 */
+section .portfolio-me .portfolio-inner img {
+  width: 100%;
+  display: block;
+}
+/* strong 색상과 간격 */
+section .portfolio-me .portfolio-inner strong {
+  color: #ff6a6a;
+  margin: 0.5rem 0;
+  display: block;
+}
+section .portfolio-me .portfolio-inner h3 {
+  font-size: 1.75rem;
+}
+
+section .contact-me::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+section .contact-me .left {
+  width: 30%;
+  float: left;
+}
+section .contact-me .right {
+  float: left;
+  width: 65%;
+  margin-left: 5%;
+  margin-bottom: 2rem;
+  border: 1px solid #ccc;
+  padding: 1rem;
+}
+section .contact-me .left .card {
+  border: 1px solid #ccc;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.25rem;
+}
+section .contact-me .left .card .icon i {
+  font-size: 2rem;
+  margin-right: 15px;
+}
+section .contact-me .right .form-group {
+  margin-bottom: 1.25rem;
+}
+section .contact-me .right .form-group label {
+  display: block;
+  margin-bottom: 0.85rem;
+}
+section .contact-me .right .form-group input {
+  padding: 0.625rem;
+  width: 100%;
+  outline: none;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+}
+section .contact-me .right .form-group input:focus {
+  border: 1px solid #719ece;
+  box-shadow: 0 0 10px #719ece;
+}
+section .contact-me .right .form-group textarea {
+  height: 300px;
+  width: 100%;
+  resize: none;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+}
+section .contact-me .right .form-group textarea:focus {
+  outline: none;
+  border: 1px solid #719ece;
+  box-shadow: 0 0 10px #719ece;
+}
+section .contact-me .right button {
+  width: 100%;
+  padding: 1rem;
+  background-color: #f78b00;
+  border: none;
+  border-radius: 10px;
+  color: white;
+}
+section .contact-me .right button:hover {
+  background-color: #f77300;
+}
+
+/* 반응형 앱만들기 단계 */
+@media screen and (max-width: 1140px) {
+  /* 섹션영역 container기준 너비변경 -2단으로 처리하기 위한 적정너비 */
+  section .container {
+    width: 600px; /*1140->600*/
+  }
+  /* about me 왼쪽너비 50->100%로 변경 */
+  section .about-self .left {
+    width: 100%;
+    margin-bottom: 1.5rem;
+  }
+  /* about me 오른쪽너비 50->100%로 변경 */
+  section .about-self .right {
+    width: 100%;
+    padding: 0;
+  }
+  section .do-me .do-inner {
+    width: 48%; /*본문사각형너비 30->48%*/
+    margin-bottom: 1.5rem; /*분문 사각형 사이간격*/
+    margin-right: 0; /*외부여백 초기화*/
+  }
+  section .do-me .do-inner:nth-child(2n + 1) {
+    margin-right: 4%; /*1,3,5번째 본문 사각형에 마진4%*/
+  }
+  section .portfolio-me .portfolio-inner {
+    width: 48%;
+    margin-right: 0;
+  }
+  section .portfolio-me .portfolio-inner:nth-child(2n + 1) {
+    margin-right: 4%;
+  }
+  section .contact-me .left {
+    width: 100%;
+  }
+  section .contact-me .right {
+    width: 100%;
+    margin-left: 0; /*외부여백 초기화*/
+  }
+}
+@media screen and (max-width: 992px) {
+  section .portfolio-me .portfolio-inner {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  section .container {
+    width: 400px;
+  }
+  section .do-me .do-inner {
+    width: 100%;
+    margin-right: 0;
+  }
+}
+@media screen and (max-width: 576px) {
+  section .container {
+    width: 360px;
+  }
+}
+
+@media screen and (max-width: 400x) {
+  section .container {
+    width: 320px;
+  }
+  section .container {
+    width: 320px;
+  }
+  section .title h2 {
+    font-size: 3rem;
+  }
+}

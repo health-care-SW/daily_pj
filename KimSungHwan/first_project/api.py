@@ -2,7 +2,9 @@ from flask import redirect, request, render_template, jsonify, Blueprint, sessio
 from models import User, Post
 from db_connect import db
 from flask_bcrypt import Bcrypt
+from flask_login import LoginManager, login_user, logout_user
 
+login_manager = LoginManager()
 board = Blueprint('board',__name__)
 bcrypt = Bcrypt()
 
@@ -15,9 +17,15 @@ def load_logged_in_user():
     else:
         g.user = db.session.query(User).filter(User.id == user_id).first()
 
+
+
 @board.route("/")
 def home():
     return render_template("base.html")
+
+# @login_manager.user_loader
+# def load_user(user_id):
+#     return User.get(user_id)
 
 @board.route("/post", methods=["GET"])
 def post():
@@ -48,9 +56,11 @@ def login():
         user_id = jsonData['user_id']
         user_pw = jsonData['user_pw']
         user = User.query.filter(User.user_id == user_id).first()
+    
 
         if user is not None:
             if bcrypt.check_password_hash(user.user_pw, user_pw):
+                login_user(user)
                 session['login'] = user.id
                 return jsonify({"result":"success"})
             else:
@@ -62,5 +72,6 @@ def login():
 
 @board.route("/logout")
 def logout():
+    logout_user()
     session['login'] = None
     return redirect("/")

@@ -1,62 +1,62 @@
-<html>
+{% extends 'base.html' %}
 
-<head>
-    <title>전처리 페이지 UI</title>
-    <link rel="sylesheet" href="{{ url_for('static', filename='/assets/css/syle.css') }}">
-</head>
-
-<body>
-<div class="main">
-    <form action="/get_selected_table" method="POST" enctype="multipart/form-data">
-        <input type="text" name="table_name" placeholder="테이블 명" required="required" />
-        <button type="submit">선택</button>
-        {% if label %}
-            <span>
-                {{ label }}
-            </span>
-        {% endif %}
-
-    </form>
-
-    <form action="/image_preprocess" method="POST" enctype="multipart/form-data">
-        <h1>이미지 업로드 하기</h1>
-        <input type="file" name="uploaded_image">
-    </form>
-    
-    <form action="/get_column_name_change" method="POST" enctype="multipart/form-data">
-        <h1>컬럼 이름 변경</h1>
-            <input type="text" name="before_column_name" placeholder="변경 전 컬럼명" required="required" />
-            <input type="text" name="after_column_name" placeholder="변경 후 컬럼명"required="required" />
-        <br>
-        <br>
-        <button type="submit">변경</button>
-    </form>
-
-    <form action="/get_image_pre_status" method="POST" enctype="multipart/form-data">
-        <h1>이미지 전처리 종류 선택</h1>
+{% block content %}
+<h2 class="title" style="padding-left: 15px;">이미지 처리</h2>
+<hr>
+<div class="card" style="text-align: center; margin: 0 auto; padding: 15px;">
+    <form action="/image/image_preprocess" method="POST" enctype="multipart/form-data">
+            <h3>이미지 업로드 하기</h3>
+            <input type="file" name="uploaded_image">
+        <h3>이미지 전처리 종류 선택</h3>
         <input type="checkbox" name="pre_toggle_0">
         <span>180도 회전 </span>
         <br>
         <input type="checkbox" name="pre_toggle_1">
         <span>흑백 변경 </span>
         <br>
-        <input type="checkbox" name="pre_toggle_2">
+        <input type="checkbox" name="pre_toggle_2" id="change_image_size_cb" onclick="setTextBoxShow()">
         <span>이미지 사이즈 변경 </span>
-        <br>
-        <button type="submit">변경</button>
-    </form>
 
-    <form action="/upload_image" method="POST" enctype="multipart/form-data">
-        <h1>이미지 업로드 하기</h1>
-        <input type="file" name="uploaded_image">
-        <button>이미지 업로드</button>
+        <h3 id="size_header"style="display:none">이미지 사이즈 지정</h3>
+            <input type="text" id="width_size" name="changed_width" placeholder="넓이(width)를 입력해주세요" onkeypress="onlyNumber()" style="display:none"/>
+            <input type="text" id="height_size" name="changed_height" placeholder="높이(height)를 입력해주세요" onkeypress="onlyNumber()" style="display:none"/>
+        <br>
+        <script>
+        function onlyNumber(){
+
+                if((event.keyCode<48)||(event.keyCode>57))
+
+                    event.returnValue=false;
+
+        }
+        function setTextBoxShow() {
+            var checkBox = document.getElementById("change_image_size_cb");
+            if (checkBox.checked == true){
+            width_size.style.display = "block";
+            height_size.style.display = "block";
+            size_header.style.display = "block";
+
+            } else {
+            width_size.style.display = "none";
+            height_size.style.display = "none";
+            size_header.style.display = "none";
+            }
+        }
+        </script>
+
         {% if label %}
+            <span>
+                결과 저장 경로 :
+            </span>
+        <br>
             <span>
                 {{ label }}
             </span>
+        <br>
+        <br>
         {% endif %}
+        <button type="submit">변경</button>
     </form>
 </div>
-</body>
-
-</html>
+</hr>
+{% endblock %}

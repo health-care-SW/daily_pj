@@ -1,23 +1,20 @@
-<html>
+{% extends 'base.html' %}
 
-<head>
-    <title>SQL 처리 페이지</title>
-</head>
-
-<body>
-    <h1>SQL 처리 페이지</h1>
-        <form action="/dbsql" method="POST">
-        <h2>데이터베이스 이름</h2>
-        <span> <input type="text" name="db_name" placeholder="ex)name.db"> </span>
-
-        <h2>SQL (명령어 한 줄만 가능)</h2>
+{% block content %}
+<h2 class="title" style="padding-left: 15px;">SQL 처리</h2>
+<hr>
+<div class="card" style="text-align: center; margin: 0 auto; padding: 15px;">
+    <form action="/dbsql" method="POST">
+        <div class="mb-3 row">
+            <h3>데이터베이스 이름</h3>
+            <span> <input type="text" name="db_name" placeholder="ex) name.db"> </span>
+        </div>
+        <h3>SQL (명령어 한 줄만 가능)</h3>
         <textarea name="sql" cols="40" rows="10" placeholder="ex) SELECT * FROM table_name"></textarea>
         <br>
         {% if label %}
             <span class="result_lable">
-                {% block content %}
                 {{ label }}
-                {% endblock %}
             </span>
         <br>
         {% endif %}
@@ -25,5 +22,6 @@
         <button type="submit">SQL 전송</button>
 
     </form>
-</body>
-
+</div>
+</hr>
+{% endblock %}

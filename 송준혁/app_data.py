@@ -1,21 +1,22 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, Blueprint
 from flask_ngrok import run_with_ngrok
-import os
 import sqlite3
 import pandas as pd
 
 app = Flask(__name__)
 run_with_ngrok(app)
-
+board = Blueprint("app_data", __name__)
 '''
 DB 함수
 '''
 
 
+@board.route('/get')
 def get_db(db_name):
     return sqlite3.connect(db_name)
 
 
+@board.route('/dbsql')
 def sql_command(conn, command):
 
     try:

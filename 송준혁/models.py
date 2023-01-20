@@ -2,6 +2,7 @@ from datetime import datetime
 from flask_sqlalchemy import SQLAlchemy
 # from werkzeug.security import generate_password_hash, check_password_hash
 
+
 db = SQLAlchemy()
 
 
@@ -19,18 +20,9 @@ class User(db.Model):
         self.user_id = user_id
         self.user_pw = user_pw
 
-    # 추후 front로 뺄 예정
-    # 암호화
-
-    # def set_password(self, password):
-    #     self.password = generate_password_hash(password)
-
-    # # 복호화
-    # def check_password(self, password):
-    #     return check_password_hash(self.password, password)
-
-
 # 게시판
+
+
 class Post(db.Model):
     __tablename__ = 'post'
     id = db.Column(db.Integer,  primary_key=True,

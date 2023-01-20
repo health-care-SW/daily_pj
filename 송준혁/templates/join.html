@@ -18,6 +18,39 @@
 
 {% extends 'base.html' %}
 
+{% block scripts %}
+<script>
+  function regist() {
+    let u_id = $("#userId").val();
+    let u_pw = $("#userPw").val();
+    let u_pw2 = $("#userPw2").val();
+    let info = { 'user_id': u_id, 'user_pw': u_pw }
+    if (u_pw === u_pw2) {
+      $.ajax({
+        type: 'POST', // 전송방식
+        url: "/join",
+        data: JSON.stringify(info),
+        contentType: "application/json",
+        dataType: "JSON",
+        success: function (res) {
+          if (res["result"] === "success") {
+            alert("등록!");
+            window.location.href = "/";
+          } else {
+            alert("알 수 없는 오류가 발생했습니다.");
+            window.location.reload();
+          }
+        },
+      });
+    }
+    else {
+      alert("비밀번호가 서로 일치하지 않습니다.!");
+    }
+
+  }
+</script>
+{% endblock %}
+
 <!-- content block과 필요한 코드를 작성하세요. -->
 {% block content %}
 <h2 class="title">회원가입</h2>
@@ -49,32 +82,5 @@
 <hr />
 
 {% endblock %}
-
-<!-- scripts block과 필요한 코드를 작성하세요. -->
-{% block scripts %}
-<script>
-  function regist() {
-    let u_id = $("#userId").val();
-    let u_pw = $("#userPw").val();
-    let u_pw2 = $("#userPw2").val();
-    let info = { 'user_id': u_id, 'user_pw': u_pw }
-    $.ajax({
-      type: 'POST', // 전송방식
-      url: "/join",
-      data: JSON.stringify(info),
-      success: function (res) {
-        if (res["result"] === "success") {
-          alert("등록!");
-          window.location.href = "/";
-        } else {
-          alert("알 수 없는 오류가 발생했습니다.");
-          window.location.reload();
-        }
-      },
-    });
-  }
-</script>
-{% endblock %}
-
 
 </html>

@@ -4,7 +4,6 @@
 # 터미널 껐다켰다? ctrl+ `
 
 from flask import Flask, render_template, request
-<<<<<<< HEAD
 import sqlite3
 import pandas as pd
 
@@ -28,10 +27,6 @@ def exe_sql(conn, command: str):
         return None, 0
 
 app = Flask(__name__) # Flask 클래스를 app 인스턴스에 받기
-=======
-
-app = Flask(__name__) # 전체 프로그램 관장
->>>>>>> 955fe3a203c6b2f3abc1c0b59248b41f146e2934
 
 @app.route('/') # 문법: 데코레이터 #root 경로를 실행하면 아래 함수를 실행해라
 def hello_world():
@@ -39,7 +34,6 @@ def hello_world():
 
 @app.route('/sql')
 def index():
-<<<<<<< HEAD
     return render_template("index.html")
 
 @app.route('/command', methods=['POST'])
@@ -74,14 +68,4 @@ def sql_test():
         
 
 if __name__ == "__main__":
-=======
-    return render_template('index.html')
-
-@app.route('/command', methods=['POST']) #web에서 API로 Data를 주고받을 때 POST, GET
-def command():
-    #print(request.form.get('first_test'))
-    return "Test" + request.form.get('first_test') # render_template('index.)
-
-if __name__=="__main__":
->>>>>>> 955fe3a203c6b2f3abc1c0b59248b41f146e2934
     app.run(debug=True)

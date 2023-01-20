@@ -1,5 +1,4 @@
 # main file
-# []
 # ctrl+B
 # 터미널 껐다켰다? ctrl+ `
 

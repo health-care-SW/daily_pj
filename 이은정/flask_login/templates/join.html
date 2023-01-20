@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Join Page</title>
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="upgrade-insecure-requests"
+    />
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,600,600i,700,700i"
+      rel="stylesheet"
+    />
+
+    <!-- Vendor CSS Files -->
+    <link
+      href="assets/vendor/bootstrap/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="assets/vendor/bootstrap-icons/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+
+    <!-- Template Main CSS File -->
+    <link href="static/assets/css/style.css" rel="stylesheet" />
+
+    <!-- =======================================================
+  * Template Name: WeBuild - v4.9.0
+  * Template URL: https://bootstrapmade.com/free-bootstrap-coming-soon-template-countdwon/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+  </head>
+  <body>
+    <!-- scripts block과 필요한 코드를 작성하세요. -->
+    {% block scripts %}
+    <script>
+      function regist() {
+        let user_id = $("#userId").val();
+        let user_pw = $("#userPw").val();
+        let user_pw2 = $("#userPw2").val();
+        $.ajax({
+          url: "/join",
+          type: "POST",
+          data: JSON.stringify({
+            user_id: user_id,
+            user_pw: user_pw,
+            user_pw2: user_pw2,
+          }),
+          contentType: "application/json",
+          dataType: "JSON",
+          success: function (res) {
+            if (res["result"] === "success") {
+              alert("등록!");
+              window.location.href = "/";
+            } else {
+              alert("알 수 없는 오류가 발생했습니다.");
+              window.location.reload();
+            }
+          },
+        });
+      }
+    </script>
+    {% endblock %} {% block content %}
+    <header id="header">
+      <div
+        class="container-fluid d-flex justify-content-between align-items-center"
+      >
+        <div class="logo">
+          <h1 class="text-light">
+            <a href="/"><span>Welcome</span></a>
+          </h1>
+    <hr />
+    <div class="card">
+      <div class="card-body">
+        <div class="mb-3 row">
+          <label class="col-sm-2 col-form-label">ID</label>
+          <div class="col-sm-10">
+            <input
+              type="text"
+              id="userId"
+              class="form-control"
+              placeholder="e-mail address"
+            />
+          </div>
+        </div>
+        </div>
+        <div class="mb-3 row">
+          <label class="col-sm-2 col-form-label">Password</label>
+          <div class="col-sm-10">
+            <input type="password" class="form-control" id="userPw" />
+          </div>
+        </div>
+        <div class="mb-3 row">
+          <label class="col-sm-2 col-form-label">Password Check</label>
+          <div class="col-sm-10">
+            <input type="password" class="form-control" id="userPw2" />
+          </div>
+        </div>
+        <button class="join" onclick="regist()">Join</button>
+      </div>
+    </div>
+    <hr />
+
+    {% endblock %}
+  </body>
+</html>

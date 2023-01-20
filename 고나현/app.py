@@ -53,6 +53,32 @@ def preprocessing():
 
         # 결과 리턴
         return render_template('index.html', label=image_path)
+    
+    
+@app.route("/login", methods=["GET", "POST"])
+def login():
+	if request.method == "POST":
+		email = request.form.get("userEmail")
+		password = request.form.get("password")
+
+		members = mongo.db.members
+		data = members.find_one({"userEmail":email})
+
+		if data is None:
+			flash("회원 정보가 없습니다.")
+			return redirect(url_for("member_login"))
+		else:
+			if data.get("password") == password:
+				session["userEmail"] = email
+				session["name"] = data.get("name")
+				session["id"] = str(data.get("_id"))
+
+				session.permanent = True
+				return redirect(url_for("lists"))
+			else:
+				flash("비밀번호가 일치하지 않습니다.")
+				return redirect(url_for("member_login"))
+            
 
 if __name__ == '__main__':
     app.run()

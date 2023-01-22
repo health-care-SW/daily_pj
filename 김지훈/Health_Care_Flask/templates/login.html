@@ -11,17 +11,17 @@
 
 <body class="main">
     <div class = "main">
-        <form action="/login" method = "post">
+        <div>
             <h2>아이디</h2>
-            <span><input type="text" name = "user_name" placeholder="아이디를 입력하세요"></span>
+            <span><input type="text" id = "user_name" placeholder="아이디를 입력하세요"></span>
     
             <h2>패스워드</h2>
-            <span><input type="password" name = "user_password" placeholder="패스워드를 입력하세요"></span>
+            <span><input type="password" id = "user_password" placeholder="패스워드를 입력하세요"></span>
 
             <br>
             <br>
             <button onclick="login()" id = "loginBtn">로그인</button>
-        </form>
+        </div>
         
     </div>
     <button class = 'mainBtn' onclick="window.location.href='/'">메인페이지</button>
@@ -30,8 +30,8 @@
 <script>
     async function login(){
 
-        let userName = document.querySelector("input[name='user_name']").value;
-        let userPassword = document.querySelector("input[name='user_password']").value;   
+        let userName = document.querySelector("#user_name").value;
+        let userPassword = document.querySelector("#user_password").value;   
 
         let urlParams = new URLSearchParams({
             userName: userName,

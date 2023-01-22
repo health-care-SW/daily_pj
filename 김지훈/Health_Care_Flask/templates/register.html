@@ -9,22 +9,23 @@
 </head>
 <body class="main">
     <div class = "main">
-        <form action="/register_process" method = "post">
+        <div>
             <h1>회원가입</h1>
             <h2>아이디</h2>
-            <span><input type="text" name = "user_name" placeholder="아이디를 입력하세요"></span>
+            <span><input type="text" id = "user_name" placeholder="아이디를 입력하세요"></span>
     
             <h2>패스워드</h2>
-            <span><input type="password" name = "user_password" placeholder="패스워드를 입력하세요"></span>
+            <span><input type="password" id = "user_password" placeholder="패스워드를 입력하세요"></span>
     
             <h2>이메일</h2>
-            <span><input type="email" name = "user_email" placeholder="이메일을 입력하세요"></span>
+            <span><input type="email" id = "user_email" placeholder="이메일을 입력하세요"></span>
 
             <br>
             <br>
+        </div>
             
             <button id="btnRegister" onclick="register()">회원가입</button>
-        </form>
+
         <button class = 'mainBtn' onclick="window.location.href='/'">메인페이지</button>
         
     </div>
@@ -35,9 +36,9 @@
 <script>
     async function register() {
    
-    var userName = document.querySelector("input[name='user_name']").value;
-    var userPassword = document.querySelector("input[name='user_password']").value;   
-    var userEmail = document.querySelector("input[name='user_email']").value;   
+    var userName = document.querySelector("#user_name").value;
+    var userPassword = document.querySelector("#user_password").value;   
+    var userEmail = document.querySelector("#user_email").value;   
     
     let urlParams = new URLSearchParams({
         userName: userName,

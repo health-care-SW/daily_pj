@@ -1,8 +1,10 @@
 from flask import Flask, render_template, request, redirect, url_for, session, g, jsonify
 import User
+from flask_bcrypt import Bcrypt
 from datetime import timedelta
 
 from __main__ import app
+
 
 app.config["PERMANENT_SESSION_LIFETIME"] = timedelta(minutes=3)
 
@@ -16,11 +18,12 @@ def login():
         return render_template("login.html")
 
     if request.method == 'POST':
+        bcrypt = Bcrypt(app)
         user_name = request.form.get('userName')
         user_pw = request.form.get('userPassword')
         user = User.select_user_with_name(user_name)
 
-        if user != None and user.user_password == user_pw:
+        if user != None and bcrypt.check_password_hash(user.user_password, user_pw):
             session['username'] = user_name
             return jsonify({'result' : 'success'})
 

@@ -4,15 +4,31 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{url_for('static', filename='assets/css/styles.css')}}">
-    <title> mysql</title>
+    <title>Document</title>
 </head>
 <body>
-    <div class="main">
-        <form action="/command" method="POST">
-            <input type="text" name="first_test" placeholder="sql command" required="required">
-            <button type="submit" >submit</button>
+    <div class="query">
+        <form action="/image_preprocess" method="POST" enctype="multipart/form-data">
+            <h1>이미지 업로드 하기</h1>
+            <input type="file" name="uploaded_image">
+            <h1>이미지 전처리 종류 선택</h1>
+            <input type="checkbox" name="pre_toggle_0">
+            <span>180도 회전 </span>
+            <br>
+            <input type="checkbox" name="pre_toggle_1">
+            <span>흑백 변경 </span>
+            <br>
+            <input type="checkbox" name="pre_toggle_2">
+            <span>이미지 사이즈 변경 </span>
+            <br>
+            <button>변경</button>
         </form>
+    </div>
+    <div class="respone">
+        {% if label %}
+            <img src="/static/{{label}}" alt="">
+            <img src="/static/changed_{{label}}" alt="">
+        {% endif %}
     </div>
 </body>
 </html>

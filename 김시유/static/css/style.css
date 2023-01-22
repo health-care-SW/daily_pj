@@ -1,0 +1,189 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+a,
+a:link,
+a:visited {
+  color: inherit;
+  text-decoration: none;
+}
+li {
+  list-style: none;
+}
+.container {
+  width: 1140px;
+  margin: 0 auto;
+}
+header {
+  position: fixed;
+  color: white;
+  top: 0;
+  z-index: 1;
+  width: 100%;
+  padding: 1rem;
+}
+header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  font-family: "Chakra Petch", sans-serif;
+}
+header nav ul {
+  display: flex;
+}
+header nav ul li {
+  padding: 12px;
+}
+header button {
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+}
+header h1 button {
+  font-size: 2rem;
+  font-weight: bold;
+  color: white;
+}
+header nav ul li button {
+  font-size: 1.2rem;
+  color: white;
+}
+header.active {
+  background-color: rgb(0, 0, 0);
+  animation: fadeIn 0.5s ease-in-out;
+}
+main {
+  width: 100%;
+  height: 100vh;
+  color: white;
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.8)),
+    url("static/assets/images/kimsiu.jpg") center center;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-family: "Chakra Petch", sans-serif;
+}
+main h4 {
+  font-size: 2rem;
+  letter-spacing: 2px;
+}
+main h2 {
+  font-size: 3rem;
+  margin: 2rem 0;
+  letter-spacing: 3px;
+}
+main h2 span::after {
+  content: "";
+  height: 40px;
+  width: 3px;
+  background-color: rgb(255, 255, 255);
+  display: inline-block;
+  animation: blink 0.7s ease-in-out infinite;
+}
+@keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+main p {
+  max-width: 70%;
+  margin: 0 auto;
+  font-size: 1.25rem;
+}
+main button.download {
+  background-color: transparent;
+  border: 3px solid white;
+  border-radius: 20px;
+  padding: 1rem 2rem;
+  margin-top: 3rem;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+main button.mouse {
+  background-color: transparent;
+  border: none;
+  color: white;
+  font-size: 3rem;
+  position: absolute;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: upDown 1s ease-in-out infinite;
+  cursor: pointer;
+}
+@keyframes upDown {
+  0% {
+    bottom: 1rem;
+  }
+  50% {
+    bottom: 1.5rem;
+  }
+  100% {
+    bottom: 1rem;
+  }
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+/* 반응형 앱 만들기단계 */
+/* 화면 너비가 1140px이하일 떄 */
+@media screen and (max-width: 1140px) {
+  /* 메인영역 container 기준 너비 변경 */
+  main .container {
+    width: 992px; /*1140->992*/
+  }
+}
+/* 992px 이하일 때 */
+@media screen and (max-width: 992px) {
+  html {
+    font-size: 14px;
+  }
+  main .container {
+    width: 768px;
+  }
+}
+/* 768px 이하일 때 */
+@media screen and (max-width: 768px) {
+  html {
+    font-size: 13px;
+  }
+  main .container {
+    width: 576px;
+  }
+}
+/* 576px 이하일 때 */
+@media screen and (max-width: 576px) {
+  html {
+    font-size: 12px;
+  }
+  main .container {
+    width: 400px;
+  }
+}
+/* 400px 이하일 때 */
+@media screen and (max-width: 400px) {
+  html {
+    font-size: 11px;
+  }
+  main .container {
+    width: 320px;
+  }
+  main h4 {
+    font-size: 1.5rem;
+  }
+}

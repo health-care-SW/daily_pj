@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="uk-margin-left uk-margin-right">
+        <form action="/img/image_preprocess" method="POST" enctype="multipart/form-data">
+            <h3>Choose your image</h3>
+            <input type="file" name="uploaded_image" class="uk-button uk-button-default">
+            
+            <h3>Process your image</h3>
+            <label><input type="checkbox" name="pre_toggle_0"> upend </label>
+            <br>
+            <label><input type="checkbox" name="pre_toggle_1"> greyscale </label>
+            <br>
+            <label><input type="checkbox" name="pre_toggle_2"> resize </label>
+            <span>
+                <input type="number" name="width" placeholder="width" style="display:none;"> 
+                <input type="number" name="height" placeholder="height" style="display:none;">
+            </span>
+            <br>
+            <button class="uk-button uk-button-default">upload</button>
+        </form>
+        <div class="response">
+            {% if label %}
+                <img src="/static/{{label}}" alt="">
+                <img src="/static/result_{{label}}" alt="">
+            {% endif %}
+        </div>
+        <script src="/static/assets/js/script.js"></script>
+    </div>    
+{% endblock %}

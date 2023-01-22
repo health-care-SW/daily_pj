@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <div class="uk-margin-left">
+        <form action="/post" method="POST">
+
+                <fieldset class="uk-fieldset">
+        
+                <legend class="uk-legend">POST</legend>
+        
+                <div class="uk-margin">
+                    <input class="uk-input" type="text" name="title" placeholder="Title" aria-label="Title" required>
+                </div>
+            
+                <div class="uk-margin">
+                    <textarea class="uk-textarea" name="content" rows="5" placeholder="What's up?" aria-label="content" required></textarea>
+                </div>
+
+                <button class="uk-button uk-button-default"> SUBMIT </button>
+            </fieldset>
+        </form>
+
+    </div>
+    
+
+    
+
+{% endblock %}

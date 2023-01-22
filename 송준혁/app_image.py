@@ -1,11 +1,11 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, Blueprint
 # from flask_ngrok import run_with_ngrok # port를 우회해서 접속가능한 도메인을 할당
 import os
 from PIL import Image
 
 app = Flask(__name__)
 # run_with_ngrok(app)
-
+board = Blueprint("app_image", __name__)
 '''
 이미지 처리 함수
 '''
@@ -28,18 +28,17 @@ def image_change_bw(image):
 '''
 
 
-@app.route('/image')
+@board.route('/image')
 def index():
     return render_template('image.html')
 
 
-@app.route('/image_preprocess', methods=['POST'])
+@board.route('/image_preprocess', methods=['POST'])
 def preprocessing():
     if request.method == 'POST':
         file = request.files['uploaded_image']
         if not file:
-            return render_template('index.html', label="No Files")
-        # label = file.save('static')
+            return render_template('image.html', label="No Files")
 
         img = Image.open(file)
 
@@ -58,12 +57,10 @@ def preprocessing():
             img = image_resize(img, request.form.get(
                 'changed_width'), request.form.get('changed_height'))
 
-        src_dir = os.path.dirname(os.path.abspath(__file__))
-        image_path = os.path.join(src_dir, f'{file.filename}')
+        img.save(f'static/changed_{file.filename}')
 
-        print(src_dir)
         # 결과 리턴
-        return render_template('image.html', label=image_path)
+        return render_template('image.html', label=file.filename)
 
 
 if __name__ == '__main__':

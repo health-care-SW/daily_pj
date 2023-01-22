@@ -1,0 +1,54 @@
+{% extends 'base.html'%}
+
+    {% block scripts %}
+    <!-- <script>
+
+        function login() {
+            let user_id = $("#userId").val()
+            let user_pw = $("#userPw").val()
+        }
+        $.ajax({
+            url: '/login',
+            type:'post',
+            data: {
+                'user_id':user_id,
+                'user_pw':user_pw
+            },
+            success: function(res) {
+                if (res['result'] == 'success') {
+                    alert('LOGGED IN!')
+                    window.location.reload()
+                }
+            }
+        })
+        
+    </script> -->
+
+    {% endblock %}
+
+    {% block content %}
+
+    <h2>LOG IN</h2>
+    <hr>
+    <form action="/login" method="POST">
+        <!-- id -->
+        <div class="uk-margin">
+            <div class="uk-inline">
+                <span class="uk-form-icon" uk-icon="icon: user"></span>
+                <input class="uk-input" id="user_email" name="user_email" type="email" placeholder="ID">
+            </div>
+        </div>
+    
+        <!-- pw -->
+        <div class="uk-margin">
+            <div class="uk-inline">
+                <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: lock"></span>
+                <input class="uk-input" id="user_pw" name="user_pw" type="password" placeholder="PW">
+            </div>
+        </div>
+        <button class="uk-button uk-button-default">LOGIN</button>
+        <a class="uk-link-text" href="/join">SIGN UP</a>
+    </form>
+    <hr>
+
+    {% endblock%}

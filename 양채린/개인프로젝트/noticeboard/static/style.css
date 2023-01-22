@@ -1,0 +1,13 @@
+.comment {
+    border-top:dotted 1px #ddd;
+    font-size:0.7em;
+}
+
+.lightblue{
+    background-color: #E8F5FF		
+}
+
+.darkerblue{
+    background-color: #b4dbf6;
+    border-style: none;
+}

@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <div>
+        <form action="/post" method="POST">
+
+                <fieldset class="uk-fieldset">
+        
+                <legend class="uk-legend">EDIT</legend>
+        
+                <div class="uk-margin">
+                    <input class="uk-input" type="text" name="title" aria-label="Title" required> {{ post.title }}
+        
+                <div class="uk-margin">
+                    <textarea class="uk-textarea" name="content" rows="5" aria-label="content" required>{{ post.content }}</textarea>
+                </div>
+
+                <button class="uk-button uk-button-default"> SUBMIT </button>
+            </fieldset>
+        </form>
+
+    </div>
+    
+
+    
+
+{% endblock %}

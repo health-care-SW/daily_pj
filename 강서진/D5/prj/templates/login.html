@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sofia+Sans:wght@500&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.15.21/dist/css/uikit.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.15.21/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.15.21/dist/js/uikit-icons.min.js"></script>
+    
+    <title>SIGN UP</title>
+</head>
+<body>
+    {% extends 'base.html'%}
+
+    {% block scripts %}
+    <script>
+
+        function login() {
+            let user_id = $("#userId").val()
+            let user_pw = $("#userPw").val()
+        }
+        $.ajax({
+            url: '/login',
+            type:'post',
+            data: {
+                'user_id':user_id,
+                'user_pw':user_pw
+            },
+            success: function(res) {
+                if (res['result'] == 'success') {
+                    alert('LOGGED IN!')
+                    window.location.reload()
+                }
+            }
+        })
+    </script>
+
+    {% endblock %}
+
+    {% block content %}
+
+    <h2>LOG IN</h2>
+    <hr>
+    <form>
+
+        <!-- id -->
+        <div class="uk-margin">
+            <div class="uk-inline">
+                <span class="uk-form-icon" uk-icon="icon: user"></span>
+                <input class="uk-input" id="userId" type="text" placeholder="ID">
+            </div>
+        </div>
+    
+        <!-- pw -->
+        <div class="uk-margin">
+            <div class="uk-inline">
+                <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: lock"></span>
+                <input class="uk-input" id="userPw" type="password" placeholder="PW">
+            </div>
+        </div>
+        <button class="uk-button uk-button-default">LOGIN</button>
+        <a class="uk-link-text" href="/join">SIGN UP</a>
+    
+    </form>
+    <hr>
+
+    {% endblock%}
+
+</body>
+</html>

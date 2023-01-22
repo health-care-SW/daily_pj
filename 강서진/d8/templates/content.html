@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="uk-margin-left uk-margin-right">
+    <h3>Title: {{ post.title }}</h3>
+    <hr class="uk-divider-small">
+        <p> {{ post.content }} </p>
+        <hr class="uk-divider-small">
+        <span>Author: {{ post.author }} </span>
+        <br>
+        <span>Date: {{post.created_at}}</span>
+        <br>
+        <hr class="uk-divider-small">
+            <div class="uk-grid-small uk-child-width-auto" uk-grid>
+                <div>
+                    <a class="uk-button uk-button-text" href="/content/{{ post.id + 1}}">next</a>
+                </div>
+                <div>
+                    <a class="uk-button uk-button-text" href="/content/{{ post.id - 1}}/">previous</a>
+                </div>
+            </div>
+
+    <br>
+    <a class="uk-link-muted" href="/blog">back to list</a>
+    <br>
+    {% if session['login'] == post.author %}
+
+    <div class="uk-button-group">
+        <form action="/edit/{{ postid }}" method="GET">
+            <button class="uk-button uk-button-default uk-button-small"> EDIT </button>
+        </form>
+        <form action="/delete/{{ post.id }}" method="GET" >
+            <button class="uk-button uk-button-default uk-button-small">Delete</button>
+        </form>
+    </div>
+    {% endif %}
+</div>
+    {% endblock %}

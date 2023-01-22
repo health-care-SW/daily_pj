@@ -1,5 +1,4 @@
-import pymysql
-
+from Database import Database 
 class User():
     __tablename__ ='user'
 
@@ -7,22 +6,8 @@ class User():
         self.user_id = user_id
         self.user_pw = user_pw
 
-    def get_pwd():
-        with open("pwd.txt","r") as f:
-            return f.read()
-
-    def get_db():
-        # 디비 연결(mysql)
-        return pymysql.connect(
-                        host='localhost',
-                        port=3306,
-                        user='root',
-                        passwd= User.get_pwd(),
-                        db="webProject",
-                        charset='utf8')
-
     def find(id):
-        conn = User.get_db()
+        conn = Database().get_db()
         cursor = conn.cursor()
         sql = "select * from user where id=%s;"
         cursor.execute(sql,(id))

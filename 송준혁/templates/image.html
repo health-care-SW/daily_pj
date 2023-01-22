@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <html>
+    <head>
+      <meta charset="UTF-8" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <script src="static/assets/js/f.js"></script>
+      <title>전처리 페이지 UI</title>
+      <link rel="stylesheet" href="assets" />
+    </head>
+
+    <body>
+      <div class="main">
+        <form
+          action="/image_preprocess"
+          method="POST"
+          enctype="multipart/form-data"
+        >
+          <h1>이미지 업로드 하기</h1>
+          <input type="file" name="uploaded_image" />
+          <h1>이미지 전처리 종류 선택</h1>
+          <input type="checkbox" name="pre_toggle_0" />
+          <span>180도 회전 </span>
+          <br />
+          <input type="checkbox" name="pre_toggle_1" />
+          <span>흑백 변경 </span>
+          <br />
+          <input type="checkbox" name="pre_toggle_2" />
+          <span>이미지 사이즈 변경 </span>
+          <br />
+          <button type="submit">변경</button>
+        </form>
+      </div>
+      {% if label %}
+      <div class="respone">
+        <img class="respone" src="/static/changed_{{label}}" />
+      </div>
+      {% endif %}
+    </body>
+  </html>
+</html>

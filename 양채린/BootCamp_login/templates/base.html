@@ -2,9 +2,8 @@
 
 <head>
     <title>Hchang - 자유게시판 만들기</title>
-    <script src="{{ url_for('static', filename='bootstrap.bundle.min.js') }}" > </script>
-    <script src="{{ url_for('static', filename='jquery.js') }}" > </script>
-    <link href="{{ url_for('static',filename='bootstrap.min.css') }}" rel="stylesheet">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
 
     <!-- style 코드를 작성하세요. -->
     <style>
@@ -17,8 +16,7 @@
         }
     </style>
     <!-- block을 만들어주세요. -->
-    {% block scripts %}
-    {% endblock %}
+
 </head>
 
 <body>
@@ -46,5 +44,8 @@
         {% endblock %}
     </div>
 </body>
+<!-- ajax를 처리하기 위해 body 아래에 넣습니다. -->
+{% block scripts %}
+{% endblock %}
 
 </html>

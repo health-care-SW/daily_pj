@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request
-# from flask_ngrok import run_with_ngrok
+# from flask_ngrok import run_with_ngrok  #: port를 우회해서 접속가능한 도메일을 할당해줌
+
 
 # from project.data import *
 # from project.image import *

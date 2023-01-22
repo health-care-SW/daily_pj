@@ -50,3 +50,33 @@ html, body {
 #inputBox button {
   padding: 3px 5px;
 }
+
+.bg-light{
+  height: 1053px;
+  padding-top:55px;
+  padding-bottom:75px;
+}
+.flex-fill.mx-xl-5.mb-2{
+  margin: 0 auto;
+  width : 700px;
+  padding-right: 7rem;
+  padding-left: 7rem;
+}
+
+.container.py-4{
+  margin: 0 auto;
+  width : 503px;
+}
+
+.d-grid.gap-2{
+  padding-top: 30px;
+}
+  
+.bir_yy,.bir_mm,.bir_dd{
+  width:160px;
+  display:table-cell;
+}
+
+.bir_mm+.bir_dd, .bir_yy+.bir_mm{
+  padding-left:10px;
+}

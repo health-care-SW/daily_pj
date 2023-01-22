@@ -2,7 +2,7 @@ import pymysql
 
 class Database():
     def __init__(self) -> None:
-        self.db = pymysql.connect(host='localhost', user='root', password='rltnf1402', db='shopping_mall', charset='utf8')
+        self.db = pymysql.connect(host='localhost', user='root', password='Aasdf1234!', db='shopping_mall', charset='utf8')
         self.cursor = self.db.cursor(pymysql.cursors.DictCursor)
 
     def commit(self):

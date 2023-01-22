@@ -20,7 +20,16 @@
         <nav class="navbar navbar-light bg-light static-top">
             <div class="container">
                 <a class="navbar-brand" href="#!">Mad</a>
-                <a class="btn btn-primary" href="http://127.0.0.1:5000/login">Sign Up</a>
+                {% if label%}
+                    <div class="justify-content-end">
+                        <h5 class="text" style="display: inline;">{{ label }}  </h5>
+                        <form action="/logout" style="display: inline;">
+                            <button type="submit" class="btn btn-primary">로그아웃</button>
+                        </form>
+                    </div>
+                {% else %}
+                    <a class="btn btn-primary" href="http://127.0.0.1:5000/login">로그인</a>
+                {% endif %}
             </div>
         </nav>
         <!-- Masthead-->
@@ -50,14 +59,14 @@
                 <div class="row">
                     <div class="col-lg-4">
                         <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
-                            <div class="features-icons-icon d-flex"><i class="bi bi-filetype-sql m-auto text-primary"></i></div>
+                            <a class="features-icons-icon d-flex" href="http://127.0.0.1:5000/app_data"><i class="bi bi-filetype-sql m-auto text-primary"></i></a>
                             <h3>SQL 실행</h3>
                             <p class="lead mb-0">This theme will look great on any device, no matter the size!</p>
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
-                            <div class="features-icons-icon d-flex"><i class="bi bi-image-fill m-auto text-primary"></i></div>
+                            <a class="features-icons-icon d-flex" href="http://127.0.0.1:5000/app_image"><i class="bi bi-image-fill m-auto text-primary"></i></a>
                             <h3>이미지 전처리</h3>
                             <p class="lead mb-0">Featuring the latest build of the new Bootstrap 5 framework!</p>
                         </div>

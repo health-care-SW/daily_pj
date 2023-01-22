@@ -1,0 +1,9 @@
+.main {
+  width: 400px;
+  margin: auto;
+}
+
+.respone {
+  width: inherit;
+  margin: auto;
+}

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="static/assets/js/f.js"></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="main">
+      <div class="query">
+        <form
+          action="/image_preprocess"
+          method="POST"
+          enctype="multipart/form-data"
+        >
+          <h1>이미지 업로드 하기</h1>
+          <input type="file" name="uploaded_image" />
+
+          <h1>이미지 전처리 종류 선택</h1>
+          <input type="checkbox" name="pre_toggle_0" />
+          <span>180도 회전 </span>
+          <br />
+          <input type="checkbox" name="pre_toggle_1" />
+          <span>흑백 변경 </span>
+          <br />
+          <input type="checkbox" name="pre_toggle_2" onclick="f()" />
+          <span>이미지 사이즈 변경 </span>
+          <div name="size" style="display: none">
+            <br />
+            <input
+              type="text"
+              name="changed_width"
+              placeholder="width"
+              required="required"
+              pattern="[0-9]+"
+              min="0"
+              max="500"
+            />
+            <input
+              type="text"
+              name="changed_height"
+              placeholder="height"
+              required="required"
+              pattern="[0-9]+"
+              min="0"
+              max="500"
+            />
+          </div>
+          <br />
+          <button>변경</button>
+        </form>
+      </div>
+    </div>
+    {% if label %}
+    <div class="respone">
+      <img class="respone" src="/static/{{label}}" />
+    </div>
+    <div class="respone">
+      <img class="respone" src="/static/changed_{{label}}" />
+    </div>
+    {% endif %}
+  </body>
+</html>

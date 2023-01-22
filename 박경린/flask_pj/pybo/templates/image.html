@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="{{ url_for('static',filename='assets/css/style.css') }}">
+
+   
+    
+</head>
+
+<body>
+    <div class="main">
+
+        <!-- <form action="/get_selected_table" method="POST" enctype="multipart/form-data">
+            <input type="text" name="table_name" placeholder="테이블 명" required="required" />
+            <button type="submit">선택</button>
+            {% if label %}
+                <span>
+                    {{ label }}
+                </span>
+            {% endif %}
+    
+        </form>
+    
+        <form action="/get_column_name_change" method="POST" enctype="multipart/form-data">
+            <h1>컬럼 이름 변경</h1>
+            <input type="text" name="before_column_name" placeholder="변경 전 컬럼명" required="required" />
+            <input type="text" name="after_column_name" placeholder="변경 후 컬럼명"required="required" />
+            <br>
+            <br>
+            <button type="submit">변경</button>
+        </form> -->
+        
+        <form action="/upload" method="POST" enctype="multipart/form-data">
+            <!-- <h1>Hello {{session['id']}}</h1> -->
+            <input type="text" name="subject" cols="20" rows="1" placeholder="제목">
+            <input type="text" name="content" cols="40" rows="10" placeholder="글을 입력하세요">
+            
+            <h2>이미지 업로드 하기</h2>
+            <input type="file" name="uploaded_image">
+            <br>
+            <br>
+            <button type = "submit">업로드</button>
+            <!-- <h1>이미지 전처리 종류 선택</h1>
+            <input type="checkbox" name="pre_toggle_0">
+            <span>180도 회전 </span>
+            <br>
+            <input type="checkbox" name="pre_toggle_1">
+            <span>흑백 변경 </span>
+            <br>
+            <input type="checkbox" name="pre_toggle_2">
+            <span>이미지 사이즈 변경 </span>
+            <br>
+            <button type="submit">변경</button> -->
+        </form>
+                
+       
+            <!-- <button type="submit" onclick=f()>게시</button> <button onclick=g()>임시저장</button>  -->
+      
+            <!-- {% if label %}
+                <span>
+                    <div style="background-image: url('/static/{{ label }}'); background-size: cover; width: 400px; height: 300px "></div>
+                    {{ label }}
+                    <img src="{{url_for('static', filename=label)}}">
+                    
+                    
+                </span>
+            {% endif %} -->
+
+    </div>
+    
+ 
+</body>
+</html>

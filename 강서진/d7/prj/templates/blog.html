@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h3>FORUM</h3>
+<h5>Penny for your thought?</h5>
+<div>
+{% if post_list %}
+    <ul class="uk-list uk-list-divider">
+        {% for post in post_list %}
+        <li><a href="/content/{{ post.id }}/">{{ post.title }}</a>{{ post.created_at }}</li>
+
+        {% if session['login'] == post.author %}
+            <button href="/edit/{{ post.id }}" class="uk-button uk-button-default">Edit</button>
+            <button href="/delete/{{ post.id }}" class="uk-button uk-button-default">Delete</button>
+        {% endif %}
+
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>nothing here... yet</p>
+{% endif %}
+</div>
+    <form action="/post" method="GET">
+        <button class="uk-button uk-button-default">POST</button>
+    </form>
+{% endblock %}

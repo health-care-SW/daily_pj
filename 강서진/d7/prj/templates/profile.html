@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    {% if (session['login'] == None) or ('login' not in session) %}
+
+    <div>
+        <h3>Hi there stranger!</h3>
+    </div>
+
+    {% else %}
+    <div>
+        <h3>Hello {{ session['login'] }},</h3>
+        <span>this is your page</span>
+    </div>
+    <div>
+        {% if post_by_u %}
+        <h4>Your Recent Posts</h4>
+        <ul class="uk-list uk-list-divider">
+            {% for urpost in post_by_u %}
+            <li><a href="/content/{{ urpost.id }}/">{{ urpost.title }}</a>{{ urpost.created_at }}</li>
+            <button href="/edit/{{ urpost.id }}" class="uk-button uk-button-default">Edit</button>
+            <button href="/delete/{{ urpost.id }}" class="uk-button uk-button-default">Delete</button>
+            {% endfor %}
+            {% endif %}
+        </ul>
+    </div>
+    {% endif %}
+
+
+{% endblock %}

@@ -1,35 +1,37 @@
 {% extends 'base.html' %}
 {% block content %}
-<h1>이미지 처리 페이지입니다.</h1>
-<br>
-<div class="query">
-        <form action="/image/image_preprocess/" method="POST" enctype="multipart/form-data">
-            <h2>이미지 업로드 하기</h2>
-            <br>
-            <input type="file" name="uploaded_image">
-            <br>
-            <br>
-            <h1>이미지 전처리 종류 선택</h1>
-            <input type="checkbox" name="pre_toggle_0">
-            <span>180도 회전 </span>
-            <br>
-            <input type="checkbox" name="pre_toggle_1">
-            <span>흑백 변경 </span>
-            <br>
-            <input type="checkbox" name="pre_toggle_2">
-            <span>이미지 사이즈 변경 </span>
-            <div id="size"><br>
-                <input type="text" name="changed_width" placeholder="width"  pattern="[0-9]+" min="0" max="200">
-                <input type="text" name="changed_height" placeholder="height" pattern="[0-9]+" min="0" max="200">
-            </div>
-            <br>
-            <button>변경</button>
-        </form>
-    </div>
-    <div class="response">
-        {% if label %}
-            <img src="/static/{{label}}" alt="">
-            <img src="/static/changed_{{label}}" alt="">
-        {% endif %}
-    </div>
+<div class="wrapper">
+    <h1>이미지 처리 페이지입니다.</h1>
+    <br>
+    <div class="query">
+            <form action="/image/image_preprocess/" method="POST" enctype="multipart/form-data">
+                <h2>이미지 업로드 하기</h2>
+                <br>
+                <input type="file" name="uploaded_image">
+                <br>
+                <br>
+                <h1>이미지 전처리 종류 선택</h1>
+                <input type="checkbox" name="pre_toggle_0">
+                <span>180도 회전 </span>
+                <br>
+                <input type="checkbox" name="pre_toggle_1">
+                <span>흑백 변경 </span>
+                <br>
+                <input type="checkbox" name="pre_toggle_2">
+                <span>이미지 사이즈 변경 </span>
+                <div id="size"><br>
+                    <input type="text" name="changed_width" placeholder="width"  pattern="[0-9]+" min="0" max="200">
+                    <input type="text" name="changed_height" placeholder="height" pattern="[0-9]+" min="0" max="200">
+                </div>
+                <br>
+                <button>변경</button>
+            </form>
+        </div>
+        <div class="response">
+            {% if label %}
+                <img src="/static/{{label}}" alt="">
+                <img src="/static/changed_{{label}}" alt="">
+            {% endif %}
+        </div>
+</div>
 {% endblock %}

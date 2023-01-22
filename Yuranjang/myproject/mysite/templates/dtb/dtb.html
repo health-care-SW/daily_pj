@@ -1,4 +1,43 @@
-{% extends 'base.html' %}
-{% block content %}
-<h1>sql 처리 페이지 입니다</h1>
-{% endblock %}
+<!doctype html>
+<html lang="ko">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css') }}">
+    <!-- mysite CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <!-- Bootstrap JS -->
+    <script src="{{ url_for('static', filename='bootstrap.min.js') }}"></script>
+    <title>SQL 처리 페이지</title>
+</head>
+
+<body>
+    <!-- 네비게이션바 -->
+    {% include "navbar.html" %}
+    <div class="wrapper">
+        <h1 class="p-3">SQL 처리 페이지</h1>
+        <form action="/dtb/dbsql/" method="POST">
+        <h2 class="p-3">데이터베이스 이름</h2>
+        <span class="p-3"> <input type="text" name="db_name" placeholder="ex)name.db"> </span>
+
+        <h2 class="p-3">SQL (명령어 한 줄만 가능)</h2>
+        <textarea class="mx-3" name="sql" cols="40" rows="10" placeholder="ex) SELECT * FROM table_name"></textarea>
+        <br>
+        {% if label %}
+            <span class="result_lable p-3">
+                {% block content %}
+                {{ label }}
+                {% endblock %}
+            </span>
+
+        <br>
+        {% endif %}
+
+        <button class="m-3" type="submit">SQL 전송</button>
+
+        </form>
+    </div>
+</body>
+</html>

@@ -1,10 +1,8 @@
 import sqlite3
 from sqlite3 import Error
-from flask_sqlalchemy import SQLAlchemy
 import numpy as np
 
 con = sqlite3.connect('users')
-db = SQLAlchemy()
 
 def connectDB(dbName):
     try:
@@ -15,7 +13,7 @@ def connectDB(dbName):
 def createTable(dbCon, tbname, colName, colType):
     dbCursor = dbCon.cursor()
 
-    # CREATE문 만들기 >> create table tablename(columnname1 columntype1, columnname2 columntype2, ...);
+    # CREATE문 만들기 >> create table tablename(columnname1 columntype1, columnname2 columntype2, ...)
     sql_create = ""
     collist = np.column_stack(colName, colType)
     for j in range(len(collist)):
@@ -27,13 +25,13 @@ def createTable(dbCon, tbname, colName, colType):
                 if j != len(collist)-1:
                     sql_create += ", "
     
-    dbCursor.execute("create table "+tbname+"("+sql_create+");")
+    dbCursor.execute("create table "+tbname+"("+sql_create+")")
     dbCon.commit()
 
 def insertValue(dbCon, tbname, vallist):
     dbCursor = dbCon.cursor()
 
-    # INSERT INTO문 만들기 >> insert into tablename values (value1, value2, ...);
+    # INSERT INTO문 만들기 >> insert into tablename values (value1, value2, ...)
     sql_insert = ""
     for temp in vallist:
         sql_insert += str(temp)+" "

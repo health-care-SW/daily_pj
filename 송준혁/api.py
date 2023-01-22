@@ -1,7 +1,7 @@
 from flask import Flask, redirect, request, render_template, jsonify, Blueprint, session, g
-from models import User, Post
-from db_connect import db
+from models import User, db
 from flask_bcrypt import Bcrypt
+from datetime import timedelta
 
 board = Blueprint('board', __name__)
 bcrypt = Bcrypt()
@@ -19,14 +19,16 @@ def load_logged_in_user():
         g.user = db.session.query(User).filter(User.id == user_id).first()
 
 
+def before_request():
+    session.permanent = True
+    app.permanent_session_lifetime = timedelta(minutes=1)
+
+
 @board.route("/")
 def home():
     return render_template("base.html")
 
-
-@board.route("/post", methods=["GET"])
-def post():
-    return render_template("index.html")
+# 회원가입
 
 
 @board.route("/join", methods=["GET", "POST"])
@@ -34,8 +36,11 @@ def join():
     if request.method == 'GET':
         return render_template('join.html')
     else:
-        user_id = request.form['user_id']
-        user_pw = request.form['user_pw']
+        data = request.get_json()
+        user_id = data['user_id']
+        user_pw = data['user_pw']
+        print(user_id)
+        print(user_pw)
         pw_hash = bcrypt.generate_password_hash(user_pw)
 
         user = User(user_id, pw_hash)
@@ -43,18 +48,21 @@ def join():
         db.session.commit()
         return jsonify({"result": "success"})
 
-# 로그인을 위한 login() 함수를 완성하세요.
+# 로그인 기능
 
 
 @board.route("/login", methods=['GET', 'POST'])
 def login():
     if request.method == 'GET':
         return render_template("login.html")
-    else:
-        user_id = request.form['user_id']
-        user_pw = request.form['user_pw']
+    elif request.method == 'POST':
+        data = request.get_json()
+        user_id = data['user_id']
+        user_pw = data['user_pw']
+
         user = User.query.filter(User.user_id == user_id).first()
 
+        # 처음 실행 되었을시
         if user is not None:
             if bcrypt.check_password_hash(user.user_pw, user_pw):
                 session['login'] = user.id
@@ -64,25 +72,10 @@ def login():
         else:
             return jsonify({"result": "fail"})
 
-# 로그아웃을 위한 logout() 함수를 완성하세요.
+# 로그아웃
 
 
 @board.route("/logout")
 def logout():
     session['login'] = None
     return redirect("/")
-
-# 로그인 기능 함수
-
-
-@app.route('/login', methods=['GET', 'POST'])
-def login():
-    user_id = request.form['user_id']
-    user_pw = request.form['user_pw']
-
-    if request.method == 'GET':
-        render_template('login.html')
-
-    elif request.method == 'POST':
-        # 데이터 작성
-        print()

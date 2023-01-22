@@ -236,6 +236,6 @@ html, body {
 }
 
 .reply-list > table td:first-child::after {
-    content:" : ";
+    content:"";
     font-weight:bold;
 }

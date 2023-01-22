@@ -1,9 +1,15 @@
 <html>
   <head>
     <title>전처리 페이지 UI</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static',filename='assets/css/style.css') }}"
+    />
   </head>
 
   <body>
+    <!--<div class="main">-->
+
     <form
       action="/get_selected_table"
       method="POST"
@@ -62,13 +68,26 @@
       <button type="submit">변경</button>
     </form>
 
+    <!--이미지 업로드-->
     <form action="/upload_image" method="POST" enctype="multipart/form-data">
       <h1>이미지 업로드 하기</h1>
       <input type="file" name="uploaded_image" />
       <button>이미지 업로드</button>
+      <!--이미지 파일명을 label로 받아옴 ->  경로에 대입하여 이미지 보여주기-->
       {% if label %}
-      <span> {{ label }} </span>
+      <span>
+        <div
+          style="background-image: url('/static/{{ label }}'); background-size: cover; width: 400;"
+        ></div>
+      </span>
       {% endif %}
     </form>
+
+    function f () { var check_b = document.getElementsByName("pre_toggle_2")[0]
+    var size = document.getElementsByName("size")[0]; if (check_b.checked){
+    size.style.display="inline"; console.log(check_b.checked) } else {
+    size.style.display="none"; } }
+
+    <!--</div>-->
   </body>
 </html>

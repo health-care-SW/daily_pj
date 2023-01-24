@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+
+<head>
+    <title>자유게시판</title>
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <link rel="icon" type="image/x-icon" href="../static/assets/img/favicon.ico" />
+    <link href="../static/assets/css/style.css" rel="stylesheet" />
+    <script src="../static/assets/js/main.js"></script>
+    <!-- <link rel="stylesheet" href="https://bootstrapmade.com/assets/css/demo-4.3.css">
+    <script src="https://bootstrapmade.com/assets/js/demo-4.3.js"></script> -->
+
+    <!-- style 코드 -->
+    <!-- <style>
+        .wrap{
+            width: 680px;
+            margin: 10px auto;
+        }
+        .title{
+            text-align: center;
+        }
+    </style> -->
+    <!-- block을 만들어주세요. -->
+
+</head>
+
+<body>
+    <div class="wrap">
+        <!-- navbar : 네비게이션 바 -->
+        <!-- https://www.codeit.kr/community/threads/7067 -->
+        <!-- navbar-expand lg :  네비바를 992px 이상(lg)일 때 펼침. toggle 버튼과 상호작용. lg 바꾸면 원하는 너비에서 toggle 됨-->
+        <!-- navbar-light : 네비바 글자색 -->
+        <!-- bg-light : 네비바 배경색 -->
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-light" style="padding-left: 15px;"">
+            <div class="container-fluid">
+                <!--na vbar-brand: 회사명, 제품명, 프로젝트명 등 표시-->
+                <a class="navbar-brand" href="/">RIVERYK</a>
+                <!-- navbar-toggler : 버튼이 토클 역할. 콜랩스 플러그인과 다른 navigation toggling 행동 -->
+                <!-- data-toggle="collapse" : 숨겨짐 -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                    <!--navbar-nav : full-height와 보다 가벼운 네비게이션 -->
+                    <div class="navbar-nav" style="padding-left: 15px;">
+                        <a class="nav-link" href="/login">로그인</a>
+                        <a class="nav-link" href="/join">회원가입</a>
+                        <a class="nav-link" href="/logout">로그아웃</a>
+                        <a class="nav-link" href="/image">이미지 처리</a>
+                        <a class="nav-link" href="/data">SQL 처리</a>
+
+                    </div>
+                    <!-- <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/image">이미지 처리<span class="sr-only"></span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/data">SQL 처리</a>
+                        </li>
+                    </ul> -->
+                    <!-- <form class="form-inline my-2 my-lg-0">
+                        <input class="form-control mr-auto" type="search" placeholder="검색어를 입력하세요" aria-label="Search" />
+                        <button class="btn btn-outline-success my-2 my-sm-2" type="submit">Search</button>
+                    </form> -->
+                </div>
+            </div>
+        </nav>
+        <hr>
+        <!-- 3번을 하세요 -->
+        {% block content %}
+        {% endblock %}
+    </div>
+</body>
+<!-- ajax를 처리하기 위해 body 아래에 넣습니다. -->
+{% block scripts %}
+{% endblock %}
+
+</html>

@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container">
+        <h5 class="my-3 border-bottom pb-2">질문등록</h5>
+        <form method="post" class="post-form my-3">
+            {{ form.csrf_token }}
+            <!-- 오류표시 Start -->
+            {% for field, errors in form
+                .errors
+                .items() %}
+                <div class="alert alert-danger" role="alert">
+                    <strong>{{ form[field].label }}</strong>:
+                    {{ ', '.join(errors) }}
+                </div>
+            {% endfor %}
+            <!-- 오류표시 End -->
+
+            <div class="form-group">
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">업체명</span>
+                    <input
+                        type="text"
+                        name="entpName"
+                        id="entpName"
+                        class="form-control"
+                        aria-label="Username"
+                        aria-describedby="basic-addon1"
+                        value="{{ form.entpName.data or '' }}">
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">제품명</span>
+                    <input
+                        type="text"
+                        name="itemName"
+                        id="itemName"
+                        class="form-control"
+                        aria-describedby="basic-addon1"
+                        value="{{ form.itemName.data or '' }}">
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">효능</span>
+                    <input
+                        type="text"
+                        name="efcyQesitm"
+                        id="efcyQesitm"
+                        class="form-control"
+                        aria-describedby="basic-addon1"
+                        value="{{ form.efcyQesitm.data or '' }}">
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">사용법</span>
+                    <input
+                        type="text"
+                        name="useMethodQesitm"
+                        id="useMethodQesitm"
+                        class="form-control"
+                        aria-describedby="basic-addon1"
+                        value="{{ form.useMethodQesitm.data or '' }}">
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">주의사항</span>
+                    <input
+                        type="text"
+                        name="atpnQesitm"
+                        id="atpnQesitm"
+                        class="form-control"
+                        aria-describedby="basic-addon1"
+                        value="{{ form.atpnQesitm.data or '' }}">
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">보관법</span>
+                    <input
+                        type="text"
+                        name="depositMethodQesitm"
+                        id="depositMethodQesitm"
+                        class="form-control"
+                        aria-describedby="basic-addon1"
+                        value="{{ form.depositMethodQesitm.data or '' }}">
+                </div>
+
+
+            </div>
+            <button type="submit" class="btn btn-primary">저장하기</button>
+        </form>
+    </div>
+{% endblock %}

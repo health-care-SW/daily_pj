@@ -1,57 +1,74 @@
-from flask import Flask, render_template, request
-# from flask_ngrok import run_with_ngrok # port를 우회해서 접속가능한 도메인을 할당
+from flask import Flask, render_template, request, redirect
+from models import db
 import os
-from PIL import Image
+from models import Fcuser
+from flask import session 
+from flask_wtf import CSRFProtect
+from forms import RegisterForm, LoginForm
 
 app = Flask(__name__)
-# run_with_ngrok(app)
 
-'''
-이미지 처리 함수
-'''
-def image_resize(image, width, height):
-    return image.resize((int(width), int(height)))
+@app.route('/', methods=['GET','POST'])
+def hello():
+    return render_template("hello.html")
 
-def image_rotate(image):
-    return image.transpose(Image.ROTATE_180)
+@app.route('/register', methods=['GET','POST'])
+def register():
+    if request.method == 'GET':
+        return render_template("register.html")
+    else:
+        #회원정보 생성
+        userid = request.form.get('userid') 
+        username = request.form.get('username')
+        password = request.form.get('password')
+        re_password = request.form.get('re_password')
+        print(password)
 
-def image_change_bw(image):
-    return image.convert('L')
 
-'''
-플라스크
-'''
-@app.route("/")
-def index():
-    return render_template('index.html')
+        if not (userid and username and password and re_password) :
+            return "모두 입력해주세요"
+        elif password != re_password:
+            return "비밀번호를 확인해주세요"
+        else:
+            fcuser = Fcuser()         
+            fcuser.password = password 
+            fcuser.userid = userid
+            fcuser.username = username      
+            db.session.add(fcuser)
+            db.session.commit()
+            return "회원가입 완료"
 
-@app.route('/image_preprocess', methods=['POST'])
-def preprocessing():
-    if request.method == 'POST':
-        file = request.files['uploaded_image']
-        if not file: return render_template('index.html', label="No Files")
+        return redirect('/')
 
-        img = Image.open(file)
+@app.route('/login', methods=['GET','POST'])  
+def login():  
+    form = LoginForm() #로그인 폼 생성
+    if form.validate_on_submit(): #유효성 검사
+        session['userid'] = form.data.get('userid') #form에서 가져온 userid를 session에 저장    
+        return redirect('/') #로그인에 성공하면 홈화면으로 redirect
+            
+    return render_template('login.html', form=form)
 
-        is_rotate_180 = request.form.get('pre_toggle_0')
-        is_change_bw = request.form.get('pre_toggle_1')
-        is_change_size = request.form.get('pre_toggle_2')
+@app.route('/logout',methods=['GET'])
+def logout():
+    session.pop('userid',None)
+    return redirect('/')
 
-        if is_rotate_180 == 'on':
-            img = image_rotate(img)
+if __name__ == "__main__":
+    basedir = os.path.abspath(os.path.dirname(__file__))  # database 경로를 절대경로로 설정
+    dbfile = os.path.join(basedir, 'db.sqlite') # 데이터베이스 경로와 이름
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + dbfile
+    app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    app.config['SECRET_KEY'] = 'wcsfeufhwiquehfdx'
 
-        if is_change_bw == 'on':
-            img = image_change_bw(img)
+    csrf = CSRFProtect()
+    csrf.init_app(app)
 
-        if is_change_size == 'on':
-            img = image_resize(img, request.form.get('changed_width'), request.form.get('changed_height'))
+    db.init_app(app)
+    db.app = app
+    with app.app_context():
+        db.create_all()
 
-        img.save('result_image.png')
-        src_dir = os.path.dirname(os.path.abspath(__file__))
-        image_path = os.path.join(src_dir, 'result_image.png')
 
-        # 결과 리턴
-        return render_template('index.html', label=image_path)
-
-if __name__ == '__main__':
-    app.run()
+    app.run(host='127.0.0.1', port=5000, debug=True) 

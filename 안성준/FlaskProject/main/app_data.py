@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request
 from flask import Blueprint
+from flask import current_app as app
 import os
 import sqlite3
 import pandas as pd

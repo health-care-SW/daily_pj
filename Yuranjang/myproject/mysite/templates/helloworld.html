@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1 class="hlwd">Hello, Flask!</h1>
+<br>
+<h3 class="hlwd">플라스크 프로젝트 메인 화면입니다.</h3>
+<br>
+<div class="hlwd">
+    <a href="{{url_for('question._list')}}"><button type="button" class="btn btn-outline-primary">게시판</button></a>
+    &nbsp;
+    <a href="{{url_for('image.image')}}"><button type="button" class="btn btn-outline-primary">이미지처리</button></a>
+    &nbsp;
+    <a href="{{url_for('dtb.dtb')}}"><button type="button" class="btn btn-outline-primary">SQL처리</button></a>
+</div>
+{% endblock %}

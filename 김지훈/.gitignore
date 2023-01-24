@@ -1,32 +1,4 @@
-Skip to content
-Search or jump to…
-Pull requests
-Issues
-Codespaces
-Marketplace
-Explore
- 
-@Gocha64 
-health-care-SW
-/
-daily_pj
-Public
-Fork your own copy of health-care-SW/daily_pj
-Code
-Issues
-Pull requests
-4
-Actions
-Projects
-Security
-Insights
-daily_pj/김민종/first_flask_project/.gitignore
-@Kim-Min-Jong
-Kim-Min-Jong Create .gitignore
-Latest commit a11a9f4 20 hours ago
- History
- 1 contributor
-269 lines (204 sloc)  5.82 KB
+
 
 # Created by https://www.toptal.com/developers/gitignore/api/python,flask,virtualenv
 # Edit at https://www.toptal.com/developers/gitignore?templates=python,flask,virtualenv

@@ -1,0 +1,82 @@
+* { padding: 0; margin: 0; }
+
+html, body {
+  height: 100%;
+  background: #ffffff;
+}
+
+#container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+#loginBox {
+  width: 300px;
+  text-align: center;
+  background-color: #ffffff;
+}
+.input-form-box {
+  border: 0px solid #ff0000;
+  display: flex;
+  margin-bottom: 5px;
+}
+.input-form-box > span {
+  display: block;
+  text-align: left;
+  padding-top: 5px;
+  min-width: 65px;
+}
+.button-login-box {
+  margin: 10px 0;
+}
+#loginBoxTitle {
+  color:#000000;
+  font-weight: bold;
+  font-size: 32px;
+  text-transform: uppercase;
+  padding: 5px;
+  margin-bottom: 20px;
+  background: linear-gradient(to right, #270a09, #8ca6ce);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+#inputBox {
+  margin: 10px;
+}
+
+#inputBox button {
+  padding: 3px 5px;
+}
+
+.bg-light{
+  height: 1053px;
+  padding-top:55px;
+  padding-bottom:75px;
+}
+.flex-fill.mx-xl-5.mb-2{
+  margin: 0 auto;
+  width : 700px;
+  padding-right: 7rem;
+  padding-left: 7rem;
+}
+
+.container.py-4{
+  margin: 0 auto;
+  width : 503px;
+}
+
+.d-grid.gap-2{
+  padding-top: 30px;
+}
+  
+.bir_yy,.bir_mm,.bir_dd{
+  width:160px;
+  display:table-cell;
+}
+
+.bir_mm+.bir_dd, .bir_yy+.bir_mm{
+  padding-left:10px;
+}

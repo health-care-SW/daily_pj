@@ -1,0 +1,39 @@
+ <!DOCTYPE html>
+ <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+    <body>
+        <div class="query">
+            <form action="/image/image_preprocess" method="POST" enctype="multipart/form-data">
+                <h1>이미지 업로드 하기</h1>
+                <input type="file" name="uploaded_image">
+        
+                <h1>이미지 전처리 종류 선택</h1>
+                <input type="checkbox" name="pre_toggle_0">
+                <span>180도 회전 </span>
+                <br>
+        
+                <input type="checkbox" name="pre_toggle_1">
+                <span>흑백 변경 </span>
+                <br>
+        
+                <input type="checkbox" name="pre_toggle_2">
+                <span>이미지 사이즈 변경 </span>
+                <br>
+                <button>변경</button>
+            </form>
+        </div>
+        <div class="respone">
+            {% if label %}
+            <!-- label에 이미지가 들어올 것이다. -->
+                <img src="/static/{{ label }}" width="400" height="400">
+                <img src="/static/changed_{{ label }}" width="400" height="400">
+            {% endif %}
+        </div>
+
+    </body>
+ </html>

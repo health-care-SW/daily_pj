@@ -8,7 +8,7 @@ st.markdown('''
     Data source: [kaggle](https://www.kaggle.com/datasets/timmate/avocado-prices-2020)
 ''')
 
-avocado = pd.read_csv("avocado.csv")
+avocado = pd.read_csv("./avocado.csv")
 avg = avocado.groupby("type")[['total_volume','average_price']].mean()
 
 st.dataframe(avg)

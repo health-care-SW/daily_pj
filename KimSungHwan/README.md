@@ -21,5 +21,5 @@ StreamLit Project
 
 [StreamLit 주소](https://dksj9921-test-app-kup188.streamlit.app/, "StreamLit link")
 
-##1일차
+## 1일차
 >StreamLit과 GitHub연결

@@ -7,3 +7,4 @@ keras == 2.11.0
 streamlit-cropper == 0.2.1
 selenium == 4.8.0
 tensorflow == 2.11.0
+libgl1-mesa-glx

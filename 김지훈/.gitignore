@@ -2,6 +2,8 @@
 
 # Created by https://www.toptal.com/developers/gitignore/api/python,flask,virtualenv
 # Edit at https://www.toptal.com/developers/gitignore?templates=python,flask,virtualenv
+## model ###
+model
 
 ### Flask ###
 instance/*
@@ -132,9 +134,10 @@ celerybeat.pid
 
 # Environments
 .venv
-env/
+stream_env
 venv/
 ENV/
+env/
 env.bak/
 venv.bak/
 

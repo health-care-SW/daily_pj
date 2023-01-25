@@ -46,5 +46,6 @@ Flask docs 확인
 
 ## 16일차
 1. streamlit 튜토리얼
-2. AI 친화적인 웹 서비스 개발
+2. AI 친화적인 웹 서비스 개발 및 배포
     - sketch2fashion
+    - ngrok 

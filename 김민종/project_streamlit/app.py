@@ -93,6 +93,7 @@ if __name__ == "__main__":
 
     if cropped != None:
         st.image(img)
+
         submitted = st.button("submit")
         if submitted:
             max_idx, predict_max_percent, predict = classification(cropped)

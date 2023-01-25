@@ -1,2 +1,9 @@
-pandas
-plotly
+pandas == 1.5.2
+plotly == 5.13.0
+pillow == 9.4.0
+opencv-python == 4.7.0.68
+numpy == 1.24.1
+keras == 2.11.0
+streamlit-cropper == 0.2.1
+selenium == 4.8.0
+os

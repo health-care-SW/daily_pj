@@ -1,3 +1,6 @@
+import os
+os.add_dll_directory("C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.2/bin")
+
 import streamlit as st
 import pandas as pd
 import plotly.express as px
@@ -7,12 +10,13 @@ import PIL
 import numpy as np
 import seaborn as sns
 from sklearn.model_selection import train_test_split
-import tensorflow.python.keras
-from tensorflow.python.keras import layers
+from tensorflow import keras
+from keras import layers
 import tensorflow as tf
 
+from io import StringIO
 
-# st.title("Avocado Price Dashboard")
+
 st.markdown('''
 # Bees Health Classification Dashboard
 
@@ -29,31 +33,6 @@ bees = bees.replace({'location':'Athens, Georgia, USA'}, 'Athens, GA, USA')
 lshc = bees[['location','subspecies','health','caste']]
 
 st.dataframe(bees)
-
-# ---------------------------------------
-# 그래프 표현
-# ---------------------------------------
-# f, ax = plt.subplots(nrows=2, ncols=2, figsize=(20,15))
-# # subspecies
-# bees['subspecies'].value_counts().plot(kind='bar', ax=ax[0,0])
-# ax[0,0].set_xlabel='Subspecies'
-# ax[0,0].set_ylabel='Count'
-# # location
-# bees['location'].value_counts().plot(kind='bar', ax=ax[0,1])
-# ax[0,1].set_xlabel='Location'
-# ax[0,1].set_ylabel='Count'
-# # health 
-# bees['health'].value_counts().plot(kind='bar', ax=ax[1,0])
-# ax[1,0].set_xlabel='Health'
-# ax[1,0].set_ylabel='Count'
-# # caste
-# bees['caste'].value_counts().plot(kind='bar', ax=ax[1,1])
-# ax[1,1].set_xlabel='Caste'
-# ax[1,1].set_ylabel='Count'
-# # 
-# f.subplots_adjust(hspace=0.7)
-# f.tight_layout()
-# plt.show()
 
 col = st.selectbox(label="Column",options=['location','subspecies','health','caste'])
 submitted = st.button("submit")
@@ -137,23 +116,46 @@ model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=
 # ---------------------------------------
 # 학습 돌리기
 # ---------------------------------------
-# history = model.fit(x_train, y_train, validation_data = (x_test, y_test), epochs = 30)
+history = model.fit(x_train, y_train, validation_data = (x_test, y_test), epochs = 30)
 
 # ---------------------------------------
 # 학습 정확도 그래프
 # ---------------------------------------
-# plt.plot(history.history['accuracy'], label = 'train_accuracy')
-# plt.plot(history.history['val_accuracy'], label = 'val_accuracy')
-# plt.legend()
+acc_fig = plt.figure(figsize=(6,3))
+plt.subplot(121)
+plt.plot(history.history['accuracy'], label = 'train_accuracy')
+plt.title("Train Accuracy")
+
+plt.subplot(122)
+plt.plot(history.history['val_accuracy'], label = 'val_accuracy')
+plt.title("Validation Accuracy")
+
+st.pyplot(acc_fig)
 
 # ---------------------------------------
 # 학습 loss 그래프
 # ---------------------------------------
-# plt.plot(history.history['loss'], label = 'train_loss')
-# plt.plot(history.history['val_loss'], label = 'val_loss')
-# plt.legend()
+
+loss_fig = plt.figure(figsize=(6,3))
+plt.subplot(121)
+plt.title("Train Loss")
+plt.plot(history.history['loss'], label = 'train_loss')
+
+plt.subplot(122)
+plt.plot(history.history['val_loss'], label = 'val_loss')
+plt.title("Validation Loss")
+
+st.pyplot(loss_fig)
 
 # -----------------
 # STREAMLIT MD
 # -----------------
+# uploaded_file = st.file_uploader("Upload a bee photo!", type=['png','jpg'])
+# if uploaded_file is not None:
+#   uploaded_file('image',uploaded_file)
+#   img = PIL.Image.open(uploaded_file)
+#   st.write("filename: ", uploaded_file.name)
+  # st.write(bytes_data)
+  
+
 

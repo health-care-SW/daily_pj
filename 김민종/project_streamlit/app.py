@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-# import plotly.express as px
+import plotly.express as px 
 st.title("Avocado Prices dashboard")
 
 st.markdown('''
@@ -9,15 +9,14 @@ st.markdown('''
 ''')
 
 avocado = pd.read_csv("avocado.csv")
-avg = avocado.groupby("type")['total_volume','average_price'].mean()
+avg = avocado.groupby("type")[['total_volume','average_price']].mean()
 
 st.dataframe(avg)
 
 selected = st.selectbox(label="Geography",options=avocado['geography'].unique())
 submitted = st.button("submit")
 if submitted:
-    pass
-    # line_fig = px.line(avocado[avocado['geography']== selected],
-    # x='date',y='average_price', color='type',title=selected)
+    line_fig = px.line(avocado[avocado['geography']== selected],
+    x='date',y='average_price', color='type',title=selected)
 
-    # st.plotly_chart(line_fig)
+    st.plotly_chart(line_fig)

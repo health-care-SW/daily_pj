@@ -43,3 +43,9 @@ Flask docs 확인
     - 이미지 처리 라우팅 함수 작성
     
 ## 11~12일차(진행중)
+
+## 16일차
+1. streamlit 튜토리얼
+2. AI 친화적인 웹 서비스 개발 및 배포
+    - sketch2fashion
+    - ngrok 활용

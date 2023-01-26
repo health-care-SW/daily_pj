@@ -10,7 +10,8 @@ from utils import rotate, flip_LR, flip_TB
 import cv2
 import numpy as np
 import os
-from selenium.webdriver.chrome.service import Service
+# from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.firefox.service import Service
 # from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.firefox import GeckoDriverManager
 

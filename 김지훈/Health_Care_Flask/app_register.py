@@ -4,8 +4,6 @@ import User
 
 from __main__ import app
 
-bcrypt = Bcrypt(app)
-
 @app.route('/register')
 def register():
     #이미 로그인 했다면 메인페이지
@@ -18,6 +16,7 @@ def register():
 @app.route('/register_process', methods=["POST"])
 def register_process():
     if request.method == "POST":
+        bcrypt = Bcrypt(app)
         userName = request.form.get('userName')
         userPw = request.form.get('userPassword')
         userPwHash = bcrypt.generate_password_hash(userPw)

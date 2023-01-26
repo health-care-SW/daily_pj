@@ -10,6 +10,8 @@ from utils import rotate, flip_LR, flip_TB
 import cv2
 import numpy as np
 import os
+from selenium.webdriver.chrome.service import Service as ChromeService
+from webdriver_manager.chrome import ChromeDriverManager
 
 target_pill = ['뉴에르도테캡슐', '듀카브정30/10밀리그램', '듀카브정30/5밀리그램', '라노펜세미정', '락토엔큐캡슐(바실루스리케니포르미스균)\xa0', '루키오정10밀리그램(몬테루카스트나트륨)', '리셀톤캡슐 6.0mg', '리프레가캡슐 75mg', '뮤코원캡슐(에르도스테인)', '바실리포미스캡슐', '베아로탄정 50mg', '베아투스정', '비오메틱스캡슐(바실루스리케니포르미스균)', '비우미정 500mg/병', '아나그레캡슐 0.5mg', '앤도민300프리미엄연질캡슐 300mg/PTP', '에피나레정', '엘도민캡슐 300mg', '엘도스인캡슐(에르도스테인)', '크라틴정 10mg', '크라틴정 20mg', '크라틴정 5mg', '티아프란정', '피타로틴정 2mg']
 # 약학정보원 약 코드
@@ -74,7 +76,7 @@ def get_text(ids, idx):
     keyword = ['result_drug_name', 'upso_title', 'charact','effect', 'dosage', 'caution']
     option = webdriver.ChromeOptions()
     option.add_argument("headless")
-    driver = webdriver.Chrome(options=option)
+    driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=option)
     driver.get("https://www.health.kr/searchDrug/result_drug.asp?drug_cd=%s"%(drug_cd[int(idx)]))
     for key in keyword:
         ids.append(driver.find_element(By.ID, key).text)

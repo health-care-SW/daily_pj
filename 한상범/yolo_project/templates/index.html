@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+       <meta charset="UTF-8">
+       <meta http-equiv="X-UA-Compatible" content="IE=edge">
+       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+       <title>Document</title>
+   </head>
+   <body>
+        <div>
+            <form action="/image/upload_image" method="POST" enctype="multipart/form-data">
+                    <h1>이미지 업로드 하기</h1>
+                    <input type="file" name="uploaded_image">
+                    <button>이미지 업로드</button>
+            <form>
+        </div>
+        {% if  label %}
+            <h1>{{ label }}</h1>
+            <img src="/static/{{ label }}" width="400" height="400">
+
+            <form action="/image/image_preprocess">
+                <h1>yolo~~~</h1>
+                <button>image detection</button>
+            <form>
+        {% endif %}
+   </body>
+</html>

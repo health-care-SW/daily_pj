@@ -4,13 +4,12 @@ import plotly.express as px
 from PIL import Image
 from keras.models import load_model
 from streamlit_cropper import st_cropper
-# from bs4 import BeautifulSoup as bs
 from selenium import webdriver
+from selenium.webdriver.common.by import By
+from utils import rotate, flip_LR, flip_TB
 import cv2
 import numpy as np
 import os
-import copy
-# import requests
 
 target_pill = ['뉴에르도테캡슐', '듀카브정30/10밀리그램', '듀카브정30/5밀리그램', '라노펜세미정', '락토엔큐캡슐(바실루스리케니포르미스균)\xa0', '루키오정10밀리그램(몬테루카스트나트륨)', '리셀톤캡슐 6.0mg', '리프레가캡슐 75mg', '뮤코원캡슐(에르도스테인)', '바실리포미스캡슐', '베아로탄정 50mg', '베아투스정', '비오메틱스캡슐(바실루스리케니포르미스균)', '비우미정 500mg/병', '아나그레캡슐 0.5mg', '앤도민300프리미엄연질캡슐 300mg/PTP', '에피나레정', '엘도민캡슐 300mg', '엘도스인캡슐(에르도스테인)', '크라틴정 10mg', '크라틴정 20mg', '크라틴정 5mg', '티아프란정', '피타로틴정 2mg']
 # 약학정보원 약 코드
@@ -25,7 +24,8 @@ def header():
     ''')
     df = pd.DataFrame(target_pill)
     df.columns = ["이름"]
-    st.table(df)
+    if st.checkbox("약제 종류 보기"):
+        st.table(df)
 
 def upload_file(directory, file):
     if not os.path.exists(directory):
@@ -47,15 +47,7 @@ def crop_image():
     else:
         st.text("이미지가 아직 업로드 되지 않았습니다.")
 
-def flip_TB(img):
-    global cropped
-    cropped = img.transpose(Image.FLIP_TOP_BOTTOM)
-    return cropped
 
-def flip_LR(img):
-    global cropped
-    cropped = img.transpose(Image.FLIP_LEFT_RIGHT)
-    return cropped
 
 def classification(image):
     img = image.convert("RGB")
@@ -70,35 +62,49 @@ def classification(image):
     return max_idx, predict_max_percent, predict
 
 def pill_info(idx):
-    # info = requests.get("https://www.health.kr/searchDrug/result_drug.asp?drug_cd=%s"%(drug_cd[int(idx)]))
-    # soup = bs(info.text, "html.parser")
-    # title = soup.select('#result_drug_name')
-    # company = soup.select('#upso_title')
-    # print(title)
-    # print(company)
-    # html = soup.select("td")
-    # print(html) 
-    # st.markdown(html, unsafe_allow_html= True)
-    driver = webdriver.Chrome()
+    ids = []
+    index = ['약제명', '제조사', '성상', '효과', '용법, 용량', '주의 사항']
+    informations = get_text(ids, idx)
+    for idx, i in enumerate(informations):
+        st.info(index[idx]+": \n"+ i)
+    return informations
+    
+
+def get_text(ids, idx):
+    keyword = ['result_drug_name', 'upso_title', 'charact','effect', 'dosage', 'caution']
+    option = webdriver.ChromeOptions()
+    option.add_argument("headless")
+    driver = webdriver.Chrome(options=option)
     driver.get("https://www.health.kr/searchDrug/result_drug.asp?drug_cd=%s"%(drug_cd[int(idx)]))
-
-
-def disable(b):
-    st.session_state["disabled"] = b
+    for key in keyword:
+        ids.append(driver.find_element(By.ID, key).text)
+    return ids
 
 if __name__ == "__main__":
     header()
     cropped = crop_image()
-    img = copy.deepcopy(cropped)
-
+    st.session_state.image = cropped
+    print(type(st.session_state.image))
+    command = []
     if cropped != None:
-        st.image(img)
+        if st.button("상하 뒤집기"):
+            flip_TB()
+        if st.button("좌우 뒤집기"):
+            flip_LR()
+        option = st.selectbox("회전각",('90°','180°','270°'))    
+        if st.button("회전"):
+            rotate(option)
 
+
+        # st.button("회전", on_click=rotate,args=(st.session_state.image,))
+        
         submitted = st.button("submit")
+        
         if submitted:
-            max_idx, predict_max_percent, predict = classification(cropped)
-            st.write(target_pill[max_idx])
-            st.write(f'{predict_max_percent}%')
-            st.write(predict)
-            # print(max_idx)
-            # pill_info(max_idx)
+                max_idx, predict_max_percent, predict = classification(cropped)
+                st.write(target_pill[max_idx])
+                st.write(f'{predict_max_percent}%')
+                with st.spinner("상세 정보 로딩 중..."):
+                    pill_info(max_idx)
+        else:
+            st.image(st.session_state.image)

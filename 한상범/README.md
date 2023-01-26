@@ -49,3 +49,8 @@ Flask docs 확인
 2. AI 친화적인 웹 서비스 개발 및 배포
     - sketch2fashion
     - ngrok 활용
+
+
+## 17일차
+1. AI 친화적인 웹 서비스 개발 및 배포
+    - yolo 프로젝트 

@@ -1,13 +1,10 @@
 from turtle import pd
-from flask import Flask, render_template, request
+from flask import Flask, jsonify, render_template, request
 import sqlite3
 
 from flask import Flask, request
-
-
-
 import json
-
+from db_connect import *
 
 # def get_db(db_name):
 #     return sqlite3.connect(db_name)
@@ -59,13 +56,52 @@ import json
 #         else:
 #             return render_template('data.html', label = "오류 발생")
 
-app = Flask(__name__);
+app = Flask(__name__)
 
 
 @app.route("/")
 def helloWorld():
-    return "Hello World!"
+    return render_template('base.html')
 
+@app.route("/join",methods=["GET","POST"])
+def test():
+    
+    if request.method == 'GET':
+        return render_template('join.html')
+    else:
+        conn = pymysql.connect(
+        host = 'localhost',
+        port = 3306,
+        user = 'root',
+        passwd = '1234',
+        db = 'flaskdb',
+        charset = 'utf8',
+
+        )
+        user_id = request.form['user_id']
+        user_pw = request.form['user_pw']
+
+        insert(user_id,user_pw)
+        # pw_hash = bcrypt.generate_password_hash(user_pw)
+
+        # user = User(user_id, pw_hash)
+        # db.session.add(user)
+        # db.session.commit()
+        return jsonify({"result":"success"})
+
+    # user_id = request.form['user_id']
+    # user_pw = request.form['user_pw']
+
+    # insert(user_id,user_pw)
+    return render_template('join.html')
+    # return "Test World!"
+
+
+# @app.route('/all')
+# def select_all():
+    
+#     # return render_template('db.html', test=test)
+#     return render_template('test.html',rows=rows)
 
 
 

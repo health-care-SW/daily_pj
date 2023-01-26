@@ -76,7 +76,7 @@ def get_text(ids, idx):
     keyword = ['result_drug_name', 'upso_title', 'charact','effect', 'dosage', 'caution']
     option = webdriver.ChromeOptions()
     option.add_argument("headless")
-    driver = webdriver.Chrome(service=Service('/app/daily_pj/김민종/project_streamlit/chromedriver'),options=option)
+    driver = webdriver.Chrome(service=Service('/app/daily_pj/김민종/project_streamlit/chromedriver.exe'),options=option)
     driver.get("https://www.health.kr/searchDrug/result_drug.asp?drug_cd=%s"%(drug_cd[int(idx)]))
     for key in keyword:
         ids.append(driver.find_element(By.ID, key).text)

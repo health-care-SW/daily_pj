@@ -20,6 +20,12 @@ StreamLit Project
 =============
 
 [StreamLit 주소](https://dksj9921-test-app-kup188.streamlit.app/, "StreamLit link")
+[gitRepo 주소](https://github.com/dksj9921/test, "gitrepo link")
 
 ## 1일차
 >StreamLit과 GitHub연결
+
+## 3일차
+>VGG16모델을 이용한 견종 분류 서비스 구현
+*현재 이미지 전처리 단계 구현중
+*주말 내에 전부 완료할 예정

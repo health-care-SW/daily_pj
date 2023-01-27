@@ -11,7 +11,7 @@ import cv2
 import numpy as np
 import os
 from selenium.webdriver.chrome.service import Service
-# from selenium.webdriver.firefox.service import Service
+from selenium.webdriver.firefox.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.core.utils import ChromeType
 # from webdriver_manager.firefox import GeckoDriverManager
@@ -59,7 +59,7 @@ def classification(image):
     img = image.convert("RGB")
     arr_img = [cv2.resize(np.array(img), (64,64))]
     arr_img = [i/255.0 for i in arr_img]
-    model = load_model("/app/daily_pj/김민종/project_streamlit/pill.h5") 
+    model = load_model("pill.h5") 
     predicts = model.predict(np.array(arr_img))
     m = max(predicts[0])
     max_idx = list(predicts[0]).index(m)
@@ -86,7 +86,7 @@ def get_text(ids, idx):
     # 파이어폭스
     # driver = webdriver.Firefox(service=Service(GeckoDriverManager().install()))
     
-    driver = webdriver.Chrome(options=option)
+    # driver = webdriver.Chrome(options=option)
     driver.get("https://www.health.kr/searchDrug/result_drug.asp?drug_cd=%s"%(drug_cd[int(idx)]))
     for key in keyword:
         ids.append(driver.find_element(By.ID, key).text)

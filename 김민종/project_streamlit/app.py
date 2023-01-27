@@ -10,9 +10,9 @@ from utils import rotate, flip_LR, flip_TB
 import cv2
 import numpy as np
 import os
-# from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.firefox.service import Service
-# from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.chrome.service import Service
+# from selenium.webdriver.firefox.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
 # from webdriver_manager.firefox import GeckoDriverManager
 
 target_pill = ['뉴에르도테캡슐', '듀카브정30/10밀리그램', '듀카브정30/5밀리그램', '라노펜세미정', '락토엔큐캡슐(바실루스리케니포르미스균)\xa0', '루키오정10밀리그램(몬테루카스트나트륨)', '리셀톤캡슐 6.0mg', '리프레가캡슐 75mg', '뮤코원캡슐(에르도스테인)', '바실리포미스캡슐', '베아로탄정 50mg', '베아투스정', '비오메틱스캡슐(바실루스리케니포르미스균)', '비우미정 500mg/병', '아나그레캡슐 0.5mg', '앤도민300프리미엄연질캡슐 300mg/PTP', '에피나레정', '엘도민캡슐 300mg', '엘도스인캡슐(에르도스테인)', '크라틴정 10mg', '크라틴정 20mg', '크라틴정 5mg', '티아프란정', '피타로틴정 2mg']
@@ -80,7 +80,7 @@ def get_text(ids, idx):
     # option.binary_location = r'/app/daily_pj/김민종/project_streamlit/chromedriver.exe'
     option.add_argument("headless")
     # 크롬
-    driver = webdriver.Chrome(service=Service('/app/daily_pj/김민종/project_streamlit/chromedriver'),options=option)
+    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()),options=option)
     # 파이어폭스
     # driver = webdriver.Firefox(service=Service(GeckoDriverManager().install()))
     

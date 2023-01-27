@@ -1,6 +1,10 @@
-1월 26일  
+1월 27일  
+https://uran-89-test-1-streamlit-projectmainpage-yuzanz.streamlit.app/  
+streamlit_project 내용 배포중입니다.
+
+~~1월 26일  
 https://uran-89-streamlit-project-my-test2-l1mrwi.streamlit.app/  
-streamlit_project_2 폴더 내용 배포중입니다.
+streamlit_project_2 폴더 내용 배포중입니다.~~
 
 ~~1월 19일  
 myproject 폴더만 남기고 정리  

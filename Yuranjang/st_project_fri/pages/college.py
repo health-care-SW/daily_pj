@@ -3,7 +3,7 @@ import pandas as pd
 from keras.models import load_model
 
 
-model = load_model('C:\streamlit_project\\test_model2.h5')
+model = load_model('..\test_model2.h5')
 
 
 st.title('합격예측')

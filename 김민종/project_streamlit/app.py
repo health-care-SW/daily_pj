@@ -82,7 +82,7 @@ def get_text(ids, idx):
     # option.binary_location = r'/app/daily_pj/김민종/project_streamlit/chromedriver.exe'
     option.add_argument("headless")
     # 크롬
-    driver = webdriver.Chrome(service=Service(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install()),options=option)
+    driver = webdriver.Chrome('/home/appuser/.wdm/drivers/chromedriver/linux64/109.0.5414/chromedriver',options=option)
     # 파이어폭스
     # driver = webdriver.Firefox(service=Service(GeckoDriverManager().install()))
     

@@ -59,7 +59,7 @@ def classification(image):
     img = image.convert("RGB")
     arr_img = [cv2.resize(np.array(img), (64,64))]
     arr_img = [i/255.0 for i in arr_img]
-    model = load_model("pill.h5") 
+    model = load_model("/app/daily_pj/김민종/project_streamlit/pill.h5") 
     predicts = model.predict(np.array(arr_img))
     m = max(predicts[0])
     max_idx = list(predicts[0]).index(m)

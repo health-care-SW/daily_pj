@@ -1,0 +1,7 @@
+1)	구, 월 선택 시 해당 확진자 정보 출력(session)
+2)	서울시 월별 확진자 추이(line graph)
+3)	구별 월별 확진자 추이(line graph)
+4)	구별 확진자 수(bar graph)
+5)	구별 확진자 수 (map-folium)
+6)	확진자 상태 비율(pie graph)
+7)	확진자 여행력 비율 (pie graph)

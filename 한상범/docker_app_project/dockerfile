@@ -1,0 +1,11 @@
+FROM python # 파이썬 이미지 기반(이미지이다. latest가 생략된 것이다.) = app이 돌아기기 위한 기반 설치
+
+RUN pip install flask pymongo # app이 돌아기기 위한 라이브러리들 설치
+COPY app /app
+
+ENV USERNAME admin
+ENV PASSWORD password
+ENV SERVER mongodb
+EXPOSE 5000
+
+WORKDIR /app

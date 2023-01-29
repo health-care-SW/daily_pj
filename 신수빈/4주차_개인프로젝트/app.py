@@ -69,7 +69,7 @@ df["director"] = df["director"].apply(lambda x: ' '.join([i.replace(" ","") for 
 df["cast"] = df["cast"].apply(lambda x: [i["name"][:5] for i in eval(x)])
 df["cast"] = df["cast"].apply(lambda x: ' '.join([i.replace(" ","") for i in x]))
 
-table = movie_df_wr.groupby("genres")['title']
+table = df.copy()
 
 st.dataframe(df)
 
@@ -225,6 +225,10 @@ def generate_recommendation(user_input):
         user_input = random.choices(user_input_test, k=5)
     return generate_recommendation_userid(user_input, similar_user(user_input))
 
+selected_movie = st.selectbox(label="title",options=table['original_title'].unique())
+
+submitted = st.button("Submit")
+
 user_input_test = ["Toy Story"]
 
 result_test = generate_recommendation_userid(user_input_test, 1)
@@ -236,18 +240,12 @@ show
 
 
 # table = netflix.groupby("genres")['title']
+#st.dataframe(table)
 
-# st.dataframe(table)
-# selected_geo = st.selectbox(label="Geography",options=avocado['geography'].unique())
 
-# submitted = st.button("Submit")
-
-# if submitted:
-#     line_fig = px.line(
-#     avocado[avocado['geography']==selected_geo],
-#     x='date', y='average_price',
-#     color='type',
-#     title=f'{selected_geo} dashboard'
-#     )
-    
-#     st.plotly_chart(line_fig)
+if submitted:
+     user_input_test = ["{seleceted_movie}"]
+     result_test = generate_recommendation_userid(user_input_test)
+     find_movieids(user_input_test)
+     show = result_test
+     show

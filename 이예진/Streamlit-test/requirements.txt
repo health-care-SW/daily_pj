@@ -1,2 +1,5 @@
-Streamlit
+streamlit
 pandas
+numpy
+plotly.express
+time
